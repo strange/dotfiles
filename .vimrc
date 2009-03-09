@@ -18,6 +18,9 @@ set backspace=2 " Backspace over everything in insert mode
 "set smarttab
 "set smartindent
 
+nnoremap ' `
+nnoremap ` '
+
 "set number
 set numberwidth=1
 
