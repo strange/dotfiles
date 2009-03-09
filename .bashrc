@@ -53,8 +53,3 @@ alias djtest='django-admin.py test --settings=${PWD##*/}.settings'
 alias djvalidate='django-admin.py validate --settings=${PWD##*/}.settings'
 alias djmakemessages='django-admin.py makemessages --settings=${PWD##*/}.settings'
 alias djcompilemessages='django-admin.py compilemessages'
-
-CATALINA_HOME="/Applications/Tomcat"
-alias startcat="${CATALINA_HOME}/bin/startup.sh"
-alias stopcat="${CATALINA_HOME}/bin/shutdown.sh"
-
