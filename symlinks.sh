@@ -13,9 +13,11 @@ then
     exit 1
 fi
 
+EXCLUDE=".gitignore .git README.txt $SCRIPT"
+
 for FILE in `ls -A`
 do
-    if [ $FILE != $SCRIPT ] && [ $FILE != '.gitignore' ] && [ $FILE != '.git' ]
+    if [[ "${EXCLUDE}" != *${FILE}* ]]
     then
         SOURCE="$PWD/$FILE"
         TARGET="$HOME/$FILE"
