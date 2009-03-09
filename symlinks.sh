@@ -5,12 +5,6 @@
 # thus be run from the directory in which the files we're creating links to
 # reside.
 
-if [ $# -eq 1 ] && [ $1 = 'remove' ]; then
-    REMOVE=1
-else
-    REMOVE=0
-fi
-
 SCRIPT=$(basename $0)
 
 if [ ! -e "$PWD/$SCRIPT" ]
@@ -25,14 +19,11 @@ do
     then
         SOURCE="$PWD/$FILE"
         TARGET="$HOME/$FILE"
-        if [ $REMOVE -eq 1 ]
+        if [ $# -eq 1 ] && [ $1 = 'remove' ]
         then
             if [ -L $TARGET ]
             then
                 rm $TARGET
-            elif [ -e $TARGET ]
-            then
-                echo "$TARGET is not a symbolic link!"
             fi
         else
             if [ -e $TARGET ]
