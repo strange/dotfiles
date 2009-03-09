@@ -1,0 +1,10 @@
+# Images
+Image/JPEG; /Users/gs/.mutt/view_attachment.sh %s jpg
+Image/PNG; /Users/gs/.mutt/view_attachment.sh %s png
+Image/GIF; /Users/gs/.mutt/view_attachment.sh %s gif
+
+# PDF
+application/pdf; /Users/gs/.mutt/view_attachment.sh %s pdf
+
+# HTML
+text/html; lynx -force-html %s

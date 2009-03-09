@@ -1,0 +1,14 @@
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# "\e[Z": "\e-1\C-i"
+# TAB: menu-complete
+
+# List the possible completions when Tab is pressed
+# set show-all-if-ambiguous on
+
+set expand-tilde off
+set alt-sends-meta on
+
+# Display a "/" at the end for symlinked directories
+set mark-symlinked-directories on

@@ -1,0 +1,59 @@
+# Source this file from ~/.muttrc and add the following:
+# imap_user, imap_pass, smtp_url, smtp_pass
+# smtp_url="smtp://<user>@smtp.gmail.com:587/"
+
+set imap_keepalive=240
+set imap_check_subscribed
+
+set from = "gs@distrop.com"
+set realname = "Gustaf Sjöberg"
+
+set query_command ="/opt/local/bin/lbdbq '%s'"
+set alias_file=~/.mutt/alias
+
+set folder = "imaps://imap.gmail.com:993"
+set spoolfile = "+INBOX"
+set postponed="+[Gmail]/Drafts"
+
+set index_format="%4C %Z %{%b %d} %-20.20L %s"
+
+set signature="~/.mutt/signature"
+
+set markers=no
+set pager="builtin"
+set fast_reply=yes
+set include=yes
+set menu_scroll=yes
+set pager_context=1
+set pager_stop=yes
+set sig_dashes=no
+set imap_check_subscribed
+
+set pager_index_lines=6
+
+set timeout=15
+set mail_check=90
+
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+set certificate_file=~/.mutt/certificates
+
+set sort=threads
+set sort_aux = 'last-date-received'
+set move = no
+
+ignore *
+unignore Date From To Cc
+hdr_order Date From To Cc
+
+# Custom bindings
+bind editor <space> noop
+macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
+macro index ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
+macro index gs "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to Sent Mail"
+macro index gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
+
+bind pager <up> previous-line
+bind pager <down> next-line
+
+source ~/.mutt/colors/new

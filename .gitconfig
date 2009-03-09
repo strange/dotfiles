@@ -1,0 +1,9 @@
+[user]
+	name = Gustaf Sjöberg
+	email = gs@distrop.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[alias]
+    ci = commit

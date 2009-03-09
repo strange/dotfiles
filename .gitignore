@@ -1,0 +1,15 @@
+.mutt/cache
+.mutt/certificates
+.mutt/alias
+
+.vim/.*
+.vim/sessions
+.vim/backup
+.vim/colors/*
+!.vim/colors/gconsole.vim
+!.vim/colors/gurra.vim
+
+.vifm/Trash
+
+.ipython/*
+!.ipython/ipythonrc
