@@ -1,22 +1,23 @@
-syntax on
 set nocompatible 
+filetype on
+filetype plugin indent on
+
+syntax on
 
 let python_highlight_indent_errors = 0
 let python_highlight_space_errors = 0
 let python_highlight_all = 1
 
-set hidden
 let mapleader = ","
+
 set tabstop=4
 set softtabstop=4
 set expandtab
-
 set shiftwidth=4 " Use the < and > keys from visual mode to block indent/unindent
 set backspace=2 " Backspace over everything in insert mode
-"set autoindent
-"set textwidth=80
-"set smarttab
-"set smartindent
+set autoindent
+set smarttab
+set smartindent
 
 nnoremap ' `
 nnoremap ` '
@@ -71,8 +72,9 @@ noremap <c-h> <c-w>h
 noremap <c-l> <c-w>l
 
 " Open files
-noremap ,e :FuzzyFinderTextMate<CR>
-noremap ,E :FuzzyFinderTextMateRefreshFiles<CR>
+noremap <leader>e :FuzzyFinderTextMate<CR>
+noremap <leader>E :FuzzyFinderTextMateRefreshFiles<CR>
+noremap <leader>b :FuzzyFinderBuffer<CR>
 let g:fuzzy_ignore = "*.png;*.jpg;*.jpeg;*.gif;*.swp;*.pyc;*.psd;*.ai;*.JPG"
 let g:fuzzy_path_display = 'full'
 
@@ -81,7 +83,6 @@ nmap <C-A> :Explore ~/Documents/vim<CR>
 
 " Space scrolls half a page
 noremap <Space> <C-d>
-noremap <S-Space> <C-u>
 
 inoremap <silent> <CR> <C-R>=ExpandBraces()<CR>
 function! ExpandBraces()
@@ -157,9 +158,6 @@ function! <SID>InsertTabWrapper(direction)
     return "\<C-p>"
   endif
 endfunction
-
-filetype on
-filetype plugin indent on
 
 " Remove trailing whitespace from lines
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
