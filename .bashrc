@@ -31,6 +31,9 @@ shopt -s histappend
 # to disk.
 PROMPT_COMMAND='history -a'
 
+# Update lines and columns on resize.
+shopt -s checkwinsize
+
 # Bash completion
 
 source /opt/local/etc/bash_completion
