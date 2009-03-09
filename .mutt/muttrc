@@ -27,7 +27,7 @@ set menu_scroll=yes
 set pager_context=1
 set pager_stop=yes
 set sig_dashes=no
-set imap_check_subscribed
+set charset="utf8"
 
 set pager_index_lines=6
 
