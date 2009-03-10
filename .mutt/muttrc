@@ -8,6 +8,8 @@ set imap_check_subscribed
 set from = "gs@distrop.com"
 set realname = "Gustaf Sjöberg"
 
+unset fcc_attach
+
 set query_command ="/opt/local/bin/lbdbq '%s'"
 set alias_file=~/.mutt/alias
 
@@ -28,6 +30,11 @@ set pager_context=1
 set pager_stop=yes
 set sig_dashes=no
 set charset="utf8"
+
+# Do not store local copies of sent mail as Google stores all mail sent through
+# it's SMTP in "[Gmail]/Sent"
+set record=no
+set fcc_attach=no
 
 set pager_index_lines=6
 
