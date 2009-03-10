@@ -14,10 +14,12 @@ set tabstop=4
 set softtabstop=4
 set expandtab
 set shiftwidth=4 " Use the < and > keys from visual mode to block indent/unindent
-set backspace=2 " Backspace over everything in insert mode
+set backspace=indent,eol,start
 set autoindent
 set smarttab
 set smartindent
+
+set showcmd
 
 nnoremap ' `
 nnoremap ` '
@@ -168,7 +170,5 @@ autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCS
 
 autocmd BufRead,BufNewFile *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-"autocmd FileType css inoremap : : ;<left>
-
 autocmd BufRead,BufNewFile *.html set filetype=htmldjango
 autocmd BufRead,BufNewFile *.txt set filetype=rest
