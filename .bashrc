@@ -45,6 +45,7 @@ _expand() { return 0; }
 alias ls="ls -G"
 
 alias myip="ifconfig | grep 192 | awk '{print \$2}'"
+alias startpg="sudo -u postgres /opt/local/lib/postgresql83/bin/postgres -D /opt/local/var/db/postgresql83/defaultdb"
 
 # Some Django convenience aliases
 alias djrun='django-admin.py runserver --settings=${PWD##*/}.settings'
