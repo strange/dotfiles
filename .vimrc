@@ -81,7 +81,7 @@ let g:fuzzy_ignore = "*.png;*.jpg;*.jpeg;*.gif;*.swp;*.pyc;*.psd;*.ai;*.JPG"
 let g:fuzzy_path_display = 'full'
 
 " Edit vim-file
-nmap <C-A> :Explore ~/Documents/vim<CR>
+nmap <C-A> :Explore ~/Documents/<CR>
 
 " Space scrolls half a page
 noremap <Space> <C-d>
