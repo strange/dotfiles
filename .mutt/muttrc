@@ -18,6 +18,7 @@ set spoolfile = "+INBOX"
 set postponed="+[Gmail]/Drafts"
 
 set index_format="%4C %Z %{%b %d} %-20.20L %s"
+set index_format="%4C %{%b %d} %-20.20L [%Z] %s"
 
 set signature="~/.mutt/signature"
 
@@ -33,8 +34,8 @@ set charset="utf8"
 
 # Do not store local copies of sent mail as Google stores all mail sent through
 # it's SMTP in "[Gmail]/Sent"
-set record=no
-set fcc_attach=no
+unset record
+unset fcc_attach
 
 set pager_index_lines=6
 
