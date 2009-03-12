@@ -43,7 +43,6 @@ set nowrap
 set history=1000
 set ul=1000
 
-set title
 set shortmess=atI
 
 " Ignore case when searching if only lowecase characters are used
