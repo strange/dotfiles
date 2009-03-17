@@ -62,6 +62,8 @@ macro index,pager ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
 macro index,pager gs "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to Sent Mail"
 macro index,pager gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
 
+bind index,pager ,g group-reply
+
 bind pager <up> previous-line
 bind pager <down> next-line
 
