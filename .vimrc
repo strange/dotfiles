@@ -79,6 +79,9 @@ noremap <leader>b :FuzzyFinderBuffer<CR>
 let g:fuzzy_ignore = "*.png;*.jpg;*.jpeg;*.gif;*.swp;*.pyc;*.psd;*.ai;*.JPG"
 let g:fuzzy_path_display = 'full'
 
+" Reset search highlighting
+noremap <leader>n :noh<CR>
+
 " Edit vim-file
 nmap <C-A> :Explore ~/Documents/<CR>
 
