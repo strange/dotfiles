@@ -17,9 +17,13 @@ set shiftwidth=4 " Use the < and > keys from visual mode to block indent/uninden
 set backspace=indent,eol,start
 set autoindent
 set smarttab
-set smartindent
+set nosmartindent
+set nofoldenable
 
 set showcmd
+set matchtime=2
+
+set laststatus=2
 
 nnoremap ' `
 nnoremap ` '
@@ -43,10 +47,12 @@ set nowrap
 set history=1000
 set ul=1000
 
+set complete=.,w,b,u,U,t,i
+set completeopt=menu,preview,longest
+
 set shortmess=atI
 
-" Ignore case when searching if only lowecase characters are used
-set ignorecase
+"set ignorecase
 set smartcase
 set hlsearch
 set incsearch
@@ -72,15 +78,25 @@ noremap <c-k> <c-w>k
 noremap <c-h> <c-w>h
 noremap <c-l> <c-w>l
 
+" Navigate Tabs
+noremap <leader>tn :tabnext<CR>
+noremap <leader>tp :tabprev<CR>
+
 " Open files
 noremap <leader>e :FuzzyFinderTextMate<CR>
 noremap <leader>E :FuzzyFinderTextMateRefreshFiles<CR>
 noremap <leader>b :FuzzyFinderBuffer<CR>
-let g:fuzzy_ignore = "*.png;*.jpg;*.jpeg;*.gif;*.swp;*.pyc;*.psd;*.ai;*.JPG"
+let g:fuzzy_ignore = "*.png;*.jpg;*.jpeg;*.gif;*.swp;*.pyc;*.psd;*.ai;*.JPG;*.db"
 let g:fuzzy_path_display = 'full'
 
 " Reset search highlighting
 noremap <leader>n :noh<CR>
+
+" Toggle paste mode
+noremap <leader>pp :set paste!<CR>
+
+" Toggle NERDTree
+noremap <leader>nn :NERDTreeToggle<CR>
 
 " Edit vim-file
 nmap <C-A> :Explore ~/Documents/<CR>
@@ -174,3 +190,5 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCS
 autocmd BufRead,BufNewFile *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd BufRead,BufNewFile *.html set filetype=htmldjango
 autocmd BufRead,BufNewFile *.txt set filetype=rest
+
+autocmd Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim

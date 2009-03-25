@@ -33,6 +33,8 @@
 'NERDUsePlaceHolders'	NERD_commenter.txt	/*'NERDUsePlaceHolders'*
 'loaded_nerd_comments'	NERD_commenter.txt	/*'loaded_nerd_comments'*
 'loaded_nerd_tree'	NERD_tree.txt	/*'loaded_nerd_tree'*
+:HTMLSpecialChars	htmlspecialchars.txt	/*:HTMLSpecialChars*
+:HTMLSpecialCharsDecode	htmlspecialchars.txt	/*:HTMLSpecialCharsDecode*
 :MkVimball	pi_vimball.txt	/*:MkVimball*
 :NERDTree	NERD_tree.txt	/*:NERDTree*
 :NERDTreeClose	NERD_tree.txt	/*:NERDTreeClose*
@@ -62,6 +64,8 @@ DechoVarOn	Decho.txt	/*DechoVarOn*
 Dredir	Decho.txt	/*Dredir*
 Dsep	Decho.txt	/*Dsep*
 Filters	vifm.txt	/*Filters*
+HTMLSpecialChars	htmlspecialchars.txt	/*HTMLSpecialChars*
+HTMLSpecialCharsDecode	htmlspecialchars.txt	/*HTMLSpecialCharsDecode*
 IndentAnything	IndentAnything.txt	/*IndentAnything*
 Marks	vifm.txt	/*Marks*
 Movement	vifm.txt	/*Movement*
@@ -196,10 +200,15 @@ g:decho_winheight	Decho.txt	/*g:decho_winheight*
 g:dechomode	Decho.txt	/*g:dechomode*
 g:dechovar	Decho.txt	/*g:dechovar*
 g:dechovarname	Decho.txt	/*g:dechovarname*
+g:htmlspecialchars_ent_noquotes	htmlspecialchars.txt	/*g:htmlspecialchars_ent_noquotes*
+g:htmlspecialchars_ent_quotes	htmlspecialchars.txt	/*g:htmlspecialchars_ent_quotes*
 g:vimball_home	pi_vimball.txt	/*g:vimball_home*
 g:vimball_mkdir	pi_vimball.txt	/*g:vimball_mkdir*
 g:vimball_path_escape	pi_vimball.txt	/*g:vimball_path_escape*
 greplace.txt	greplace.txt	/*greplace.txt*
+htmlspecialchars	htmlspecialchars.txt	/*htmlspecialchars*
+htmlspecialchars-customization	htmlspecialchars.txt	/*htmlspecialchars-customization*
+htmlspecialchars.txt	htmlspecialchars.txt	/*htmlspecialchars.txt*
 i_CTRL-G_S	surround.txt	/*i_CTRL-G_S*
 i_CTRL-G_s	surround.txt	/*i_CTRL-G_s*
 named-tags	snippets_emu.txt	/*named-tags*
