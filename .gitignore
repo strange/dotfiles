@@ -1,3 +1,5 @@
+.DS_Store
+
 .mutt/cache
 .mutt/certificates
 .mutt/alias
