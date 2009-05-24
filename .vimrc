@@ -8,6 +8,9 @@ let python_highlight_indent_errors = 0
 let python_highlight_space_errors = 0
 let python_highlight_all = 1
 
+let g:tex_flavor='latex'
+let g:Tex_ViewRule_pdf = 'Preview'
+
 let mapleader = ","
 
 set tabstop=4
@@ -48,7 +51,7 @@ set history=1000
 set ul=1000
 
 set complete=.,w,b,u,U,t,i
-set completeopt=menu,preview,longest
+set wildmode=list:longest,list:full
 
 set shortmess=atI
 
@@ -81,6 +84,11 @@ noremap <c-l> <c-w>l
 " Navigate Tabs
 noremap <leader>tn :tabnext<CR>
 noremap <leader>tp :tabprev<CR>
+noremap <leader>t1 :tab 1<CR>
+noremap <leader>t2 :tab 2<CR>
+noremap <leader>t3 :tab 3<CR>
+noremap <leader>t4 :tab 3<CR>
+noremap <leader>t5 :tab 4<CR>
 
 " Open files
 noremap <leader>e :FuzzyFinderTextMate<CR>
@@ -90,7 +98,7 @@ let g:fuzzy_ignore = "*.png;*.jpg;*.jpeg;*.gif;*.swp;*.pyc;*.psd;*.ai;*.JPG;*.db
 let g:fuzzy_path_display = 'full'
 
 " Reset search highlighting
-noremap <leader>n :noh<CR>
+noremap <leader>nh :noh<CR>
 
 " Toggle paste mode
 noremap <leader>pp :set paste!<CR>
@@ -99,7 +107,7 @@ noremap <leader>pp :set paste!<CR>
 noremap <leader>nn :NERDTreeToggle<CR>
 
 " Edit vim-file
-nmap <C-A> :Explore ~/Documents/<CR>
+noremap <C-A> :Explore ~/Documents/<CR>
 
 " Space scrolls half a page
 noremap <Space> <C-d>
@@ -119,7 +127,7 @@ function! ExpandBraces()
 endfunction
 
 " Simple Snippets ;)
-inoremap <S-Tab> <C-r>=Snips()<CR>
+"inoremap <S-Tab> <C-r>=Snips()<CR>
 function! Snips()
     let line = getline('.')
     let cursor = col('.')
@@ -164,13 +172,13 @@ function! <SID>InsertTabWrapper(direction)
   let idx = col('.') - 1
   let str = getline('.')
   if a:direction > 0 && idx >= 2 && str[idx - 1] == ' '
-	\&& str[idx - 2] =~? '[a-z]'
+	\&& str[idx - 2] =~? '[a-z0-9_-]'
     if &softtabstop && idx % &softtabstop == 0
       return "\<BS>\<Tab>\<Tab>"
     else
       return "\<BS>\<Tab>"
     endif
-  elseif idx == 0 || str[idx - 1] !~? '[a-z]'
+  elseif idx == 0 || str[idx - 1] !~? '[a-z0-9_-]'
     return "\<Tab>"
   elseif a:direction > 0
     return "\<C-n>"
@@ -181,8 +189,9 @@ endfunction
 
 " Remove trailing whitespace from lines
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
+autocmd FileType python setlocal omnifunc=pysmell#Complete
 
-autocmd FileType python set omnifunc=pythoncomplete#Complete
+"autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCS
@@ -190,5 +199,6 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCS
 autocmd BufRead,BufNewFile *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd BufRead,BufNewFile *.html set filetype=htmldjango
 autocmd BufRead,BufNewFile *.txt set filetype=rest
+autocmd BufRead,BufNewFile *.as set filetype=actionscript
 
 autocmd Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim

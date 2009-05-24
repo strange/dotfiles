@@ -2,11 +2,11 @@ set background=dark
 hi clear
 
 hi Normal guifg=#FFFFFF guibg=#000000 gui=none
-hi Identifier guifg=#bbbaab gui=none
 hi Statement guifg=#5d6065 gui=none
+hi Identifier guifg=#bbbaab gui=none
+hi Title guifg=salmon
 hi String guifg=#818f71 gui=none
 hi Comment guifg=#777777 gui=none
-hi Title guifg=salmon
 
 hi Type guifg=#999999 gui=none
 hi Number guifg=#97806e gui=none
@@ -19,7 +19,7 @@ hi StatusLine guibg=#222222 guifg=#ffffff gui=none
 hi StatusLineNC guibg=#222222 guifg=#555555 gui=none
 hi CursorLine guibg=#090909
 hi Visual gui=bold guifg=black guibg=#C0FFC0
-hi LineNr guibg=#000000 guifg=#111111
+hi LineNr guibg=#111111 guifg=#3d464c
 
 hi Pmenu guibg=#222222 guifg=#EEEEEE 
 hi PmenuSel guibg=#777777 guifg=#222222 
