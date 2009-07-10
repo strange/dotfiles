@@ -10,7 +10,7 @@ set realname = "Gustaf Sjöberg"
 
 unset fcc_attach
 
-set query_command ="/opt/local/bin/lbdbq '%s'"
+set query_command ="lbdbq '%s'"
 set alias_file=~/.mutt/alias
 
 set folder = "imaps://imap.gmail.com:993"

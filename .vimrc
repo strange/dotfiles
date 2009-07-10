@@ -16,11 +16,12 @@ let mapleader = ","
 set tabstop=4
 set softtabstop=4
 set expandtab
-set shiftwidth=4 " Use the < and > keys from visual mode to block indent/unindent
+set shiftwidth=4
+
 set backspace=indent,eol,start
 set autoindent
 set smarttab
-set nosmartindent
+set smartindent
 set nofoldenable
 
 set showcmd
@@ -42,7 +43,7 @@ let g:NERDShutUp = 1
 
 set vb
 set ruler
-set splitbelow
+set nosplitbelow
 set splitright
 set wildmenu " Display tab-complete matches above commandline
 set bg=dark
@@ -127,7 +128,7 @@ function! ExpandBraces()
 endfunction
 
 " Simple Snippets ;)
-"inoremap <S-Tab> <C-r>=Snips()<CR>
+inoremap <S-Tab> <C-r>=Snips()<CR>
 function! Snips()
     let line = getline('.')
     let cursor = col('.')
@@ -152,7 +153,7 @@ function! Snips()
             endif
         elseif &filetype == "python"
             if trigger == "pdb"
-                return "import pdb; pdb.set_trace()" 
+                return bs."import pdb; pdb.set_trace()" 
             endif
         elseif &filetype == "vim"
             if trigger == 'mdf'
@@ -189,12 +190,12 @@ endfunction
 
 " Remove trailing whitespace from lines
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
-autocmd FileType python setlocal omnifunc=pysmell#Complete
 
 "autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCS
+autocmd FileType actionscript set omnifunc=actionscriptcomplete#Complete
 
 autocmd BufRead,BufNewFile *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd BufRead,BufNewFile *.html set filetype=htmldjango

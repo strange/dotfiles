@@ -5,6 +5,7 @@ Image/GIF; /Users/gs/.mutt/view_attachment.sh %s gif
 
 # PDF
 application/pdf; /Users/gs/.mutt/view_attachment.sh %s pdf
+application/zip; /Users/gs/.mutt/view_attachment.sh %s zip
 
 # HTML
 text/html; lynx -force-html %s
