@@ -128,7 +128,7 @@ function! ExpandBraces()
 endfunction
 
 " Simple Snippets ;)
-inoremap <S-Tab> <C-r>=Snips()<CR>
+inoremap <c-e> <C-r>=Snips()<CR>
 function! Snips()
     let line = getline('.')
     let cursor = col('.')
@@ -155,7 +155,7 @@ function! Snips()
             if trigger == "pdb"
                 return bs."import pdb; pdb.set_trace()" 
             endif
-        elseif &filetype == "vim"
+        elseif &filetype == "djangomodels"
             if trigger == 'mdf'
                 return bs."models.DecimalField()\<left>"
             elseif trigger == 'mcf'
@@ -166,40 +166,17 @@ function! Snips()
     endif
 endfunction
 
-" Omni completion using tab
-inoremap <silent> <Tab> <C-r>=<SID>InsertTabWrapper(1)<CR>
-"inoremap <silent> <S-Tab> <C-r>=<SID>InsertTabWrapper(-1)<CR>
-function! <SID>InsertTabWrapper(direction)
-  let idx = col('.') - 1
-  let str = getline('.')
-  if a:direction > 0 && idx >= 2 && str[idx - 1] == ' '
-	\&& str[idx - 2] =~? '[a-z0-9_-]'
-    if &softtabstop && idx % &softtabstop == 0
-      return "\<BS>\<Tab>\<Tab>"
-    else
-      return "\<BS>\<Tab>"
-    endif
-  elseif idx == 0 || str[idx - 1] !~? '[a-z0-9_-]'
-    return "\<Tab>"
-  elseif a:direction > 0
-    return "\<C-n>"
-  else
-    return "\<C-p>"
-  endif
-endfunction
-
 " Remove trailing whitespace from lines
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
 
-"autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType actionscript set omnifunc=actionscriptcomplete#Complete
 
-autocmd BufRead,BufNewFile *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+"autocmd BufRead,BufNewFile *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd BufRead,BufNewFile *.html set filetype=htmldjango
+autocmd BufRead,BufNewFile models.py set filetype=python.djangomodels
 autocmd BufRead,BufNewFile *.txt set filetype=rest
 autocmd BufRead,BufNewFile *.as set filetype=actionscript
-
-"autocmd Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim
