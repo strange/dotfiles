@@ -194,7 +194,7 @@ autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
 "autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCS
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType actionscript set omnifunc=actionscriptcomplete#Complete
 
 autocmd BufRead,BufNewFile *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
