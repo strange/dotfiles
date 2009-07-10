@@ -1,9 +1,8 @@
 #!/bin/bash
 
-# Simple script that creates symlinks from $HOME to all files (except this
-# script and the .gitignore) in current working directory. This script must
-# thus be run from the directory in which the files we're creating links to
-# reside.
+# A simple script that automatically generates symlinks for the various
+# configurations available in this package. The script must be run from
+# the directory in which the files we're creating symlinks for reside.
 
 SCRIPT=$(basename $0)
 
