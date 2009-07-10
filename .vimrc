@@ -202,4 +202,4 @@ autocmd BufRead,BufNewFile *.html set filetype=htmldjango
 autocmd BufRead,BufNewFile *.txt set filetype=rest
 autocmd BufRead,BufNewFile *.as set filetype=actionscript
 
-autocmd Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim
+"autocmd Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim
