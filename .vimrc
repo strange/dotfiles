@@ -131,45 +131,6 @@ function! ExpandBraces()
     endif
 endfunction
 
-" Simple Snippets ;)
-inoremap <c-e> <C-r>=Snips()<CR>
-function! Snips()
-    let line = getline('.')
-    let cursor = col('.')
-    let match = matchlist(line[:cursor - 1], '\v(\w+)$')
-    if !empty(match) && match(line[cursor], '\v\s|^$') == 0
-        let trigger = match[1]
-        let bs = repeat("\<BS>", strlen(trigger))
-        " Django Template Snippets
-        if &filetype == "htmldjango"
-            if trigger == 'load'
-                return bs."{% load  %}\<Left>\<Left>\<Left>"
-            elseif trigger == 'extends'
-                return bs."{% extends  %}\<Left>\<Left>\<Left>"
-            elseif trigger == 'if'
-                return bs."{% if  %}\<CR>\<Tab>\<CR>{% endif %}\<Up>\<Up>\<Left>\<Left>\<Left>"
-            elseif trigger == 'ifequal'
-                return bs."{% ifequal  %}\<CR>\<Tab>\<CR>{% endifequal %}\<Up>\<Up>\<Left>\<Left>\<Left>"
-            elseif trigger == 'else'
-                return bs."{% else %}"
-            elseif trigger == 'html_base'
-                return bs."<!DOCTYPE html PUBLIC \"-\/\/W3C\/\/DTD XHTML 1.0 Strict\/\/EN\"\<CR>\<Tab>\"http:\/\/www.w3.org\/TR\/xhtml1\/DTD\/xhtml1-strict.dtd\">\<CR>\<CR>\<BS><html xmlns=\"http:\/\/www.w3.org\/1999\/xhtml\" xml:lang=\"en\" lang=\"en\">\<CR>\<CR>\<BS><head>\<CR><meta http-equiv=\"Content-type\" content=\"text\/html; charset=utf-8\" />\<CR><title></title>\<CR>\<BS></head>\<CR>\<CR><body></body>\<CR>\<CR></html>"
-            endif
-        elseif &filetype == "python"
-            if trigger == "pdb"
-                return bs."import pdb; pdb.set_trace()" 
-            endif
-        elseif &filetype == "djangomodels"
-            if trigger == 'mdf'
-                return bs."models.DecimalField()\<left>"
-            elseif trigger == 'mcf'
-                return bs."models.CharField(max_length=)\<Left>"
-            endif
-        endif
-        return ""
-    endif
-endfunction
-
 " Remove trailing whitespace from lines
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
 
