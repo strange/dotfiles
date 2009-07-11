@@ -141,7 +141,7 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType actionscript set omnifunc=actionscriptcomplete#Complete
 
 "autocmd BufRead,BufNewFile *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-autocmd BufRead,BufNewFile *.html set filetype=htmldjango
+autocmd BufRead,BufNewFile *.html set filetype=html.htmldjango
 autocmd BufRead,BufNewFile models.py set filetype=python.djangomodels
 autocmd BufRead,BufNewFile *.txt set filetype=rest
 autocmd BufRead,BufNewFile *.as set filetype=actionscript
