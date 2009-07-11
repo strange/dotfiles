@@ -18,6 +18,7 @@ hi VertSplit guibg=#222222 guifg=#222222 gui=none
 hi StatusLine guibg=#222222 guifg=#ffffff gui=none
 hi StatusLineNC guibg=#222222 guifg=#555555 gui=none
 hi CursorLine guibg=#090909
+hi CursorColumn guibg=#090909
 hi Visual gui=bold guifg=black guibg=#C0FFC0
 hi LineNr guibg=#111111 guifg=#3d464c
 
