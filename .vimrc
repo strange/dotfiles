@@ -116,6 +116,7 @@ noremap <Space> <C-d>
 " Keep hands on home row
 inoremap jj <Esc>
 
+" Expand braces
 inoremap <silent> <CR> <C-R>=ExpandBraces()<CR>
 function! ExpandBraces()
     let column = col('.')
@@ -183,3 +184,8 @@ autocmd BufRead,BufNewFile *.html set filetype=htmldjango
 autocmd BufRead,BufNewFile models.py set filetype=python.djangomodels
 autocmd BufRead,BufNewFile *.txt set filetype=rest
 autocmd BufRead,BufNewFile *.as set filetype=actionscript
+
+" Source local configuration
+if filereadable(expand("~/.vimrc.local"))
+    source ~/.vimrc.local
+endif
