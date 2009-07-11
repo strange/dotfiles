@@ -113,6 +113,9 @@ noremap <C-A> :Explore ~/Documents/<CR>
 " Space scrolls half a page
 noremap <Space> <C-d>
 
+" Keep hands on home row
+inoremap jj <Esc>
+
 inoremap <silent> <CR> <C-R>=ExpandBraces()<CR>
 function! ExpandBraces()
     let column = col('.')
