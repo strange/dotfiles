@@ -64,7 +64,7 @@ syn match rstExternalHyperlinks "\w\+_\w\@!"
 "This seems to overlap with the ReStructuredText comment?!?
 
 "ReStructuredText Sections:
-syn match rstTitle ".\{2,120}\n\(\.\|=\|-\|=\|`\|:\|'\|\"\|\~\|\^\|_\|\*\|+\|#\|<\|>\)\{3,120}"
+syn match rstTitle ".\{2,120}\n\(\.\|=\|-\|=\|`\|:\|'\|\"\|\~\|\^\|_\|\*\|+\|#\|<\|>\)\{3,120}$"
 " [-=`:'"~^_*+#<>]
 "for some strange reason this only gets highlighted upon refresh
 
@@ -91,8 +91,7 @@ syn match rstLiteralBlock "::\s*\n" contains=rstGridTable
 "syn region rstBlockQuote start=+\s\n+ end=+[^:]\{2}\s*\n\s*\n\s*+me=e-1 contains=ALLBUT,rstEmphasis,rstStrongEmphasis,rstInlineLiteral,rstRuler
 "FIX rstBlockQuote
 
-"syn match rstDocTestBlock
-"
+syn match rstDocTestBlock /^\s*\(>>>\|[.][.][.]\).*/
 "
 "RestructureText Targets:
 syn match rstFootnoteTarget "\[\%([#*]\|[0-9]\+\|#[a-zA-Z0-9_.-]\+\)\]" contained
@@ -146,6 +145,7 @@ if !exists("did_rst_syn_inits")
     hi link rstEmphasis Exception
     hi link rstStrongEmphasis Exception
     hi link rstLiteralBlock Type
+    hi link rstDocTestBlock Special
     hi link rstBlockQuote Type
     hi link rstEnumeratedList Operator
     hi link rstBulletedList Operator
