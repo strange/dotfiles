@@ -1,4 +1,5 @@
 set nocompatible 
+
 filetype on
 filetype plugin indent on
 
@@ -29,14 +30,8 @@ set matchtime=2
 
 set laststatus=2
 
-nnoremap ' `
-nnoremap ` '
-
 "set number
 set numberwidth=1
-
-" Some cool bash-hooks
-command! -nargs=1 -complete=file CreateTemplate !bash ~/bin/create_template.sh <args>
 
 " Don't bother us when editing rest-files
 let g:NERDShutUp = 1
@@ -75,6 +70,23 @@ set langmenu=en_us.utf-8
 set wildignore=*.pyc
 
 color gconsole
+
+nnoremap ' `
+nnoremap ` '
+
+" Some cool bash-hooks
+command! -nargs=1 -complete=file CreateTemplate !bash ~/bin/create_template.sh <args>
+
+" Switch between pivot and landscape
+command Pivot set columns=80 lines=55
+command Landscape set columns=160 lines=35
+command Terminal set columns=80 lines=25
+
+" For the last time!
+command W w
+command Q q
+command WQ wq
+command Wq wq
 
 " Navigate windows
 noremap <c-j> <c-w>j
@@ -141,7 +153,7 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType actionscript set omnifunc=actionscriptcomplete#Complete
 
 "autocmd BufRead,BufNewFile *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-autocmd BufRead,BufNewFile *.html set filetype=html.htmldjango
+autocmd BufRead,BufNewFile *.html set filetype=htmldjango.html
 autocmd BufRead,BufNewFile models.py set filetype=python.djangomodels
 autocmd BufRead,BufNewFile *.txt set filetype=rest
 autocmd BufRead,BufNewFile *.as set filetype=actionscript
