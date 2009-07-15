@@ -15,6 +15,7 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH:$HOME/bin"
 export MANPATH=/opt/local/share/man:$MANPATH
 
 export EDITOR=vim
+export PAGER=less
 
 PS1='[\u@\h]\W$(__git_ps1 ":%s")% '
 
