@@ -38,7 +38,7 @@ let g:NERDShutUp = 1
 
 set vb
 set ruler
-set nosplitbelow
+set splitbelow
 set splitright
 set wildmenu " Display tab-complete matches above commandline
 set bg=dark
@@ -69,6 +69,9 @@ set langmenu=en_us.utf-8
 
 set wildignore=*.pyc
 
+set statusline=%f%m\ %=[%l,%v]\ \ \ \ \ %=%p%%
+
+
 color gconsole
 
 nnoremap ' `
@@ -78,7 +81,7 @@ nnoremap ` '
 command! -nargs=1 -complete=file CreateTemplate !bash ~/bin/create_template.sh <args>
 
 " Switch between pivot and landscape
-command Pivot set columns=80 lines=55
+command Pivot set columns=80 lines=50
 command Landscape set columns=160 lines=35
 command Terminal set columns=80 lines=25
 
