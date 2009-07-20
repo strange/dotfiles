@@ -69,7 +69,7 @@ set langmenu=en_us.utf-8
 
 set wildignore=*.pyc
 
-set statusline=%f%m\ %=[%l,%v]\ \ \ \ \ %=%p%%
+set statusline=%f%m\ %=[y=%l,x=%v]\ %=%p%%
 
 
 color gconsole
