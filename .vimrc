@@ -116,6 +116,8 @@ command Q q
 command WQ wq
 command Wq wq
 
+cnoremap w!! w !sudo tee % > /dev/null
+
 " Navigate between windows
 noremap <c-j> <c-w>j
 noremap <c-k> <c-w>k
@@ -135,6 +137,7 @@ noremap <leader>t5 :tab 4<CR>
 noremap <leader>e :FuzzyFinderTextMate<CR>
 noremap <leader>E :FuzzyFinderTextMateRefreshFiles<CR>
 noremap <leader>b :FuzzyFinderBuffer<CR>
+
 let g:fuzzy_ignore = "*.png;*.jpg;*.jpeg;*.gif;*.swp;*.pyc;*.psd;*.ai;*.JPG;*.db;*.class;*.mp3"
 let g:fuzzy_path_display = 'full'
 
