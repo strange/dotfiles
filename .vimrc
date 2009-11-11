@@ -176,7 +176,7 @@ autocmd BufRead,BufNewFile *.html set filetype=htmldjango.html
 autocmd BufRead,BufNewFile models.py set filetype=python.djangomodels
 autocmd BufRead,BufNewFile *.txt set filetype=rest
 autocmd BufRead,BufNewFile *.as set filetype=actionscript
-autocmd Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim
+autocmd BufRead,BufNewFile *.html,*.xml,*.xsl,*.xul source ~/.vim/scripts/closetag.vim
 
 " Source local configuration
 if filereadable(expand("~/.vimrc.local"))
