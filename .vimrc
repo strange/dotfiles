@@ -33,15 +33,6 @@ set statusline=%f%m\ %=[y=%l,x=%v]\ %=%p%%
 set splitbelow
 set splitright
 
-" NERD  **********************************************************************
- 
-" Don't bother us when editing rest-files
-let g:NERDShutUp = 1
-
-" AutoClose ******************************************************************
-
-"let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'", '<': '>'}
-
 " Gutter *********************************************************************
 
 "set number
@@ -92,6 +83,21 @@ let python_highlight_all = 1
 
 syntax on
 color strange
+
+" NERD  **********************************************************************
+ 
+" Don't bother us when editing rest-files
+let g:NERDShutUp = 1
+
+" AutoClose ******************************************************************
+
+"let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'",
+                        "\ '<': '>'}
+
+" Supertab *******************************************************************
+
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
 
 " Custom Mappings ************************************************************
 
