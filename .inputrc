@@ -14,6 +14,7 @@ set expand-tilde off
 set alt-sends-meta on
 
 # Display a "/" at the end for symlinked directories
+set mark-directories on
 set mark-symlinked-directories on
 
 set editing-mode vi
