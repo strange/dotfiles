@@ -98,7 +98,6 @@ let g:NERDShutUp = 1
 
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
-
 " Custom Mappings ************************************************************
 
 nnoremap ' `
