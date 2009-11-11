@@ -61,17 +61,19 @@ set matchtime=2
 set nowrap
 set vb
 set bg=dark
+set scrolloff=5
 
 " Wildmenu *******************************************************************
 
 set wildmenu
-set complete=.,w,b,u,U,t,i
-set wildmode=list:longest,list:full
+"set complete=.,w,b,u,U,t,i
+"set wildmode=list:longest,list:full
 set wildignore=*.pyc
 
 " Searching *****************************************************************
 
-"set ignorecase
+set ignorecase
+set infercase
 set smartcase
 set hlsearch
 set incsearch
