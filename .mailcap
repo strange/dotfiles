@@ -1,14 +1,14 @@
 # Images
-Image/JPEG; /Users/gs/.mutt/view_attachment.sh %s jpg
-Image/PNG; /Users/gs/.mutt/view_attachment.sh %s png
-Image/GIF; /Users/gs/.mutt/view_attachment.sh %s gif
+Image/JPEG; $HOME/.mutt/view_attachment.sh %s jpg
+Image/PNG; $HOME/.mutt/view_attachment.sh %s png
+Image/GIF; $HOME/.mutt/view_attachment.sh %s gif
 
 # PDF
-application/pdf; /Users/gs/.mutt/view_attachment.sh %s pdf
-application/zip; /Users/gs/.mutt/view_attachment.sh %s zip
+application/pdf; $HOME/.mutt/view_attachment.sh %s pdf
+application/zip; $HOME/.mutt/view_attachment.sh %s zip
 
 # HTML
 text/html; lynx -force-html %s
 
 # Documents
-application/rtf; /Users/gs/.mutt/view_attachment.sh %s rtf
+application/rtf; $HOME/.mutt/view_attachment.sh %s rtf
