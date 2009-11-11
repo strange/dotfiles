@@ -24,56 +24,59 @@ set smarttab
 set smartindent
 set nofoldenable
 
-" Statusline  ****************************************************************
+" Statusline *****************************************************************
 
 set showcmd
+set shortmess=atI
 set laststatus=2
 set statusline=%f%m\ %=[y=%l,x=%v]\ %=%p%%
+set splitbelow
+set splitright
 
-" NERD  ****************************************************************
+" NERD  **********************************************************************
  
 " Don't bother us when editing rest-files
 let g:NERDShutUp = 1
 
-" AutoClose """
+" AutoClose ******************************************************************
 
-let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'", '<': '>'}
+"let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'", '<': '>'}
 
-set matchtime=2
+" Gutter *********************************************************************
+
 "set number
 set numberwidth=1
 
-set ruler
-set splitbelow
-set splitright
+" History, backup and undo ***************************************************
 
+set history=1000
+set undolevels=1000
+set directory=/tmp
+set writebackup
+set backup backupdir=$HOME/.vim/backup
+
+" Misc ***********************************************************************
+
+set matchtime=2
+set nowrap
 set vb
 set bg=dark
-set nowrap
-set history=1000
-set ul=1000
+
+" Wildmenu *******************************************************************
 
 set wildmenu
 set complete=.,w,b,u,U,t,i
 set wildmode=list:longest,list:full
 set wildignore=*.pyc
 
-set shortmess=atI
-
-" Searching  ****************************************************************
+" Searching *****************************************************************
 
 "set ignorecase
 set smartcase
 set hlsearch
 set incsearch
 
-" Backup  *******************************************************************
-
-set directory=/tmp
-set writebackup
-set backup backupdir=$HOME/.vim/backup
-
-" Language  ******************************************************************
+" Language *******************************************************************
 
 set encoding=utf-8
 let $LANG="en_US.UTF-8"
