@@ -1,18 +1,17 @@
 set nocompatible 
+let mapleader = ","
+
+" Filetype *******************************************************************
 
 filetype on
 filetype plugin indent on
 
-syntax on
-
-let python_highlight_indent_errors = 0
-let python_highlight_space_errors = 0
-let python_highlight_all = 1
+" LaTeX **********************************************************************
 
 let g:tex_flavor='latex'
 let g:Tex_ViewRule_pdf = 'Preview'
 
-let mapleader = ","
+" Indentation ****************************************************************
 
 set tabstop=4
 set softtabstop=4
@@ -25,54 +24,71 @@ set smarttab
 set smartindent
 set nofoldenable
 
+" Statusline  ****************************************************************
+
 set showcmd
-set matchtime=2
-
 set laststatus=2
+set statusline=%f%m\ %=[y=%l,x=%v]\ %=%p%%
 
-"set number
-set numberwidth=1
-
+" NERD  ****************************************************************
+ 
 " Don't bother us when editing rest-files
 let g:NERDShutUp = 1
 
-set vb
+" AutoClose """
+
+let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'", '<': '>'}
+
+set matchtime=2
+"set number
+set numberwidth=1
+
 set ruler
 set splitbelow
 set splitright
-set wildmenu " Display tab-complete matches above commandline
+
+set vb
 set bg=dark
 set nowrap
 set history=1000
 set ul=1000
 
+set wildmenu
 set complete=.,w,b,u,U,t,i
 set wildmode=list:longest,list:full
+set wildignore=*.pyc
 
 set shortmess=atI
+
+" Searching  ****************************************************************
 
 "set ignorecase
 set smartcase
 set hlsearch
 set incsearch
 
-" Go away, pesky .swp files
-set directory=/tmp
+" Backup  *******************************************************************
 
-" Backup settings
+set directory=/tmp
 set writebackup
 set backup backupdir=$HOME/.vim/backup
+
+" Language  ******************************************************************
 
 set encoding=utf-8
 let $LANG="en_US.UTF-8"
 set langmenu=en_us.utf-8
 
-set wildignore=*.pyc
+" Syntax *********************************************************************
 
-set statusline=%f%m\ %=[y=%l,x=%v]\ %=%p%%
+let python_highlight_indent_errors = 0
+let python_highlight_space_errors = 0
+let python_highlight_all = 1
 
+syntax on
+color strange
 
-color gconsole
+" Custom Mappings ************************************************************
 
 nnoremap ' `
 nnoremap ` '
@@ -80,18 +96,13 @@ nnoremap ` '
 " Some cool bash-hooks
 command! -nargs=1 -complete=file CreateTemplate !bash ~/bin/create_template.sh <args>
 
-" Switch between pivot and landscape
-command Pivot set columns=80 lines=50
-command Landscape set columns=160 lines=35
-command Terminal set columns=80 lines=25
-
 " For the last time!
 command W w
 command Q q
 command WQ wq
 command Wq wq
 
-" Navigate windows
+" Navigate between windows
 noremap <c-j> <c-w>j
 noremap <c-k> <c-w>k
 noremap <c-h> <c-w>h
@@ -110,7 +121,7 @@ noremap <leader>t5 :tab 4<CR>
 noremap <leader>e :FuzzyFinderTextMate<CR>
 noremap <leader>E :FuzzyFinderTextMateRefreshFiles<CR>
 noremap <leader>b :FuzzyFinderBuffer<CR>
-let g:fuzzy_ignore = "*.png;*.jpg;*.jpeg;*.gif;*.swp;*.pyc;*.psd;*.ai;*.JPG;*.db"
+let g:fuzzy_ignore = "*.png;*.jpg;*.jpeg;*.gif;*.swp;*.pyc;*.psd;*.ai;*.JPG;*.db;*.class;*.mp3"
 let g:fuzzy_path_display = 'full'
 
 " Reset search highlighting
@@ -149,17 +160,12 @@ endfunction
 " Remove trailing whitespace from lines
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
 
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType actionscript set omnifunc=actionscriptcomplete#Complete
-
 "autocmd BufRead,BufNewFile *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd BufRead,BufNewFile *.html set filetype=htmldjango.html
 autocmd BufRead,BufNewFile models.py set filetype=python.djangomodels
 autocmd BufRead,BufNewFile *.txt set filetype=rest
 autocmd BufRead,BufNewFile *.as set filetype=actionscript
+autocmd Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim
 
 " Source local configuration
 if filereadable(expand("~/.vimrc.local"))

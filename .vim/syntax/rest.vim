@@ -1,169 +1,175 @@
 " Vim syntax file
-" Language: reStructuredText Documentation Format
-" Maintainer: Estienne Swart 
-" URL: http://www.sanbi.ac.za/~estienne/vim/syntax/rest.vim
-" Latest Revision: 2004-04-26
-"
-" A reStructuredText syntax highlighting mode for vim.
-" (derived somewhat from Nikolai Weibull's <source@p...>
-" source)
+" Language:         reStructuredText documentation format
+" Maintainer:       Nikolai Weibull <now@bitwi.se>
+" Latest Revision:  2009-05-25
 
-"TODO:
-" 0. Make sure that no syntax highlighting bleeding occurs!
-" 1. Need to fix up clusters and contains.
-" 2. Need to validate against restructured.txt.gz and tools/test.txt.
-" 3. Fixup superfluous matching.
-" 4. I need to figure out how to keep a running tally of the indentation in order
-" to enable block definitions, i.e. a block ends when its indentation drops
-" below that of the existing one.
-" 5. Define folding patterns for sections, etc.
-" 6. Setup a completion mode for target references to hyperlinks
-
-" Remove any old syntax stuff that was loaded (5.x) or quit when a syntax file
-" was already loaded (6.x).
-if version < 600
-  syntax clear
-elseif exists("b:current_syntax")
+if exists("b:current_syntax")
   finish
 endif
 
-"syn match rstJunk "\\_"
+let s:cpo_save = &cpo
+set cpo&vim
 
-"ReStructuredText Text Inline Markup:
-syn region rstEmphasis start=+\*[^*]+ end=+\*+ 
-syn region rstStrongEmphasis start=+\*\*[^*]+ end=+\*\*+ 
-syn region rstInterpretedText start=+`[^`]+ end=+`+ contains=rstURL
-syn region rstInlineLiteral start="``" end="``" contains=rstURL
-"Using a syn region here causes too much to be highlighted.
+syn case ignore
 
-syn region rstSubstitutionReference start=+|\w+ end=+\w|+ skip=+\\|+
-"I'm forcing matching of word characters before and after '|' in order to
-"prevent table matching (this causes messy highlighting)
+syn match   rstSections "^\%(\([=`:.'"~^_*+#-]\)\1\+\n\)\=.\+\n\([=`:.'"~^_*+#-]\)\2\+$"
 
-syn region rstGridTable start=/\n\n\s*+\([-=]\|+\)\+/ms=s+2 end=/+\([-=]\|+\)\+\n\s*\n/me=e-2
+syn match   rstTransition  /^[=`:.'"~^_*+#-]\{4,}\s*$/
 
-syn match rstRuler "\(=\|-\|+\)\{3,120}"
+syn cluster rstCruft                contains=rstEmphasis,rstStrongEmphasis,
+      \ rstInterpretedText,rstInlineLiteral,rstSubstitutionReference,
+      \ rstInlineInternalTargets,rstFootnoteReference,rstHyperlinkReference
 
-" syn match rstInlineInternalTarget "_`\_.\{-}`"
-syn region rstInlineInternalHyperlink start=+_`+ end=+`+ contains=rsturl
-" this messes up with InterpretedText
+syn region  rstLiteralBlock         matchgroup=rstDelimiter
+      \ start='::\_s*\n\ze\z(\s\+\)' skip='^$' end='^\z1\@!'
+      \ contains=@NoSpell
 
-syn match rstFootnoteReference "\[\%([#*]\|[0-9]\+\|#[a-zA-Z0-9_.-]\+\)\]_"
-"syn region rstCitationReference start=+\[+ end=+\]_+
-"syn match rstCitationReferenceNothing +\[.*\]+
-"TODO: fix Citation reference - patterns defined still cause "bleeding"
-"if end doesn't get matched, catch it first with another pattern - this is ugly???
-syn match rstURL "\(acap\|cid\|data\|dav\|fax\|file\|ftp\|gopher\|http\|https\|imap\|ldap\|mailto\|mid\|modem\|news\|nfs\|nntp\|pop\|prospero\|rtsp\|service\|sip\|tel\|telnet\|tip\|urn\|vemmi\|wais\):[-./[:alnum:]_~@]\+"
-"I need a better regexp for URLs here. This doesn't cater for URLs that are
-"broken across lines
+syn region  rstQuotedLiteralBlock   matchgroup=rstDelimiter
+      \ start="::\_s*\n\ze\z([!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]\)"
+      \ end='^\z1\@!' contains=@NoSpell
 
-" hyperlinks
-syn match rstHyperlinks /`[^`]\+`_/
-"syn region rstHyperlinks start="`\w" end="`_"
-syn match rstExternalHyperlinks "\w\+_\w\@!"
-"This seems to overlap with the ReStructuredText comment?!?
+syn region  rstDoctestBlock         oneline display matchgroup=rstDelimiter
+      \ start='^>>>\s' end='^$'
 
-"ReStructuredText Sections:
-syn match rstTitle ".\{2,120}\n\(\.\|=\|-\|=\|`\|:\|'\|\"\|\~\|\^\|_\|\*\|+\|#\|<\|>\)\{3,120}$"
-" [-=`:'"~^_*+#<>]
-"for some strange reason this only gets highlighted upon refresh
+syn region  rstTable                transparent start='^\n\s*+[-=+]\+' end='^$'
+      \ contains=rstTableLines,@rstCruft
+syn match   rstTableLines           contained display '|\|+\%(=\+\|-\+\)\='
 
-"syn match rstTitle "\w.*\n\(=\|-\|+\)\{2,120}"
+syn region  rstSimpleTable          transparent
+      \ start='^\n\%(\s*\)\@>\%(\%(=\+\)\@>\%(\s\+\)\@>\)\%(\%(\%(=\+\)\@>\%(\s*\)\@>\)\+\)\@>$'
+      \ end='^$'
+      \ contains=rstSimpleTableLines,@rstCruft
+syn match   rstSimpleTableLines     contained display
+      \ '^\%(\s*\)\@>\%(\%(=\+\)\@>\%(\s\+\)\@>\)\%(\%(\%(=\+\)\@>\%(\s*\)\@>\)\+\)\@>$'
+syn match   rstSimpleTableLines     contained display
+      \ '^\%(\s*\)\@>\%(\%(-\+\)\@>\%(\s\+\)\@>\)\%(\%(\%(-\+\)\@>\%(\s*\)\@>\)\+\)\@>$'
 
-"ReStructuredText Lists:
-syn match rstEnumeratedList "^\s*\d\{1,3}\.\s"
+syn cluster rstDirectives           contains=rstFootnote,rstCitation,
+      \ rstHyperlinkTarget,rstExDirective
 
-syn match rstBulletedList "^\s*\([+-]\|\*\)\s"
-" syn match rstBulletedList "^\s*[+-]\|\*\s"
-"I'm not sure how to include "*" within a range []?!?
-" this seems to match more than it should :-(
+syn match   rstExplicitMarkup       '^\.\.\_s'
+      \ nextgroup=@rstDirectives,rstComment,rstSubstitutionDefinition
 
+let s:ReferenceName = '[[:alnum:]]\+\%([_.-][[:alnum:]]\+\)*'
 
-syn match rstFieldList ":[^:]\+:\s"me=e-1 contains=rstBibliographicField
-"still need to add rstDefinitionList  rstOptionList
+syn keyword     rstTodo             contained FIXME TODO XXX NOTE
 
-"ReStructuredText Preformatting:
-syn match rstLiteralBlock "::\s*\n" contains=rstGridTable
-"syn region rstLiteralBlock start=+\(contents\)\@<!::\n+ end=+[^:]\{2}\s*\n\s*\n\s*+me=e-1 contains=rstEmphasis,rstStrongEmphasis,rstInlineLiteral,rstRuler,rstFieldList,rstInlineInternalTargets,rstGridTable transparent
-"Add more to allbut?
-"This command currently ignores the 'contents::' line that is found in some
-"restructured documents.
-"syn region rstBlockQuote start=+\s\n+ end=+[^:]\{2}\s*\n\s*\n\s*+me=e-1 contains=ALLBUT,rstEmphasis,rstStrongEmphasis,rstInlineLiteral,rstRuler
-"FIX rstBlockQuote
+execute 'syn region rstComment contained' .
+      \ ' start=/.*/'
+      \ ' end=/^\s\@!/ contains=rstTodo'
 
-syn match rstDocTestBlock /^\s*\(>>>\|[.][.][.]\).*/
-"
-"RestructureText Targets:
-syn match rstFootnoteTarget "\[\%([#*]\|[0-9]\+\|#[a-zA-Z0-9_.-]\+\)\]" contained
-syn region rstCitationTarget start=+\[+ end=+\]+ contained
-"syn region rstInlineInternalTarget start=+_\_s\@!+ end=+\:+ contained
-"seems to match things in reagions it should not
-syn match rstDirective +\.\.\s\{-}[^_]\{-}\:\:+ms=s+3 contained
+execute 'syn region rstFootnote contained matchgroup=rstDirective' .
+      \ ' start=+\[\%(\d\+\|#\%(' . s:ReferenceName . '\)\=\|\*\)\]\_s+' .
+      \ ' skip=+^$+' .
+      \ ' end=+^\s\@!+ contains=@rstCruft,@NoSpell'
 
-"ReStructuredText Comments:
-syn region rstComment matchgroup=rstComment start="\.\{2} " end="^\s\@!" contains=rstFootnoteTarget,rstCitationTarget,rstInlineInternalTarget,rstDirective,rstURL
-"THIS NEEDS TO BE FIXED TO HANDLE COMMENTS WITH PARAGRAPHS
-"It can be modelled on rstBlock (which also needs to be worked)
-"It also matches too much :-( e.g. normal ellipsis
-"Define fold group for comments?
+execute 'syn region rstCitation contained matchgroup=rstDirective' .
+      \ ' start=+\[' . s:ReferenceName . '\]\_s+' .
+      \ ' skip=+^$+' .
+      \ ' end=+^\s\@!+ contains=@rstCruft,@NoSpell'
 
-"ReStructuredText Miscellaneous:
+syn region rstHyperlinkTarget contained matchgroup=rstDirective
+      \ start='_\%(_\|[^:\\]*\%(\\.[^:\\]*\)*\):\_s' skip=+^$+ end=+^\s\@!+
 
-syn keyword rstBibliographicField contained Author Organization Contact Address Version Status Date Copyright Dedication Abstract Authors
-"keyword revison too??? Lower case variants too?
+syn region rstHyperlinkTarget contained matchgroup=rstDirective
+      \ start='_`[^`\\]*\%(\\.[^`\\]*\)*`:\_s' skip=+^$+ end=+^\s\@!+
 
-" todo
-syn keyword rstTodo contained FIXME TODO XXX
+syn region rstHyperlinkTarget matchgroup=rstDirective
+      \ start=+^__\_s+ skip=+^$+ end=+^\s\@!+
 
-syn region rstQuotes start=+\"+ end=+\"+ skip=+\\"+ contains=ALLBUT,rstEmphasis,rstStrongEmphasis,rstBibliographicField
+execute 'syn region rstExDirective contained matchgroup=rstDirective' .
+      \ ' start=+' . s:ReferenceName . '::\_s+' .
+      \ ' skip=+^$+' .
+      \ ' end=+^\s\@!+ contains=@rstCruft'
 
-" footnotes
-"syn region rstFootnote matchgroup=rstDirective start="^\.\.\[\%([#*]\|[0-9]\+\|#[a-z0-9_.-]\+\)\]\s" end="^\s\@!" contains=@rstCruft
+execute 'syn match rstSubstitutionDefinition contained' .
+      \ ' /|' . s:ReferenceName . '|\_s\+/ nextgroup=@rstDirectives'
 
-" citations
-"syn region rstCitation matchgroup=rstDirective start="^\.\.\[[a-z0-9_.-]\+\]\s" end="^\s\@!" contains=@rstCruft
+function! s:DefineOneInlineMarkup(name, start, middle, end, char_left, char_right)
+  execute 'syn region rst' . a:name .
+        \ ' start=+' . a:char_left . '\zs' . a:start .
+        \ '\ze[^[:space:]' . a:char_right . a:start[strlen(a:start) - 1] . ']+' .
+        \ a:middle .
+        \ ' end=+\S' . a:end . '\ze\%($\|\s\|[''")\]}>/:.,;!?\\-]\)+'
+endfunction
 
-syn region rstBlock start="::\(\n\s*\)\{-}\z(\s\+\)" skip="^$" end="^\z1\@!" fold contains=ALLBUT,rstInterpretedText,rstFootnoteTarget,rstCitationTarget,rstInlineInternalTarget
-"almost perfect
-"Still need to get stop on unident correct. Also need to work on recursive
-"blocking for proper folding.
-"TODO: Define syntax regions for Sections (defined by titles)
+function! s:DefineInlineMarkup(name, start, middle, end)
+  let middle = a:middle != "" ?
+        \ (' skip=+\\\\\|\\' . a:middle . '+') :
+        \ ""
 
+  call s:DefineOneInlineMarkup(a:name, a:start, middle, a:end, "'", "'")
+  call s:DefineOneInlineMarkup(a:name, a:start, middle, a:end, '"', '"') 
+  call s:DefineOneInlineMarkup(a:name, a:start, middle, a:end, '(', ')') 
+  call s:DefineOneInlineMarkup(a:name, a:start, middle, a:end, '\[', '\]') 
+  call s:DefineOneInlineMarkup(a:name, a:start, middle, a:end, '{', '}') 
+  call s:DefineOneInlineMarkup(a:name, a:start, middle, a:end, '<', '>') 
+
+  call s:DefineOneInlineMarkup(a:name, a:start, middle, a:end, '\%(^\|\s\|[/:]\)', '')
+
+  execute 'syn match rst' . a:name .
+        \ ' +\%(^\|\s\|[''"([{</:]\)\zs' . a:start .
+        \ '[^[:space:]' . a:start[strlen(a:start) - 1] . ']'
+        \ a:end . '\ze\%($\|\s\|[''")\]}>/:.,;!?\\-]\)+'
+
+  execute 'hi def link rst' . a:name . 'Delimiter' . ' rst' . a:name
+endfunction
+
+call s:DefineInlineMarkup('Emphasis', '\*', '\*', '\*')
+call s:DefineInlineMarkup('StrongEmphasis', '\*\*', '\*', '\*\*')
+call s:DefineInlineMarkup('InterpretedTextOrHyperlinkReference', '`', '`', '`_\{0,2}')
+call s:DefineInlineMarkup('InlineLiteral', '``', "", '``')
+call s:DefineInlineMarkup('SubstitutionReference', '|', '|', '|_\{0,2}')
+call s:DefineInlineMarkup('InlineInternalTargets', '_`', '`', '`')
+
+" TODO: Can’t remember why these two can’t be defined like the ones above.
+execute 'syn match rstFootnoteReference contains=@NoSpell' .
+      \ ' +\[\%(\d\+\|#\%(' . s:ReferenceName . '\)\=\|\*\)\]_+'
+
+execute 'syn match rstCitationReference contains=@NoSpell' .
+      \ ' +\[' . s:ReferenceName . '\]_\ze\%($\|\s\|[''")\]}>/:.,;!?\\-]\)+'
+
+execute 'syn match rstHyperlinkReference' .
+      \ ' /\<' . s:ReferenceName . '__\=\ze\%($\|\s\|[''")\]}>/:.,;!?\\-]\)/'
+
+syn match   rstStandaloneHyperlink  contains=@NoSpell
+      \ "\<\%(\%(\%(https\=\|file\|ftp\|gopher\)://\|\%(mailto\|news\):\)[^[:space:]'\"<>]\+\|www[[:alnum:]_-]*\.[[:alnum:]_-]\+\.[^[:space:]'\"<>]\+\)[[:alnum:]/]"
+
+" TODO: Use better syncing.  I don’t know the specifics of syncing well enough,
+" though.
 syn sync minlines=50
 
-if !exists("did_rst_syn_inits")
-    let did_rst_syn_inits = 1
-   
-    hi link rstBibliographicField Operator
-    hi link rstBlock Type
-    hi link rstExternalHyperlinks Underlined 
-    hi link rstHyperlinks Underlined
-    hi link rstTitle Constant
-    hi link rstRuler Special
-    hi link rstURL Underlined
-    hi link rstSubstitutionReference Macro
-    hi link rstEmphasis Exception
-    hi link rstStrongEmphasis Exception
-    hi link rstLiteralBlock Type
-    hi link rstDocTestBlock Special
-    hi link rstBlockQuote Type
-    hi link rstEnumeratedList Operator
-    hi link rstBulletedList Operator
-    hi link rstFieldList Label
-    hi link rstTodo Todo
-    hi link rstComment Comment
-    hi link rstGridTable Delimiter
-    hi link rstInlineLiteral Function
-    hi link rstInterpretedText Keyword
-    hi link rstInlineInternalHyperlink Identifier
-    hi link rstInlineInternalTarget Identifier
-    hi link rstFootnoteReference Identifier
-    hi link rstCitationReference Identifier
-    hi link rstFootnoteTarget Identifier
-    hi link rstCitationTarget Identifier
-    hi link rstDirective Underlined
-endif
+hi def link rstTodo                         Todo
+hi def link rstComment                      Comment
+hi def link rstSections                     Type
+hi def link rstTransition                   Type
+hi def link rstLiteralBlock                 String
+hi def link rstQuotedLiteralBlock           String
+hi def link rstDoctestBlock                 PreProc
+hi def link rstTableLines                   rstDelimiter
+hi def link rstSimpleTableLines             rstTableLines
+hi def link rstExplicitMarkup               rstDirective
+hi def link rstDirective                    Keyword
+hi def link rstFootnote                     String
+hi def link rstCitation                     String
+hi def link rstHyperlinkTarget              String
+hi def link rstExDirective                  String
+hi def link rstSubstitutionDefinition       rstDirective
+hi def link rstDelimiter                    Delimiter
+" TODO: I dunno...
+hi def      rstEmphasis                     term=italic cterm=italic gui=italic
+hi def link rstStrongEmphasis               Special
+"term=bold cterm=bold gui=bold
+hi def link rstInterpretedTextOrHyperlinkReference  Identifier
+hi def link rstInlineLiteral                String
+hi def link rstSubstitutionReference        PreProc
+hi def link rstInlineInternalTargets        Identifier
+hi def link rstFootnoteReference            Identifier
+hi def link rstCitationReference            Identifier
+hi def link rstHyperLinkReference           Identifier
+hi def link rstStandaloneHyperlink          Identifier
 
 let b:current_syntax = "rst"
 
-" vim: set sts=4 sw=4:
+let &cpo = s:cpo_save
+unlet s:cpo_save

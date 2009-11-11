@@ -10,8 +10,11 @@ set realname = "Gustaf Sjöberg"
 
 unset fcc_attach
 
-set query_command ="lbdbq '%s'"
+#set query_command="lbdbq '%s'"
+set query_command = "~/code/checkouts/goobook-read-only/contactos.py '%s'"
 set alias_file=~/.mutt/alias
+bind editor <Tab> complete-query
+bind editor ^T complete
 
 set folder = "imaps://imap.gmail.com:993"
 set spoolfile = "+INBOX"
@@ -37,7 +40,7 @@ set charset="utf8"
 unset record
 unset fcc_attach
 
-set pager_index_lines=6
+#set pager_index_lines=6
 
 set timeout=15
 set mail_check=90

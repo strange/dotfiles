@@ -18,6 +18,14 @@ servers = (
     use_ssl = "no";
     ssl_verify = "no";
     autoconnect = "yes";
+  },
+  {
+    address = "localhost";
+    chatnet = "Bitlbee";
+    port = "6667";
+    use_ssl = "no";
+    ssl_verify = "no";
+    autoconnect = "no";
   }
 );
 
@@ -35,18 +43,6 @@ chatnets = {
     max_msgs = "3";
     max_whois = "1";
   };
-  Undernet = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  DALnet = {
-    type = "IRC";
-    max_kicks = "4";
-    max_msgs = "3";
-    max_whois = "30";
-  };
   QuakeNet = {
     type = "IRC";
     max_kicks = "1";
@@ -54,6 +50,9 @@ chatnets = {
     max_whois = "30";
   };
   freenode = { type = "IRC"; };
+  Bitlbee = { type = "IRC"; };
+  Undernet = { type = "IRC"; };
+  DALnet = { type = "IRC"; };
 };
 
 channels = (
@@ -226,5 +225,5 @@ statusbar = {
 settings = {
   core = { real_name = "'me'"; user_name = "gs"; nick = "gurraman"; };
   "fe-text" = { actlist_sort = "refnum"; };
-  "fe-common/core" = { theme = "default"; };
+  "fe-common/core" = { theme = "lawn"; };
 };

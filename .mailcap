@@ -9,3 +9,6 @@ application/zip; /Users/gs/.mutt/view_attachment.sh %s zip
 
 # HTML
 text/html; lynx -force-html %s
+
+# Documents
+application/rtf; /Users/gs/.mutt/view_attachment.sh %s rtf
