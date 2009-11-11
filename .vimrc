@@ -136,9 +136,6 @@ noremap <leader>pp :set paste!<CR>
 " Toggle NERDTree
 noremap <leader>nn :NERDTreeToggle<CR>
 
-" Edit vim-file
-noremap <C-A> :Explore ~/Documents/<CR>
-
 " Space scrolls half a page
 noremap <Space> <C-d>
 
