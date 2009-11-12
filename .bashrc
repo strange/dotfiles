@@ -79,6 +79,9 @@ alias djvalidate='django-admin.py validate --settings=${PWD##*/}.settings'
 alias djmakemessages='django-admin.py makemessages --settings=${PWD##*/}.settings'
 alias djcompilemessages='django-admin.py compilemessages'
 
+# Remove all .pyc and .pyo files in tree
+alias cleanpy="find . -name '*.py[oc]' -delete"
+
 # Host-specific. Should probably source a .bashrc.local or something.
 if [ $HOSTNAME == "gurraman.local" ]; then
     PS1='[\u@\h]\W$(__git_ps1 ":%s")\[\e[1;31m\]%\[\e[0m\] '
