@@ -5,8 +5,9 @@ snippet extends
 	{% extends ${1} %}
 
 snippet if
-	{% if ${1} %}
-		${2}
+	{% if ${1} %}${3}{% endif %}
+
+snippet endif
 	{% endif %}
 
 snippet ifequal
@@ -18,12 +19,13 @@ snippet else
 	{% else %}
 	
 snippet block
-	{% block ${1} %}
-		${2}
-	{% endblock %}
+	{% block ${1} %}${2}{% endblock %}
 
 snippet for
-	{% for ${1} in ${2} %}
-		${3}
+	{% for ${1} in ${2} %}${3}{% endfor %}
+
+snippet endfor
 	{% endfor %}
 
+snippet url
+	{% url ${1} %}
