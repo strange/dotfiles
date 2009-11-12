@@ -10,31 +10,19 @@ export LC_TIME="sv_SE.UTF-8"
 export LC_MESSAGES="en_US.UTF-8"
 
 export PYTHONPATH="" # Disable to work nicely with pip.
-export PATH="$HOME/.cabal/bin:/opt/local/bin:/opt/local/sbin:$PATH:$HOME/bin:/opt/local/Library/Frameworks/Python.framework/Versions/Current/bin"
-export MANPATH=/opt/local/share/man:$MANPATH
+export PATH="$PATH:$HOME/bin"
 
 export EDITOR=vim
 export PAGER=less
 
 export TERM=xterm-color
 
-if [ $HOSTNAME == "gurraman.local" ]; then
-    PS1='[\u@\h]\W$(__git_ps1 ":%s")\[\e[1;31m\]%\[\e[0m\] '
-else
-    PS1='[\u@\h]\W% '
-fi
-
 # Bash history
-
 export HISTCONTROL=erasedups
 export HISTSIZE=10000
-
-# Make Bash append rather than overwrite the history on
-# disk
+# Make Bash append rather than overwrite the history on disk
 shopt -s histappend
-
-# Whenever displaying the prompt, write the previous line
-# to disk.
+# Whenever displaying the prompt, write the previous line to disk.
 PROMPT_COMMAND='history -a'
 
 # Update lines and columns on resize.
@@ -44,6 +32,7 @@ shopt -s checkwinsize
 if [ -f /opt/local/etc/bash_completion ]; then
     . /opt/local/etc/bash_completion
 fi
+
 if [ -f /opt/local/etc/bash_completion.d/git ]; then
     . /opt/local/etc/bash_completion.d/git
 fi
@@ -51,6 +40,7 @@ fi
 
 # Virtualenv
 export PIP_VIRTUALENV_BASE=$HOME/.virtualenvs
+
 # Load a virtualenv.
 loadenv() {
     local VENV_NAME=`[ -n "$1" ] && echo "$1" || echo ${PWD##*/}`
@@ -61,26 +51,22 @@ loadenv() {
     fi
     source $VENV_PATH
 }
+
 # Change directory to site-packages directory of a virtualenv.
 cdenvsp() {
     local VENV_NAME=`[ -n "$1" ] && echo "$1" || echo ${PWD##*/}`
-    # TODO: Gice choice between multiple versions?
+    # TODO: Give choice between multiple versions og Python?
     cd `echo "$PIP_VIRTUALENV_BASE/$VENV_NAME/lib/python*/site-packages"`
 }
 complete -o default -o nospace -W '$(ls $PIP_VIRTUALENV_BASE)' loadenv cdenvsp
 
 # Aliases
+alias myip="ifconfig | grep '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | \
+            grep -v '127.0.0.1' | awk '{print \$2}'"
 
 alias ls="ls -G"
-alias lock="open -a ScreenSaverEngine"
-
-alias myip="ifconfig | grep 192 | awk '{print \$2}'"
-alias startpg="sudo -u postgres /opt/local/lib/postgresql83/bin/postgres -D /opt/local/var/db/postgresql83/defaultdb"
-
 alias vi=vim
-
 alias tmux="tmux -u"
-alias weechat="weechat-curses"
 
 # Some Django convenience aliases
 alias djrun='django-admin.py runserver --settings=${PWD##*/}.settings'
@@ -92,3 +78,15 @@ alias djtest='django-admin.py test --settings=${PWD##*/}.settings'
 alias djvalidate='django-admin.py validate --settings=${PWD##*/}.settings'
 alias djmakemessages='django-admin.py makemessages --settings=${PWD##*/}.settings'
 alias djcompilemessages='django-admin.py compilemessages'
+
+# Host-specific. Should probably source a .bashrc.local or something.
+if [ $HOSTNAME == "gurraman.local" ]; then
+    PS1='[\u@\h]\W$(__git_ps1 ":%s")\[\e[1;31m\]%\[\e[0m\] '
+    export PATH="$PATH:/opt/local/bin:/opt/local/sbin"
+    export MANPATH=$MANPATH:/opt/local/share/man
+    alias weechat="weechat-curses"
+    alias startpg="sudo -u postgres /opt/local/lib/postgresql83/bin/postgres -D /opt/local/var/db/postgresql83/defaultdb"
+    alias lock="open -a ScreenSaverEngine"
+else
+    PS1='[\u@\h]\W% '
+fi
