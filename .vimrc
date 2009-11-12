@@ -111,10 +111,10 @@ nnoremap ` '
 command! -nargs=1 -complete=file CreateTemplate !bash ~/bin/create_template.sh <args>
 
 " For the last time!
-command W w
-command Q q
-command WQ wq
-command Wq wq
+command! W w
+command! Q q
+command! WQ wq
+command! Wq wq
 
 cnoremap w!! w !sudo tee % > /dev/null
 
