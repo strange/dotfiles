@@ -8,7 +8,8 @@ SCRIPT=$(basename $0)
 
 if [ ! -e "$PWD/$SCRIPT" ]
 then
-    echo "Script must be run from the directory in which the files we're creating links to reside."
+    echo "Script must be run from the directory in which the files we're " \
+         "creating links to reside."
     exit 1
 fi
 
