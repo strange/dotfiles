@@ -183,6 +183,9 @@ function acp#onPopupPost()
   if pumvisible()
     inoremap <silent> <expr> <C-h> acp#onBs()
     inoremap <silent> <expr> <BS>  acp#onBs()
+    " EDIT: Navigate popup with tab. 
+    inoremap <Tab> <Down>
+    inoremap <S-Tab> <Up>
     " a command to restore to original text and select the first match
     return (s:behavsCurrent[s:iBehavs].command =~# "\<C-p>" ? "\<C-n>\<Up>"
           \                                                 : "\<C-p>\<Down>")
@@ -366,6 +369,11 @@ endfunction
 function s:finishPopup(fGroup1)
   inoremap <C-h> <Nop> | iunmap <C-h>
   inoremap <BS>  <Nop> | iunmap <BS>
+  " EDIT: Allow tabbing inside snippets.
+  ino <silent> <tab> <c-r>=TriggerProxy()<cr>
+  snor <silent> <tab> <esc>i<right><c-r>=TriggerProxy()<cr>
+  ino <silent> <s-tab> <c-r>=BackwardsProxy()<cr>
+  snor <silent> <s-tab> <esc>i<right><c-r>=BackwardsProxy()<cr>
   let s:behavsCurrent = []
   call s:restoreTempOptions(s:GROUP0)
   if a:fGroup1

@@ -24,6 +24,15 @@ if !exists('snippets_dir')
 	let snippets_dir = substitute(globpath(&rtp, 'snippets/'), "\n", ',', 'g')
 endif
 
+fun! GetSnipsInCurrentScope()
+  let snips = {}
+  for scope in [bufnr('%')] + split(&ft, '\.') + ['_']
+    call extend(snips, get(s:snippets, scope, {}), 'keep')
+    call extend(snips, get(s:multi_snips, scope, {}), 'keep')
+  endfor
+  return snips
+endf
+
 fun! MakeSnip(scope, trigger, content, ...)
 	let multisnip = a:0 && a:1 != ''
 	let var = multisnip ? 's:multi_snips' : 's:snippets'

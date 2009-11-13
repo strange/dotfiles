@@ -97,6 +97,10 @@ let g:NERDShutUp = 1
 
 let g:snips_author = 'Gustaf Sjöberg'
 
+" acp ************************************************************************
+
+let g:acp_behaviorSnipmateLength=1
+
 " Custom Mappings ************************************************************
 
 nnoremap ' `
@@ -147,10 +151,6 @@ noremap <Space> <C-d>
 
 " Keep hands on home row
 inoremap jj <Esc>
-
-" Marvelous when using acp.
-inoremap <Tab> <C-n>
-inoremap <S-tab> <C-p>
 
 " Expand braces
 inoremap <silent> <CR> <C-R>=ExpandBraces()<CR>
