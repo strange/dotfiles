@@ -1,27 +1,45 @@
 set nocompatible 
 let mapleader = ","
 
+
 " Filetype *******************************************************************
 
 filetype on
 filetype plugin indent on
 
-" LaTeX **********************************************************************
-
-let g:tex_flavor='latex'
-let g:Tex_ViewRule_pdf = 'Preview'
-
 " Indentation ****************************************************************
 
 set tabstop=4
 set softtabstop=4
-set expandtab
 set shiftwidth=4
+set expandtab
 
 set backspace=indent,eol,start
+set smartindent
 set autoindent
 set smarttab
-set smartindent
+
+" History, backup and undo ***************************************************
+
+set history=1000
+set undolevels=1000
+set directory=/tmp
+set writebackup
+set backup backupdir=$HOME/.vim/backup
+
+" Edtitor and Interface ******************************************************
+
+set matchtime=2
+set scrolloff=5
+set vb
+set nowrap
+set bg=dark
+
+set wildmenu
+"set complete=.,w,b,u,U,t,i
+"set wildmode=list:longest,list:full
+set wildignore=*.pyc
+
 set nofoldenable
 
 " Statusline *****************************************************************
@@ -37,29 +55,6 @@ set splitright
 
 "set number
 set numberwidth=1
-
-" History, backup and undo ***************************************************
-
-set history=1000
-set undolevels=1000
-set directory=/tmp
-set writebackup
-set backup backupdir=$HOME/.vim/backup
-
-" Misc ***********************************************************************
-
-set matchtime=2
-set nowrap
-set vb
-set bg=dark
-set scrolloff=5
-
-" Wildmenu *******************************************************************
-
-set wildmenu
-"set complete=.,w,b,u,U,t,i
-"set wildmode=list:longest,list:full
-set wildignore=*.pyc
 
 " Searching *****************************************************************
 
@@ -83,6 +78,11 @@ let python_highlight_all = 1
 
 syntax on
 color strange
+
+" LaTeX **********************************************************************
+
+let g:tex_flavor='latex'
+let g:Tex_ViewRule_pdf = 'Preview'
 
 " NERD  **********************************************************************
  
