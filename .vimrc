@@ -107,9 +107,6 @@ let g:snips_author = 'Gustaf Sjöberg'
 nnoremap ' `
 nnoremap ` '
 
-" Some cool bash-hooks
-command! -nargs=1 -complete=file CreateTemplate !bash ~/bin/create_template.sh <args>
-
 " For the last time!
 command! W w
 command! Q q
