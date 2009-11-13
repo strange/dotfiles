@@ -94,10 +94,6 @@ let g:NERDShutUp = 1
 "let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'",
                         "\ '<': '>'}
 
-" Supertab *******************************************************************
-
-let g:SuperTabDefaultCompletionType = "<c-n>"
-
 " SnipMate *******************************************************************
 
 let g:snips_author = 'Gustaf Sjöberg'
