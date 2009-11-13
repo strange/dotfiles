@@ -1,7 +1,6 @@
 set nocompatible 
 let mapleader = ","
 
-
 " Filetype *******************************************************************
 
 filetype on
@@ -148,6 +147,10 @@ noremap <Space> <C-d>
 
 " Keep hands on home row
 inoremap jj <Esc>
+
+" Marvelous when using acp.
+inoremap <Tab> <C-n>
+inoremap <S-tab> <C-p>
 
 " Expand braces
 inoremap <silent> <CR> <C-R>=ExpandBraces()<CR>
