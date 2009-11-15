@@ -10,7 +10,9 @@ export LC_MESSAGES="en_US.UTF-8"
 export LANG="sv_SE.UTF-8"
 
 export PYTHONPATH="" # Disable to work nicely with pip.
-export PATH="$PATH:$HOME/bin"
+if [ -d "$HOME/bin" ] ; then
+    export PATH="$PATH:$HOME/bin"
+fi
 
 export EDITOR=vim
 export PAGER=less
