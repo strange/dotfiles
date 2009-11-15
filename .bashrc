@@ -1,34 +1,35 @@
-export DISPLAY=:0.0
+# Exports ###################################################################
 
 export LC_ALL=""
-export LANG="sv_SE.UTF-8"
 export LC_COLLATE="sv_SE.UTF-8"
 export LC_CTYPE="sv_SE.UTF-8"
 export LC_MONETARY="sv_SE.UTF-8"
 export LC_NUMERIC="sv_SE.UTF-8"
 export LC_TIME="sv_SE.UTF-8"
 export LC_MESSAGES="en_US.UTF-8"
+export LANG="sv_SE.UTF-8"
 
 export PYTHONPATH="" # Disable to work nicely with pip.
 export PATH="$PATH:$HOME/bin"
 
 export EDITOR=vim
 export PAGER=less
-
+export DISPLAY=:0.0
 export TERM=xterm-color
 
-# Bash history
+# Bash history ##############################################################
+
 export HISTCONTROL=erasedups
 export HISTSIZE=10000
+
 # Make Bash append rather than overwrite the history on disk
 shopt -s histappend
+
 # Whenever displaying the prompt, write the previous line to disk.
 PROMPT_COMMAND='history -a'
 
-# Update lines and columns on resize.
-shopt -s checkwinsize
+# Bash completion ###########################################################
 
-# Bash completion
 if [ -f /opt/local/etc/bash_completion ]; then
     . /opt/local/etc/bash_completion
 fi
@@ -36,12 +37,16 @@ fi
 if [ -f /opt/local/etc/bash_completion.d/git ]; then
     . /opt/local/etc/bash_completion.d/git
 fi
-#_expand() { return 0; }
 
-# Virtualenv
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
+# Virtualenv and pip ########################################################
+
 export PIP_VIRTUALENV_BASE=$HOME/.virtualenvs
 
-# Load a virtualenv.
+# Load a virtualenv
 loadenv() {
     local VENV_NAME=`[ -n "$1" ] && echo "$1" || echo ${PWD##*/}`
     local VENV_PATH="$PIP_VIRTUALENV_BASE/$VENV_NAME/bin/activate"
@@ -60,10 +65,10 @@ cdenvsp() {
 }
 complete -o default -o nospace -W '$(ls $PIP_VIRTUALENV_BASE)' loadenv cdenvsp
 
-# Aliases
-alias myip="ifconfig | grep '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | \
-            grep -v '127.0.0.1' | awk '{print \$2}'"
+# Aliases ###################################################################
 
+alias myip="ifconfig | grep '[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | \
+            grep -v '127.0.0.1' | awk '{print \$2}'"
 alias ls="ls -G"
 alias vi=vim
 alias tmux="tmux -u"
@@ -82,7 +87,14 @@ alias djcompilemessages='django-admin.py compilemessages'
 # Remove all .pyc and .pyo files in tree
 alias cleanpy="find . -name '*.py[oc]' -delete"
 
-# Host-specific. Should probably source a .bashrc.local or something.
+# Misc ######################################################################
+
+shopt -s checkwinsize
+
+# Host-specific ##############################################################
+
+# Should probably source a .bashrc.local or something.
+
 if [ $HOSTNAME == "gurraman.local" ]; then
     PS1='[\u@\h]\W$(__git_ps1 ":%s")\[\e[1;31m\]%\[\e[0m\] '
     export PATH="$PATH:/opt/local/bin:/opt/local/sbin"
@@ -90,6 +102,7 @@ if [ $HOSTNAME == "gurraman.local" ]; then
     alias weechat="weechat-curses"
     alias startpg="sudo -u postgres /opt/local/lib/postgresql83/bin/postgres -D /opt/local/var/db/postgresql83/defaultdb"
     alias lock="open -a ScreenSaverEngine"
+    alias port="sudo port"
 else
     PS1='[\u@\h]\W% '
 fi
