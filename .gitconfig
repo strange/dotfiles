@@ -7,3 +7,7 @@
 	branch = auto
 [alias]
     ci = commit
+    st = status
+    # Courtesy of bitprophet
+    # (http://github.com/bitprophet/dotfiles/blob/master/.gitconfig).
+    lo = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
