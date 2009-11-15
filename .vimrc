@@ -115,10 +115,14 @@ command! Wq wq
 cnoremap w!! w !sudo tee % > /dev/null
 
 " Navigate between windows
-noremap <c-j> <c-w>j
-noremap <c-k> <c-w>k
-noremap <c-h> <c-w>h
-noremap <c-l> <c-w>l
+noremap <C-j> <C-w>w
+noremap <C-k> <C-W>W
+noremap <C-j><C-j> <C-w>w
+noremap <C-k><C-k> <C-W>W
+noremap <C-w>w <C-w>p
+noremap <C-w><C-w> <C-w>p
+noremap <C-h> <C-w>h
+noremap <C-l> <C-w>l
 
 " Navigate Tabs
 noremap <leader>tn :tabnext<CR>
