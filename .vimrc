@@ -184,14 +184,9 @@ endfunction
 
 " Filetypes ******************************************************************
 
-" Remove trailing whitespace from lines
-autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
-
-autocmd BufRead,BufNewFile *.html set filetype=htmldjango.html
-autocmd BufRead,BufNewFile models.py set filetype=python.djangomodels
-autocmd BufRead,BufNewFile *.txt set filetype=rest
-autocmd BufRead,BufNewFile *.as set filetype=actionscript
-autocmd BufRead,BufNewFile *.html,*.xml,*.xsl,*.xul source ~/.vim/scripts/closetag.vim
+au BufWritePre *.py normal m`:%s/\s\+$//e ``
+au Filetype html,xml,xsl,htmldjango source ~/.vim/scripts/closetag.vim
+au Filetype rest set formatoptions=tcqna
 
 " Local Configuration ********************************************************
 
