@@ -46,7 +46,8 @@ set nofoldenable
 set showcmd
 set shortmess=atI
 set laststatus=2
-set statusline=\ %f%m%r\ %=\ [y=%l,x=%v]\ %=%p%%
+set statusline=\ %f%m%r\ %=\ y=%l,x=%v:%=%p%%\ %=
+
 set splitbelow
 set splitright
 set fillchars=stl:-,vert:\|,fold:-,diff:-
