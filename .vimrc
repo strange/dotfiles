@@ -7,7 +7,7 @@ set iskeyword+=#,-
 filetype on
 filetype plugin indent on
 
-" Indentation ****************************************************************
+" Indentation and text formatting ********************************************
 
 set tabstop=4
 set softtabstop=4
@@ -18,6 +18,9 @@ set backspace=indent,eol,start
 set smartindent
 set autoindent
 set smarttab
+
+set tw=78
+set formatoptions=rnq
 
 " History, backup and undo ***************************************************
 
