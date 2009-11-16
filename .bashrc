@@ -32,17 +32,15 @@ PROMPT_COMMAND='history -a'
 
 # Bash completion ###########################################################
 
-if [ -f /opt/local/etc/bash_completion ]; then
-    . /opt/local/etc/bash_completion
-fi
-
-if [ -f /opt/local/etc/bash_completion.d/git ]; then
-    . /opt/local/etc/bash_completion.d/git
-fi
-
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-fi
+for FILE in /opt/local/etc/bash_completion \
+            /opt/local/etc/bash_completion.d/git \
+            /usr/local/etc/bash_completion \
+            /etc/bash_completion;
+do
+    if [ -f $FILE ]; then
+        . $FILE
+    fi
+done
 
 # Virtualenv and pip ########################################################
 
