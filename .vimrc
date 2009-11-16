@@ -118,9 +118,9 @@ cnoremap w!! w !sudo tee % > /dev/null
 " Navigate between windows
 noremap <C-j> <C-w>w
 noremap <C-k> <C-W>W
-noremap <C-j><C-j> <C-w>w
-noremap <C-k><C-k> <C-W>W
-noremap <C-w>w <C-w>p
+noremap <C-w><C-j> <C-w>w
+noremap <C-w><C-k> <C-W>W
+"noremap <C-w>w <C-w>p
 noremap <C-w><C-w> <C-w>p
 noremap <C-h> <C-w>h
 noremap <C-l> <C-w>l
