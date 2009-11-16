@@ -39,12 +39,11 @@ set nowrap
 set bg=dark
 
 set wildmenu
-"set complete=.,w,b,u,U,t,i
 set wildmode=list:longest,full
 set wildignore=*.pyc
 
 set nofoldenable
-set report=0
+set report=2
 set virtualedit=block
 
 " Statusline *****************************************************************
