@@ -10,6 +10,7 @@ export LC_MESSAGES="en_US.UTF-8"
 export LANG="sv_SE.UTF-8"
 
 export PYTHONPATH="" # Disable to work nicely with pip.
+
 if [ -d "$HOME/bin" ] ; then
     export PATH="$HOME/bin:$PATH"
 fi
@@ -103,6 +104,9 @@ if [ $HOSTNAME == "gurraman.local" ]; then
     alias startpg="sudo -u postgres /opt/local/lib/postgresql83/bin/postgres -D /opt/local/var/db/postgresql83/defaultdb"
     alias lock="open -a ScreenSaverEngine"
     alias port="sudo port"
+    if [ -f "$HOME/code/checkouts/z/z.sh" ]; then
+        . "$HOME/code/checkouts/z/z.sh"
+    fi
 else
     PS1='[\u@\h]\W% '
 fi
