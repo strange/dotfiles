@@ -11,7 +11,7 @@ export LANG="sv_SE.UTF-8"
 
 export PYTHONPATH="" # Disable to work nicely with pip.
 if [ -d "$HOME/bin" ] ; then
-    export PATH="$PATH:$HOME/bin"
+    export PATH="$HOME/bin:$PATH"
 fi
 
 export EDITOR=vim
