@@ -40,10 +40,12 @@ set bg=dark
 
 set wildmenu
 "set complete=.,w,b,u,U,t,i
-"set wildmode=list:longest,list:full
+set wildmode=list:longest,full
 set wildignore=*.pyc
 
 set nofoldenable
+set report=0
+set virtualedit=block
 
 " Statusline *****************************************************************
 
