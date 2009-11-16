@@ -1,5 +1,6 @@
 set nocompatible 
 let mapleader = ","
+set iskeyword+=#,-
 
 " Filetype *******************************************************************
 
@@ -99,9 +100,20 @@ let g:NERDShutUp = 1
 
 let g:snips_author = 'Gustaf Sjöberg'
 
-" acp ************************************************************************
+" SuperTab *******************************************************************
 
-let g:acp_behaviorSnipmateLength=1
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextDefaultCompletionType = "<C-n>"
+
+" FuzzyFinder ****************************************************************
+
+noremap <leader>e :FuzzyFinderTextMate<CR>
+noremap <leader>E :FuzzyFinderTextMateRefreshFiles<CR>
+noremap <leader>b :FuzzyFinderBuffer<CR>
+
+let g:fuzzy_ignore = "*.png;*.jpg;*.jpeg;*.gif;*.swp;*.pyc;*.psd;*.ai;*.JPG;"
+                    \"*.db;*.class;*.mp3"
+let g:fuzzy_path_display = 'full'
 
 " Custom Mappings ************************************************************
 
@@ -121,10 +133,11 @@ noremap <C-j> <C-w>w
 noremap <C-k> <C-W>W
 noremap <C-w><C-j> <C-w>w
 noremap <C-w><C-k> <C-W>W
-"noremap <C-w>w <C-w>p
 noremap <C-w><C-w> <C-w>p
-noremap <C-h> <C-w>h
-noremap <C-l> <C-w>l
+
+" Line navigations
+noremap <C-h> ^
+noremap <C-l> g_
 
 " Navigate Tabs
 noremap <leader>tn :tabnext<CR>
@@ -134,14 +147,6 @@ noremap <leader>t2 :tab 2<CR>
 noremap <leader>t3 :tab 3<CR>
 noremap <leader>t4 :tab 3<CR>
 noremap <leader>t5 :tab 4<CR>
-
-" Open files
-noremap <leader>e :FuzzyFinderTextMate<CR>
-noremap <leader>E :FuzzyFinderTextMateRefreshFiles<CR>
-noremap <leader>b :FuzzyFinderBuffer<CR>
-
-let g:fuzzy_ignore = "*.png;*.jpg;*.jpeg;*.gif;*.swp;*.pyc;*.psd;*.ai;*.JPG;*.db;*.class;*.mp3"
-let g:fuzzy_path_display = 'full'
 
 " Reset search highlighting
 noremap <leader>nh :noh<CR>
@@ -173,17 +178,19 @@ function! ExpandBraces()
     endif
 endfunction
 
+" Filetypes ******************************************************************
+
 " Remove trailing whitespace from lines
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
 
-"autocmd BufRead,BufNewFile *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd BufRead,BufNewFile *.html set filetype=htmldjango.html
 autocmd BufRead,BufNewFile models.py set filetype=python.djangomodels
 autocmd BufRead,BufNewFile *.txt set filetype=rest
 autocmd BufRead,BufNewFile *.as set filetype=actionscript
 autocmd BufRead,BufNewFile *.html,*.xml,*.xsl,*.xul source ~/.vim/scripts/closetag.vim
 
-" Source local configuration
+" Local Configuration ********************************************************
+
 if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
