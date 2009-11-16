@@ -5,28 +5,12 @@ if !exists('loaded_snips') || exists('s:did_snips_mappings')
 endif
 let s:did_snips_mappings = 1
 
-" EDIT: Added proxies and new bindings.
+ino <silent> <tab> <c-r>=TriggerSnippet()<cr>
+snor <silent> <tab> <esc>i<right><c-r>=TriggerSnippet()<cr>
+ino <silent> <s-tab> <c-r>=BackwardsSnippet()<cr>
+snor <silent> <s-tab> <esc>i<right><c-r>=BackwardsSnippet()<cr>
+ino <silent> <c-r><tab> <c-r>=ShowAvailableSnips()<cr>
 
-function TriggerProxy()
-	if exists('g:snipPos') | return snipMate#jumpTabStop(0) | endif
-	return "\<tab>"
-endfunction
-
-fun! BackwardsProxy()
-	if exists('g:snipPos') | return snipMate#jumpTabStop(1) | endif
-	return "\<s-tab>"
-endf
-
-ino <silent> <tab> <c-r>=TriggerProxy()<cr>
-snor <silent> <tab> <esc>i<right><c-r>=TriggerProxy()<cr>
-ino <silent> <s-tab> <c-r>=BackwardsProxy()<cr>
-snor <silent> <s-tab> <esc>i<right><c-r>=BackwardsProxy()<cr>
-
-"ino <silent> <tab> <c-r>=TriggerSnippet()<cr>
-"snor <silent> <tab> <esc>i<right><c-r>=TriggerSnippet()<cr>
-"ino <silent> <s-tab> <c-r>=BackwardsSnippet()<cr>
-"snor <silent> <s-tab> <esc>i<right><c-r>=BackwardsSnippet()<cr>
-"ino <silent> <c-r><tab> <c-r>=ShowAvailableSnips()<cr>
 " The default mappings for these are annoying & sometimes break snipMate.
 " You can change them back if you want, I've put them here for convenience.
 snor <bs> b<bs>
