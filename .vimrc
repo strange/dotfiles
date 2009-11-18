@@ -137,6 +137,8 @@ noremap <C-j> <C-w>w
 noremap <C-k> <C-W>W
 noremap <C-w><C-j> <C-w>w
 noremap <C-w><C-k> <C-W>W
+noremap <C-w>j <C-w>w
+noremap <C-w>k <C-W>W
 noremap <C-w><C-w> <C-w>p
 
 " Line navigations
