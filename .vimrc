@@ -106,8 +106,7 @@ let g:snips_author = 'Gustaf Sjöberg'
 
 " SuperTab *******************************************************************
 
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextDefaultCompletionType = "<C-n>"
+let g:SuperTabDefaultCompletionType = "<C-n>"
 
 " FuzzyFinder ****************************************************************
 
