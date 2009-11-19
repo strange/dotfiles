@@ -100,6 +100,12 @@ let g:NERDCommentWholeLinesInVMode=1
 
 let g:Tlist_Inc_Winwidth = 0
 let g:Tlist_Exit_OnlyWindow = 1
+let g:Tlist_Compact_Format = 1
+let g:Tlist_Enable_Fold_Column = 0
+let g:Tlist_File_Fold_Auto_Close = 1
+let g:Tlist_GainFocus_On_ToggleOpen = 1
+let g:Tlist_Show_Menu = 0
+
 noremap <leader>b :TlistToggle<CR>
 
 " AutoClose ******************************************************************
