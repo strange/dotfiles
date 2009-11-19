@@ -94,7 +94,13 @@ let g:Tex_ViewRule_pdf = 'Preview'
  
 let g:NERDShutUp = 1
 let g:NERDSpaceDelims = 1
-let g:NERDCommentWholeLinesInVMode=1
+let g:NERDCommentWholeLinesInVMode = 1
+ 
+" NERD Tree ******************************************************************
+
+let g:NERDTreeShowHidden = 1
+
+noremap <leader>nn :NERDTreeToggle<CR>
 
 " Taglist ********************************************************************
 
@@ -170,9 +176,6 @@ noremap <leader>nh :noh<CR>
 
 " Toggle paste mode
 noremap <leader>pp :set paste!<CR>
-
-" Toggle NERDTree
-noremap <leader>nn :NERDTreeToggle<CR>
 
 " Space scrolls half a page
 noremap <Space> <C-d>
