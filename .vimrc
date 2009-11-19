@@ -90,10 +90,12 @@ color strange
 let g:tex_flavor='latex'
 let g:Tex_ViewRule_pdf = 'Preview'
 
-" NERD  **********************************************************************
+" NERD Comments **************************************************************
  
-" Don't bother us when editing rest-files
 let g:NERDShutUp = 1
+let g:NERDSpaceDelims = 1
+let g:NERDCommentWholeLinesInVMode=1
+let g:NERDDefaultNesting=0
 
 " AutoClose ******************************************************************
 
