@@ -95,7 +95,12 @@ let g:Tex_ViewRule_pdf = 'Preview'
 let g:NERDShutUp = 1
 let g:NERDSpaceDelims = 1
 let g:NERDCommentWholeLinesInVMode=1
-" let g:NERDDefaultNesting=0
+
+" Taglist ********************************************************************
+
+let g:Tlist_Inc_Winwidth = 0
+let g:Tlist_Exit_OnlyWindow = 1
+noremap <leader>b :TlistToggle<CR>
 
 " AutoClose ******************************************************************
 
@@ -114,7 +119,6 @@ let g:SuperTabDefaultCompletionType = "<C-n>"
 
 noremap <leader>e :FuzzyFinderTextMate<CR>
 noremap <leader>E :FuzzyFinderTextMateRefreshFiles<CR>
-noremap <leader>b :FuzzyFinderBuffer<CR>
 
 let g:fuzzy_ignore = "*.png;*.jpg;*.jpeg;*.gif;*.swp;*.pyc;*.psd;*.ai;*.JPG;"
                     \"*.db;*.class;*.mp3"
