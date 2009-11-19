@@ -95,7 +95,7 @@ let g:Tex_ViewRule_pdf = 'Preview'
 let g:NERDShutUp = 1
 let g:NERDSpaceDelims = 1
 let g:NERDCommentWholeLinesInVMode=1
-let g:NERDDefaultNesting=0
+" let g:NERDDefaultNesting=0
 
 " AutoClose ******************************************************************
 
