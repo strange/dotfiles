@@ -98,8 +98,8 @@ shopt -s checkwinsize
 
 if [ $HOSTNAME == "gurraman.local" ]; then
     PS1='[\u@\h]\W$(__git_ps1 ":%s")\[\e[1;31m\]%\[\e[0m\] '
-    export PATH="$PATH:/opt/local/bin:/opt/local/sbin"
-    export MANPATH=$MANPATH:/opt/local/share/man
+    export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+    export MANPATH=/opt/local/share/man:$MANPATH
     alias weechat="weechat-curses"
     alias startpg="sudo -u postgres /opt/local/lib/postgresql83/bin/postgres -D /opt/local/var/db/postgresql83/defaultdb"
     alias lock="open -a ScreenSaverEngine"
