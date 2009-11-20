@@ -11,7 +11,6 @@ let s:cpo_save = &cpo
 set cpo&vim
 
 syn case ignore
-syn sync linebreaks=1
 
 syn match   rstSections "^\%(\([=`:.'"~^_*+#-]\)\1\+\n\)\=.\+\n\([=`:.'"~^_*+#-]\)\2\+$"
 
@@ -139,6 +138,7 @@ syn match   rstStandaloneHyperlink  contains=@NoSpell
 " TODO: Use better syncing.  I don’t know the specifics of syncing well enough,
 " though.
 syn sync minlines=50
+syn sync linebreaks=1
 
 hi def link rstTodo                         Todo
 hi def link rstComment                      Comment
