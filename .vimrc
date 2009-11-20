@@ -26,7 +26,7 @@ set formatoptions=rnq
 
 set history=1000
 set undolevels=1000
-set directory=/tmp
+set directory=/tmp//
 set writebackup
 set backup backupdir=$HOME/.vim/backup
 
