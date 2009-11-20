@@ -11,6 +11,7 @@ let s:cpo_save = &cpo
 set cpo&vim
 
 syn case ignore
+syn sync linebreaks=1
 
 syn match   rstSections "^\%(\([=`:.'"~^_*+#-]\)\1\+\n\)\=.\+\n\([=`:.'"~^_*+#-]\)\2\+$"
 
