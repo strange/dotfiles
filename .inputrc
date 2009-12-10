@@ -4,18 +4,14 @@
 "OA": history-search-backward
 "OB": history-search-forward
 
-# "\e[Z": "\e-1\C-i"
-# TAB: menu-complete
-
 # List the possible completions when Tab is pressed
 set show-all-if-ambiguous on
 
 set expand-tilde off
 set alt-sends-meta on
 
-# Display a "/" at the end for symlinked directories
-set mark-directories on
 set mark-symlinked-directories on
+set mark-directories on
 
 set editing-mode vi
 $if mode=vi
