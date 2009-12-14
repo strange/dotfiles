@@ -61,7 +61,7 @@ loadenv() {
 # Change directory to site-packages directory of a virtualenv.
 cdenvsp() {
     local VENV_NAME=`[ -n "$1" ] && echo "$1" || echo ${PWD##*/}`
-    # TODO: Give choice between multiple versions og Python?
+    # TODO: Give choice between multiple versions of Python?
     cd `echo "$PIP_VIRTUALENV_BASE/$VENV_NAME/lib/python*/site-packages"`
 }
 complete -o default -o nospace -W '$(ls $PIP_VIRTUALENV_BASE)' loadenv cdenvsp

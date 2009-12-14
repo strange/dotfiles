@@ -1,0 +1,12 @@
+snippet class "class" b!
+class ${1:MyClass}(${2:object}):
+	"""${3:Docstring for $1}"""
+
+	def __init__(self${4/([^,])?(.*)/(?1:, )/}${4:arg}):
+${2/object$|(.+)/(?1:		$0.__init__\(self\)\n\n)/}${4/(\A\s*,\s*\Z)|,?\s*([A-Za-z_][A-Za-z0-9_]*)\s*(=[^,]*)?(,\s*|$)/(?2:		self.$2 = $2\n)/g}
+endsnippet
+
+snippet for "for x in y" b
+for ${1:x} in ${2:y}:
+    
+endsnippet

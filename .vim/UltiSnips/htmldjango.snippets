@@ -1,0 +1,37 @@
+extends html
+
+snippet for "{% for x in y %}" b
+{% for ${1:x} in ${2:y} %}${0}{% endfor %}
+endsnippet
+
+snippet if "{% if x %}" i
+{% if ${1:x} %}
+endsnippet
+
+snippet else "{% else %}" i
+{% else %}
+endsnippet
+
+snippet endif "{% endif %}" i
+{% endif %}
+endsnippet
+
+snippet load "{% load tag_library %}" b
+{% load ${1:tag_library} %}
+endsnippet
+
+snippet url "{% url named_pattern %}" i
+{% url ${1:named_pattern} %}
+endsnippet
+
+snippet block "{% block block_name %}" b
+{% block ${1:block_name} %}
+endsnippet
+
+snippet endblock "{% endblock %}" b
+{% endblock %}
+endsnippet
+
+snippet extends "{% extends document.html %}" b
+{% extend ${1:document.html} %}
+endsnippet
