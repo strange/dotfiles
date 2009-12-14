@@ -119,10 +119,6 @@ noremap <leader>b :TlistToggle<CR>
 "let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'",
                         "\ '<': '>'}
 
-" SnipMate *******************************************************************
-
-let g:snips_author = 'Gustaf Sjöberg'
-
 " SuperTab *******************************************************************
 
 let g:SuperTabDefaultCompletionType = "<C-n>"
@@ -137,8 +133,8 @@ let g:fuzzy_ignore = "*.png;*.jpg;*.jpeg;*.gif;*.swp;*.pyc;*.psd;*.ai;*.JPG;"
 let g:fuzzy_path_display = 'full'
 
 " UltiSnips ******************************************************************
-set runtimepath+=~/.vim/ultisnips_repository
 
+set runtimepath+=~/.vim/ultisnips_repository
 
 " Custom Mappings ************************************************************
 
