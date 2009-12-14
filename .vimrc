@@ -136,6 +136,10 @@ let g:fuzzy_ignore = "*.png;*.jpg;*.jpeg;*.gif;*.swp;*.pyc;*.psd;*.ai;*.JPG;"
                     \"*.db;*.class;*.mp3"
 let g:fuzzy_path_display = 'full'
 
+" UltiSnips ******************************************************************
+set runtimepath+=~/.vim/ultisnips_repository
+
+
 " Custom Mappings ************************************************************
 
 nnoremap ' `
