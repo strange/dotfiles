@@ -209,6 +209,7 @@ endfunction
 au BufWritePre *.py normal m`:%s/\s\+$//e ``
 au Filetype html,xml,xsl,htmldjango source ~/.vim/scripts/closetag.vim
 au Filetype rest set formatoptions=tcqn
+au Filetype css set foldmethod=syntax foldmarker={,}
 
 " Local Configuration ********************************************************
 
