@@ -64,7 +64,7 @@ set numberwidth=1
 
 " Searching *****************************************************************
 
-set ignorecase
+set noignorecase
 set infercase
 set smartcase
 set hlsearch
