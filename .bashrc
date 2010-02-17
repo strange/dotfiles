@@ -9,43 +9,55 @@ export LC_TIME="sv_SE.UTF-8"
 export LC_MESSAGES="en_US.UTF-8"
 export LANG="sv_SE.UTF-8"
 
-export PYTHONPATH="" # Disable to work nicely with pip.
-
-if [ -d "$HOME/bin" ] ; then
-    export PATH="$HOME/bin:$PATH"
-fi
-
-export EDITOR=vim
+export EDITOR=vi
 export PAGER=less
 export DISPLAY=:0.0
-export TERM=xterm-color
+
+# Paths #####################################################################
+
+for path in "/usr/local/bin" \
+            "/opt/local/bin" \
+            "$HOME/bin" \
+            "$HOME/local/bin";
+do
+    if [ -d $path ]; then
+        PATH="$PATH:$path"
+    fi
+done
+
+export PATH
 
 # Bash history ##############################################################
 
 export HISTCONTROL=erasedups
 export HISTSIZE=10000
+unset HISTFILESIZE
+export HISTIGNORE="ls:exit"
 
-# Make Bash append rather than overwrite the history on disk
 shopt -s histappend
+shopt -s cmdhist
 
 # Whenever displaying the prompt, write the previous line to disk.
-PROMPT_COMMAND='history -a'
+export PROMPT_COMMAND='history -a'
 
 # Bash completion ###########################################################
 
-for FILE in /opt/local/etc/bash_completion \
-            /opt/local/etc/bash_completion.d/git \
-            /usr/local/etc/bash_completion \
-            /etc/bash_completion;
+for file in "/opt/local/etc/bash_completion" \
+            "/opt/local/etc/bash_completion.d/git" \
+            "/usr/local/etc/bash_completion" \
+            "/etc/bash_completion";
 do
-    if [ -f $FILE ]; then
-        . $FILE
+    if [ -f $file ]; then
+        source $file
     fi
 done
 
 # Virtualenv and pip ########################################################
 
+export PYTHONPATH="" # Disable to work nicely with pip.
 export PIP_VIRTUALENV_BASE=$HOME/.virtualenvs
+export PIP_REQUIRE_VIRTUALENV=true
+export PIP_RESPECT_VIRTUALENV=true
 
 # Load a virtualenv
 loadenv() {
@@ -64,6 +76,22 @@ cdenvsp() {
     # TODO: Give choice between multiple versions of Python?
     cd `echo "$PIP_VIRTUALENV_BASE/$VENV_NAME/lib/python*/site-packages"`
 }
+
+# Create a new virtual environment in $PIP_VIRTUALENV_BASE
+mkvenv() {
+    if [ -z $1 ] ; then
+        echo "Usage: mkenv <name>"
+        return 1
+    fi
+    local full_path="$PIP_VIRTUALENV_BASE/$1"
+    if [ -d $full_path ]; then
+        echo "A virtual environment by that name already exists."
+        return 1
+    fi
+    virtualenv --no-site-packages $full_path
+    return 0
+}
+
 complete -o default -o nospace -W '$(ls $PIP_VIRTUALENV_BASE)' loadenv cdenvsp
 
 # Aliases ###################################################################
@@ -73,6 +101,7 @@ alias myip="ifconfig | grep '[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | \
 alias ls="ls -G"
 alias vi=vim
 alias tmux="tmux -u"
+alias port="sudo port"
 
 # Some Django convenience aliases
 alias djrun='django-admin.py runserver --settings=${PWD##*/}.settings'
@@ -96,17 +125,9 @@ shopt -s checkwinsize
 
 # Should probably source a .bashrc.local or something.
 
-if [ $HOSTNAME == "gurraman.local" ]; then
-    PS1='[\u@\h]\W$(__git_ps1 ":%s")\[\e[1;31m\]%\[\e[0m\] '
-    export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-    export MANPATH=/opt/local/share/man:$MANPATH
-    alias weechat="weechat-curses"
-    alias startpg="sudo -u postgres /opt/local/lib/postgresql83/bin/postgres -D /opt/local/var/db/postgresql83/defaultdb"
-    alias lock="open -a ScreenSaverEngine"
-    alias port="sudo port"
-    if [ -f "$HOME/code/checkouts/z/z.sh" ]; then
-        . "$HOME/code/checkouts/z/z.sh"
-    fi
-else
-    PS1='[\u@\h]\W% '
+PS1='[\u@\h]\W% '
+
+if [ -e "$HOME/.bashrc.local" ]; then
+    source "$HOME/.bashrc.local"
 fi
+
