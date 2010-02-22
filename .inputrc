@@ -13,6 +13,8 @@ set alt-sends-meta on
 set mark-symlinked-directories on
 set mark-directories on
 
+set bell-style none
+
 set editing-mode vi
 $if mode=vi
     set keymap vi-command
