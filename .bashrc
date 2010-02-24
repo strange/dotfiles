@@ -52,6 +52,9 @@ do
     fi
 done
 
+# Override as Bash Completion does not honor 'set expand-tilde'.
+_expand() { return 0; }
+
 # Virtualenv and pip ########################################################
 
 export PYTHONPATH="" # Disable to work nicely with pip.
