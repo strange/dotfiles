@@ -37,6 +37,8 @@ set scrolloff=5
 set vb
 set nowrap
 set bg=dark
+set title
+set visualbell
 
 set wildmenu
 set wildmode=list:longest,full
@@ -178,10 +180,10 @@ noremap <leader>t8 :tab 8<CR>
 noremap <leader>t9 :tab 9<CR>
 
 " Reset search highlighting
-noremap <leader>nh :noh<CR>
+noremap <silent> <leader>nh :silent :noh<CR>
 
 " Toggle paste mode
-noremap <leader>pp :set paste!<CR>
+noremap <silent> <leader>pp :set paste!<CR>
 
 " Space scrolls half a page
 noremap <Space> <C-d>
