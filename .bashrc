@@ -21,7 +21,7 @@ for path in "/usr/local/bin" \
             "$HOME/local/bin";
 do
     if [ -d $path ]; then
-        PATH="$PATH:$path"
+        PATH="$path:$PATH"
     fi
 done
 
