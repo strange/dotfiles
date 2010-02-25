@@ -15,7 +15,7 @@ set shiftwidth=4
 set expandtab
 
 set backspace=indent,eol,start
-set smartindent
+" set smartindent
 set autoindent
 set smarttab
 
@@ -127,12 +127,14 @@ let g:SuperTabDefaultCompletionType = "<C-n>"
 
 " FuzzyFinder ****************************************************************
 
-noremap <leader>e :FuzzyFinderTextMate<CR>
-noremap <leader>E :FuzzyFinderTextMateRefreshFiles<CR>
+" noremap <leader>e :FuzzyFinderTextMate<CR>
+" noremap <leader>E :FuzzyFinderTextMateRefreshFiles<CR>
 
-let g:fuzzy_ignore = "*.png;*.jpg;*.jpeg;*.gif;*.swp;*.pyc;*.psd;*.ai;*.JPG;"
-                    \"*.db;*.class;*.mp3"
-let g:fuzzy_path_display = 'full'
+" let g:fuzzy_ignore = "*.png;*.jpg;*.jpeg;*.gif;*.swp;*.pyc;*.psd;*.ai;*.JPG;"
+                    " \"*.db;*.class;*.mp3"
+" let g:fuzzy_path_display = 'full'
+
+noremap <leader>e :e **/
 
 " UltiSnips ******************************************************************
 
