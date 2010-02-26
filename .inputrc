@@ -1,9 +1,6 @@
 "\e[A": history-search-backward
 "\e[B": history-search-forward
 
-"OA": history-search-backward
-"OB": history-search-forward
-
 # List the possible completions when Tab is pressed
 set show-all-if-ambiguous on
 
