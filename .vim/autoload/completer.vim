@@ -3,7 +3,8 @@
 " * smarter matching?
 " * ignore patterns
 " * remove leading dot
-" * Dynamic window title?
+" * dynamic window title?
+" * filenames should take precedence
 
 function! completer#InitUI()
     " Reference window from which we were invoked and settings we'll be
@@ -60,7 +61,7 @@ endfunction
 
 function! s:OnBackspace()
     if pumvisible()
-        call feedkeys("\<C-e>", 'n')
+        call feedkeys("\<C-x>\<C-u>", 'n')
     endif
     return "\<BS>"
 endfunction
@@ -105,7 +106,7 @@ function! completer#Completer(start, base)
         return []
     endif
 
-    let result = s:FindSeach(a:base, 1)
+    let result = s:FindSeach(a:base)
 
     if !empty(result)
         call feedkeys("\<C-p>\<Down>", 'n')
@@ -118,7 +119,7 @@ let s:path = ''
 let s:cache = ''
 function s:UpdateCache(path, force)
     if empty(s:cache) || a:path != s:path || a:force
-        let command = "find . -depth -type f"
+        let command = "find . -maxdepth 6 -type f"
         let ignorePatterns = ['*.pyc', '*~', '*.git*', '*.jpg', '*.gif', '*.png']
         for ignorePattern in ignorePatterns
             let command = command." -not -ipath '".ignorePattern."'"
@@ -138,8 +139,7 @@ function s:Regexpify(pattern)
     return pattern
 endfunction
 
-let s:lastSearchWasNotFound = 0
-function! s:FindSeach(pattern, reinvoke)
+function! s:FindSeach(pattern)
     call s:UpdateCache(getcwd(), 0)
 
     let pattern = s:Regexpify(a:pattern)
