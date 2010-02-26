@@ -125,12 +125,10 @@ let g:SuperTabDefaultCompletionType = "<C-n>"
 
 " FuzzyFinder ****************************************************************
 
-noremap <leader>e :FuzzyFinderTextMate<CR>
-noremap <leader>E :FuzzyFinderTextMateRefreshFiles<CR>
+noremap <leader>e :Completer<CR>
 
-let g:fuzzy_ignore = "*.png;*.jpg;*.jpeg;*.gif;*.swp;*.pyc;*.psd;*.ai;*.JPG;"
+let g:completer_ignore = "*.png;*.jpg;*.jpeg;*.gif;*.swp;*.pyc;*.psd;*.ai;*.JPG;"
                     \"*.db;*.class;*.mp3"
-let g:fuzzy_path_display = 'full'
 
 " UltiSnips ******************************************************************
 
