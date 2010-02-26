@@ -21,7 +21,7 @@ for path in "/usr/local/bin" \
             "$HOME/local/bin";
 do
     if [ -d $path ]; then
-        PATH="$PATH:$path"
+        PATH="$path:$PATH"
     fi
 done
 
@@ -51,6 +51,9 @@ do
         source $file
     fi
 done
+
+# Override as Bash Completion does not honor 'set expand-tilde'.
+_expand() { return 0; }
 
 # Virtualenv and pip ########################################################
 
