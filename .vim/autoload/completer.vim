@@ -10,9 +10,11 @@ function! completer#InitUI()
     " changing.
     let s:_winno = winnr()
     let s:_completeopt = &completeopt
+    let s:_splitbelow = &splitbelow
 
     " Create and setup a new window for file-pattern insertion.
-    exec 'topleft 1split [Type the name of a file or directory ...]'
+    set nosplitbelow
+    exec '1split [Type the name of a file or directory ...]'
     let s:bufno = bufnr('%')
     setlocal nobuflisted 
     setlocal nonumber 
@@ -52,6 +54,9 @@ function s:ResetUI()
     let &completeopt=s:_completeopt
     exec s:bufno.'bdelete!'
     exec s:_winno.'wincmd w'
+    if s:_splitbelow
+        set splitbelow
+    endif
 endfunction
 
 function! s:OnInsertLeave()
@@ -100,17 +105,13 @@ function! completer#Completer(start, base)
         " matching.
         return 0
     endif
-
     if empty(a:base) || a:base == '.'
         return []
     endif
-
     let result = s:FileSeach(a:base)
-
     if !empty(result)
         call feedkeys("\<C-p>\<Down>", 'n')
     endif
-
     return result
 endfunction
 
@@ -139,11 +140,16 @@ function! s:FileSeach(pattern)
     call completer#UpdateCache(0)
     let results = []
     let pattern = a:pattern
+    if pattern[-1:] == '/'
+        " Add an asterisk to patterns ending with slash to expand
+        " the directory.
+        let pattern = pattern."*"
+    endif
     " Escape a few characters that can mess up regular expressions.
     let pattern = escape(pattern, " \t\n.?[{´$#'\"|!<&+\\'}]")
-    let pattern = substitute(pattern, '_', '.*_.*', '')
     " Add a few patterns for convenience
-    let pattern = substitute(pattern, '*', '.*', '')
+    let pattern = substitute(pattern, '[\*]\+', '.*', '')
+    let pattern = substitute(pattern, '_', '.*_.*', '')
     let bits = reverse(split(pattern, '/'))
     let bitlen = len(bits)
     for entry in s:cache
