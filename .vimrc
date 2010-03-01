@@ -128,6 +128,7 @@ let g:SuperTabDefaultCompletionType = "<C-n>"
 " FuzzyFinder ****************************************************************
 
 noremap <leader>e :Completer<CR>
+noremap <silent> <leader>E :CompleterUpdateCache<CR>
 
 let g:completer_ignore = "*.png;*.jpg;*.jpeg;*.gif;*.swp;*.pyc;*.psd;*.ai;*.JPG;"
                     \"*.db;*.class;*.mp3"

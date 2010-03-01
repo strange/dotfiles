@@ -1,9 +1,9 @@
 " TODO:
 " * remember recent files
-" * smarter matching?
-" * ignore patterns
-" * remove leading dot
 " * Dynamic window title?
+" * Fuzzy matching? 
+" * Match directories on slash?
+" * Performance..?
 
 function! completer#InitUI()
     " Reference window from which we were invoked and settings we'll be
@@ -60,7 +60,7 @@ endfunction
 
 function! s:OnBackspace()
     if pumvisible()
-        call feedkeys("\<C-e>", 'n')
+        call feedkeys("\<C-x>\<C-u>", 'n')
     endif
     return "\<BS>"
 endfunction
@@ -105,7 +105,7 @@ function! completer#Completer(start, base)
         return []
     endif
 
-    let result = s:FindSeach(a:base, 1)
+    let result = s:FileSeach(a:base)
 
     if !empty(result)
         call feedkeys("\<C-p>\<Down>", 'n')
@@ -115,36 +115,55 @@ function! completer#Completer(start, base)
 endfunction
 
 let s:path = ''
-let s:cache = ''
-function s:UpdateCache(path, force)
-    if empty(s:cache) || a:path != s:path || a:force
-        let command = "find . -depth -type f"
-        let ignorePatterns = ['*.pyc', '*~', '*.git*', '*.jpg', '*.gif', '*.png']
-        for ignorePattern in ignorePatterns
-            let command = command." -not -ipath '".ignorePattern."'"
+let s:cache = []
+function completer#UpdateCache(force)
+    let path = getcwd()
+    if empty(s:cache) || path != s:path || a:force
+        echo "Updating cache ..."
+        let s:_wildignore = &wildignore
+        set wildignore=*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp
+        let s:cache = []
+        let files = split(globpath('.', "**/*"), '\n')
+        for row in files 
+            if isdirectory(row) == 0
+                call insert(s:cache, reverse(split(row, '/')[1:]))
+            endif
         endfor
-        let s:cache = system(command)
-        let s:path = a:path
+        let s:path = path
+        let &wildignore=s:_wildignore
+        echo "Cache update done!"
     endif
-    return s:cache
 endfunction
 
-function s:Regexpify(pattern)
+function! s:FileSeach(pattern)
+    call completer#UpdateCache(0)
+    let results = []
+    let pattern = a:pattern
     " Escape a few characters that can mess up regular expressions.
-    let pattern = escape(a:pattern, " \t\n.?[{´$#'\"|!<&+\\")
-    " Add a few wildcards suitable for greping.
-    let pattern = substitute(pattern, '\/', '*\/*', '')
+    let pattern = escape(pattern, " \t\n.?[{´$#'\"|!<&+\\'}]")
+    let pattern = substitute(pattern, '_', '.*_.*', '')
+    " Add a few patterns for convenience
     let pattern = substitute(pattern, '*', '.*', '')
-    return pattern
-endfunction
-
-let s:lastSearchWasNotFound = 0
-function! s:FindSeach(pattern, reinvoke)
-    call s:UpdateCache(getcwd(), 0)
-
-    let pattern = s:Regexpify(a:pattern)
-    let command = "grep -i --regexp '.*".pattern.".*$'"
-    let result = split(system(command, s:cache), "\n")
-
-    return result
+    let bits = reverse(split(pattern, '/'))
+    let bitlen = len(bits)
+    for entry in s:cache
+        if bitlen > len(entry)
+            continue
+        endif
+        let index = 0
+        let matches = 0
+        while index < bitlen
+            if match(entry[index], bits[index]) != -1
+                let matches = matches + 1
+            endif
+            let index = index + 1
+            if index > matches
+                break
+            endif
+        endwhile
+        if matches == bitlen
+            call insert(results, join(reverse(entry[:]), '/'))
+        endif
+    endfor
+    return results
 endfunction
