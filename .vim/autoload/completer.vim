@@ -62,11 +62,6 @@ function! s:OnInsertLeave()
 endfunction
 
 function! s:OnBackspace()
-    if !pumvisible()
-        call feedkeys("\<C-x>\<C-u>", 'n')
-    else
-        call feedkeys("\<C-n>", 'n')
-    endif
     return "\<BS>"
 endfunction
 
