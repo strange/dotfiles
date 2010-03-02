@@ -159,7 +159,8 @@ function! s:FileSeach(pattern)
         let index = 0
         let matches = 0
         while index < bitlen
-            if match(entry[index], '^'.bits[index]) != -1
+            if bits[index] == '.*' ||
+                        \ match(entry[index], '^'.bits[index]) != -1
                 let matches = matches + 1
             endif
             let index = index + 1
