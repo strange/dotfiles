@@ -124,6 +124,9 @@ function completer#UpdateCache(force)
         let s:_wildignore = &wildignore
         let ignore = '*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,*.gif,*~,*.o, *.class'
         let &wildignore=ignore
+        " Build a search cache by traversing the current working directory,
+        " omitting all directories, and splitting and reversing each path
+        " entry on a slash.
         let s:cache = map(filter(split(globpath('.', "**/*"), '\n'),
             \ '!isdirectory(v:val)'), 'reverse(split(v:val, "/"))')
         let s:path = path
@@ -138,7 +141,7 @@ function! s:FileSeach(pattern)
     let pattern = a:pattern
     if pattern[-1:] == '/'
         " Add an asterisk to patterns ending with slash to expand
-        " the directory.
+        " the directory while searching.
         let pattern = pattern."*"
     endif
     " Escape a few characters that can mess up regular expressions.
@@ -150,6 +153,7 @@ function! s:FileSeach(pattern)
     let bitlen = len(bits)
     for entry in s:cache
         if bitlen > len(entry)
+            " Skip item as it cannot possibly match.
             continue
         endif
         let index = 0
@@ -160,8 +164,8 @@ function! s:FileSeach(pattern)
             endif
             let index = index + 1
             if index > matches
-                " Break out of the loop if we've gone through more
-                " iterations than we have found matching bits.
+                " Break out of the loop if we've gone through more iterations
+                " than we have found matching bits.
                 break
             endif
         endwhile
