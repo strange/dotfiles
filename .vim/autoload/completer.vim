@@ -2,8 +2,8 @@
 " * remember recent files
 " * Dynamic window title?
 " * Fuzzy matching? 
-" * Match directories on slash?
 " * Performance..?
+" * Underscore bug
 
 function! completer#InitUI()
     " Reference window from which we were invoked and settings we'll be
@@ -73,8 +73,8 @@ endfunction
 let s:lastColumn = 0
 function! s:OnCursorMoved()
     if col('.') != s:lastColumn
-        let s:lastColumn = col('.')
         call feedkeys("\<C-x>\<C-u>", 'n')
+        let s:lastColumn = col('.')
     endif
 endfunction
 
@@ -122,12 +122,12 @@ function completer#UpdateCache(force)
     if empty(s:cache) || path != s:path || a:force
         echo "Updating cache ..."
         let s:_wildignore = &wildignore
-        set wildignore=*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp
+        set wildignore=*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,*.gif
         let s:cache = []
         let files = split(globpath('.', "**/*"), '\n')
         for row in files 
             if isdirectory(row) == 0
-                call insert(s:cache, reverse(split(row, '/')[1:]))
+                call insert(s:cache, reverse(split(row, '/')))
             endif
         endfor
         let s:path = path
@@ -140,16 +140,16 @@ function! s:FileSeach(pattern)
     call completer#UpdateCache(0)
     let results = []
     let pattern = a:pattern
-    if pattern[-1:] == '/'
-        " Add an asterisk to patterns ending with slash to expand
-        " the directory.
-        let pattern = pattern."*"
-    endif
+    " if pattern[-1:] == '/'
+        " " Add an asterisk to patterns ending with slash to expand
+        " " the directory.
+        " let pattern = pattern."*"
+    " endif
     " Escape a few characters that can mess up regular expressions.
     let pattern = escape(pattern, " \t\n.?[{´$#'\"|!<&+\\'}]")
     " Add a few patterns for convenience
+    let pattern = substitute(pattern, '\([^\*_]\)[\_]\{1}', '\1*_*', '')
     let pattern = substitute(pattern, '[\*]\+', '.*', '')
-    let pattern = substitute(pattern, '_', '.*_.*', '')
     let bits = reverse(split(pattern, '/'))
     let bitlen = len(bits)
     for entry in s:cache
