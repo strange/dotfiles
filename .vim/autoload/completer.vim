@@ -143,13 +143,13 @@ function! s:FileSeach(pattern)
     let pattern = substitute(pattern, '\([_]\+\)', '*\1*', 'g') 
     let pattern = substitute(pattern, '\([\/]\+\)', '*\1*', 'g') 
     let pattern = substitute(pattern, '[\*]\+', '.*', 'g')
-    let pattern = pattern.'.*$'
+    let pattern = pattern
     let index = 0
     while index < s:cachelen
         let entry = s:cache[index]
         let match = match(entry, pattern)
         if match != -1
-            call insert(results, entry.(len(entry) - match))
+            call insert(results, entry[2:])
         endif
         if len(results) > 200
             break
