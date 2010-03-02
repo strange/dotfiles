@@ -20,22 +20,20 @@ function! completer#InitUI()
     set nosplitbelow
     exec '1split [Type the name of a file or directory ...]'
     let s:bufno = bufnr('%')
-    setlocal nobuflisted 
-    setlocal nonumber 
-    setlocal noswapfile
-    setlocal buftype=nofile
-    setlocal bufhidden=delete
-    setlocal noshowcmd
-    setlocal nowrap 
-    setlocal wrap
-    setlocal bufhidden=hide
-    setlocal winfixheight
-    setlocal wrapmargin=0
-    setlocal textwidth=0
-    set completeopt=menuone
+    setlocal nobuflisted " Do not show in buf list
+    setlocal nonumber " Do not display line numbers
+    setlocal noswapfile " Do not use a swapfile for the buffer
+    setlocal buftype=nofile " The buffer is not related to any file
+    setlocal bufhidden=delete " The buffer dies with the window
+    setlocal noshowcmd " Be restrictive with what to show in statusbar
+    setlocal nowrap " Do not wrap long lines
+    setlocal winfixheight " Keep height when other windows are opened
+    setlocal textwidth=0 " No maximum text width
+    set completeopt=menuone " Use popup with only one match
     set completefunc=completer#Completer
     exec 'delete'
     exec 'startinsert'
+    let s:lastColumn = 0
 
     augroup CompleterMovements
         autocmd!
@@ -68,13 +66,14 @@ function! s:OnInsertLeave()
 endfunction
 
 function! s:OnBackspace()
+    call feedkeys("\<C-X>\<C-U>", 'n')
+    let s:lastColumn = col('.') - 1
     return "\<BS>"
 endfunction
 
-let s:lastColumn = 0
 function! s:OnCursorMoved()
     if col('.') != s:lastColumn
-        call feedkeys("\<C-x>\<C-u>", 'n')
+        call feedkeys("\<C-X>\<C-U>", 'n')
         let s:lastColumn = col('.')
     endif
 endfunction
@@ -83,17 +82,17 @@ function! completer#OpenFile()
     if pumvisible()
         " The popup menu is visible. Select the current item and re-invoke
         " this function.
-        call feedkeys("\<C-y>\<C-r>=completer#OpenFile()\<CR>", 'n')
+        call feedkeys("\<C-Y>\<C-R>=completer#OpenFile()\<CR>", 'n')
         return ''
     endif
 
     let file = getline('.')
-
     exec 'stopinsert'
     " We need to call OnInsertLeave() explicitly for some reason. The
     " stopinsert-command should suffice in theory?
     call s:OnInsertLeave()
 
+    " Open the actual file for editing
     if !empty(file)
         exec ":silent edit ".file
     endif
@@ -123,7 +122,7 @@ function completer#UpdateCache(force)
     if empty(s:cache) || path != s:path || a:force
         echo "Updating cache ..."
         let s:_wildignore = &wildignore
-        let ignore = '*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,*.gif,*~'
+        let ignore = '*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,*.gif,*~,*.o, *.class'
         let &wildignore=ignore
         let s:cache = []
         let files = split(globpath('.', "**/*"), '\n')
@@ -166,11 +165,16 @@ function! s:FileSeach(pattern)
             endif
             let index = index + 1
             if index > matches
+                " Break out of the loop if we've gone through more
+                " iterations than we have found matching bits.
                 break
             endif
         endwhile
         if matches == bitlen
             call insert(results, join(reverse(entry[:]), '/')[2:])
+        endif
+        if len(results) > 200
+            break
         endif
     endfor
     return results
