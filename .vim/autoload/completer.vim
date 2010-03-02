@@ -117,6 +117,7 @@ endfunction
 
 let s:path = ''
 let s:cache = []
+let s:cachlen = 0
 function completer#UpdateCache(force)
     let path = getcwd()
     if empty(s:cache) || path != s:path || a:force
@@ -124,13 +125,8 @@ function completer#UpdateCache(force)
         let s:_wildignore = &wildignore
         let ignore = '*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,*.gif,*~,*.o, *.class'
         let &wildignore=ignore
-        let s:cache = []
-        let files = split(globpath('.', "**/*"), '\n')
-        for row in files 
-            if isdirectory(row) == 0
-                call insert(s:cache, reverse(split(row, '/')))
-            endif
-        endfor
+        let s:cache = filter(split(globpath('.', "**/*"), '\n'), '!isdirectory(v:val)')
+        let s:cachelen = len(s:cache)
         let s:path = path
         let &wildignore=s:_wildignore
         echo "Cache update done!"
@@ -141,41 +137,24 @@ function! s:FileSeach(pattern)
     call completer#UpdateCache(0)
     let results = []
     let pattern = a:pattern
-    if pattern[-1:] == '/'
-        " Add an asterisk to patterns ending with slash to expand
-        " the directory.
-        let pattern = pattern."*"
-    endif
     " Escape a few characters that can mess up regular expressions.
     let pattern = escape(pattern, " \t\n.?[{´$#'\"|!<&+\\'}]")
     " Add a few patterns for convenience
     let pattern = substitute(pattern, '\([_]\+\)', '*\1*', 'g') 
+    let pattern = substitute(pattern, '\([\/]\+\)', '*\1*', 'g') 
     let pattern = substitute(pattern, '[\*]\+', '.*', 'g')
-    let bits = reverse(split(pattern, '/'))
-    let bitlen = len(bits)
-    for entry in s:cache
-        if bitlen > len(entry)
-            continue
-        endif
-        let index = 0
-        let matches = 0
-        while index < bitlen
-            if match(entry[index], '^'.bits[index]) != -1
-                let matches = matches + 1
-            endif
-            let index = index + 1
-            if index > matches
-                " Break out of the loop if we've gone through more
-                " iterations than we have found matching bits.
-                break
-            endif
-        endwhile
-        if matches == bitlen
-            call insert(results, join(reverse(entry[:]), '/')[2:])
+    let pattern = pattern.'.*$'
+    let index = 0
+    while index < s:cachelen
+        let entry = s:cache[index]
+        let match = match(entry, pattern)
+        if match != -1
+            call insert(results, entry.(len(entry) - match))
         endif
         if len(results) > 200
             break
         endif
-    endfor
+        let index = index + 1
+    endwhile
     return results
 endfunction
