@@ -2,6 +2,12 @@
 " * Remember recent files?
 " * Performance..?
 " * No flicker on new keystrokes
+" * Come up with a name .. :)
+
+if exists("g:loaded_completer")
+    finish
+endif
+let g:loaded_completer = 1
 
 function! completer#InitUI()
     " Reference window from which we were invoked and settings we'll be
@@ -117,7 +123,7 @@ function completer#UpdateCache(force)
     if empty(s:cache) || path != s:path || a:force
         echo "Updating cache ..."
         let s:_wildignore = &wildignore
-        let ignore = '*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,*.gif'
+        let ignore = '*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,*.gif,*~'
         let &wildignore=ignore
         let s:cache = []
         let files = split(globpath('.', "**/*"), '\n')
