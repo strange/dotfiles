@@ -110,7 +110,7 @@ function! completer#Completer(start, base)
     endif
     let result = s:FileSeach(a:base)
     if !empty(result)
-        call feedkeys("\<C-p>\<Down>", 'n')
+        call feedkeys("\<C-P>\<Down>", 'n')
     endif
     return result
 endfunction
@@ -124,13 +124,8 @@ function completer#UpdateCache(force)
         let s:_wildignore = &wildignore
         let ignore = '*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,*.gif,*~,*.o, *.class'
         let &wildignore=ignore
-        let s:cache = []
-        let files = split(globpath('.', "**/*"), '\n')
-        for row in files 
-            if isdirectory(row) == 0
-                call insert(s:cache, reverse(split(row, '/')))
-            endif
-        endfor
+        let s:cache = map(filter(split(globpath('.', "**/*"), '\n'),
+            \ '!isdirectory(v:val)'), 'reverse(split(v:val, "/"))')
         let s:path = path
         let &wildignore=s:_wildignore
         echo "Cache update done!"
