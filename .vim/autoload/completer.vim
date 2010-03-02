@@ -1,9 +1,7 @@
 " TODO:
-" * remember recent files
-" * Dynamic window title?
-" * Fuzzy matching? 
+" * Remember recent files?
 " * Performance..?
-" * Underscore bug
+" * No flicker on new keystrokes
 
 function! completer#InitUI()
     " Reference window from which we were invoked and settings we'll be
@@ -124,7 +122,8 @@ function completer#UpdateCache(force)
     if empty(s:cache) || path != s:path || a:force
         echo "Updating cache ..."
         let s:_wildignore = &wildignore
-        set wildignore=*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,*.gif
+        let ignore = '*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,*.gif'
+        let &wildignore=ignore
         let s:cache = []
         let files = split(globpath('.', "**/*"), '\n')
         for row in files 
@@ -150,8 +149,8 @@ function! s:FileSeach(pattern)
     " Escape a few characters that can mess up regular expressions.
     let pattern = escape(pattern, " \t\n.?[{´$#'\"|!<&+\\'}]")
     " Add a few patterns for convenience
-    let pattern = substitute(pattern, '\([^\*_]\)[\_]\{1}', '\1*_*', '')
-    let pattern = substitute(pattern, '[\*]\+', '.*', '')
+    let pattern = substitute(pattern, '\([_]\+\)', '*\1*', 'g') 
+    let pattern = substitute(pattern, '[\*]\+', '.*', 'g')
     let bits = reverse(split(pattern, '/'))
     let bitlen = len(bits)
     for entry in s:cache
@@ -170,7 +169,7 @@ function! s:FileSeach(pattern)
             endif
         endwhile
         if matches == bitlen
-            call insert(results, join(reverse(entry[:]), '/'))
+            call insert(results, join(reverse(entry[:]), '/')[2:])
         endif
     endfor
     return results
