@@ -64,8 +64,10 @@ function! s:OnInsertLeave()
 endfunction
 
 function! s:OnBackspace()
-    if pumvisible()
+    if !pumvisible()
         call feedkeys("\<C-x>\<C-u>", 'n')
+    else
+        call feedkeys("\<C-n>", 'n')
     endif
     return "\<BS>"
 endfunction
@@ -140,11 +142,11 @@ function! s:FileSeach(pattern)
     call completer#UpdateCache(0)
     let results = []
     let pattern = a:pattern
-    " if pattern[-1:] == '/'
-        " " Add an asterisk to patterns ending with slash to expand
-        " " the directory.
-        " let pattern = pattern."*"
-    " endif
+    if pattern[-1:] == '/'
+        " Add an asterisk to patterns ending with slash to expand
+        " the directory.
+        let pattern = pattern."*"
+    endif
     " Escape a few characters that can mess up regular expressions.
     let pattern = escape(pattern, " \t\n.?[{´$#'\"|!<&+\\'}]")
     " Add a few patterns for convenience
