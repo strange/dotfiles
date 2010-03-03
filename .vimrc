@@ -102,7 +102,7 @@ let g:NERDCommentWholeLinesInVMode = 1
 
 let g:NERDTreeShowHidden = 1
 
-noremap <leader>nn :NERDTreeToggle<CR>
+" noremap <leader>nn :NERDTreeToggle<CR>
 
 " Taglist ********************************************************************
 
@@ -125,13 +125,14 @@ noremap <leader>b :TlistToggle<CR>
 
 let g:SuperTabDefaultCompletionType = "<C-n>"
 
-" FuzzyFinder ****************************************************************
+" Completer ******************************************************************
 
 noremap <leader>e :Completer<CR>
 noremap <silent> <leader>E :CompleterUpdateCache<CR>
 
-let g:completer_ignore = "*.png;*.jpg;*.jpeg;*.gif;*.swp;*.pyc;*.psd;*.ai;*.JPG;"
-                    \"*.db;*.class;*.mp3"
+let g:completer_ignore = "*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,
+                        \ *.gif,*~,*.o, *.class,*.ai,*.plist,*.swp,*.mp3
+                        \ *.db"
 
 " UltiSnips ******************************************************************
 
@@ -179,10 +180,10 @@ noremap <leader>t8 :tab 8<CR>
 noremap <leader>t9 :tab 9<CR>
 
 " Reset search highlighting
-noremap <silent> <leader>nh :silent :noh<CR>
+noremap <silent> <leader>n :silent :noh<CR>
 
 " Toggle paste mode
-noremap <silent> <leader>pp :set paste!<CR>
+noremap <silent> <leader>p :set paste!<CR>
 
 " Space scrolls half a page
 noremap <Space> <C-d>
