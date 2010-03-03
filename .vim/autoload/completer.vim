@@ -30,28 +30,35 @@ function! completer#InitUI()
     setlocal winfixheight " Keep height when other windows are opened
     setlocal textwidth=0 " No maximum text width
     set completeopt=menuone " Use popup with only one match
-    set completefunc=completer#Completer
+    set completefunc=completer#Completefunc
     exec 'delete'
     exec 'startinsert'
     let s:lastColumn = 0
 
     augroup CompleterMovements
         autocmd!
-        autocmd InsertLeave <buffer> call s:OnInsertLeave()
-        autocmd BufLeave <buffer> call s:OnInsertLeave()
-        autocmd CursorMovedi <buffer> call s:OnCursorMoved()
+        autocmd InsertLeave <buffer> call s:Reset()
+        autocmd BufLeave <buffer> call s:Reset()
     augroup END
 
-    inoremap <silent> <buffer> <CR> <C-r>=completer#OpenFile()<CR>
-    inoremap <silent> <buffer> <C-y> <C-r>=completer#OpenFile()<CR>
-    inoremap <silent> <buffer> <C-c> <C-r>=<SID>ResetUI()<CR>
-    inoremap <silent> <buffer> <BS> <C-r>=<SID>OnBackspace()<CR>
-    inoremap <silent> <buffer> <C-h> <C-r>=<SID>OnBackspace()<CR>
+    for chr in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+              \ 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y',
+              \ 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+              \ 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+              \ 'Y', 'Z', '-', '_', '~', '^', '.', ',', ';', '!', '#', '=',
+              \ '%', '$', '@', '<', '>', '/', '\', '<Space>']
+        exec 'ino <silent> <buffer> '.chr.' '.chr.'<C-R>=<SID>Action()<CR>'
+    endfor
+
     inoremap <silent> <buffer> <Tab> <Down>
-    inoremap <silent> <buffer> <S-Tab> <Up> " Does not work in console vim
+    inoremap <silent> <buffer> <S-Tab> <Up>
+    inoremap <silent> <buffer> <CR> <C-R>=completer#OpenFile()<CR>
+    inoremap <silent> <buffer> <C-Y> <C-R>=completer#OpenFile()<CR>
+    inoremap <silent> <buffer> <C-C> <C-R>=<SID>Reset()<CR>
+    inoremap <silent> <buffer> <BS> <BS><C-E><C-R>=<SID>Action()<CR>
 endfunction
 
-function s:ResetUI()
+function! s:Reset()
     let s:lastColumn = 0
     let &completeopt=s:_completeopt
     exec s:bufno.'bdelete!'
@@ -61,21 +68,13 @@ function s:ResetUI()
     endif
 endfunction
 
-function! s:OnInsertLeave()
-    call s:ResetUI()
-endfunction
-
-function! s:OnBackspace()
-    call feedkeys("\<C-X>\<C-U>", 'n')
-    let s:lastColumn = col('.') - 1
-    return "\<BS>"
-endfunction
-
-function! s:OnCursorMoved()
+let s:lastColumn = 0
+function! s:Action()
     if col('.') != s:lastColumn
         call feedkeys("\<C-X>\<C-U>", 'n')
         let s:lastColumn = col('.')
     endif
+    return ''
 endfunction
 
 function! completer#OpenFile()
@@ -88,9 +87,9 @@ function! completer#OpenFile()
 
     let file = getline('.')
     exec 'stopinsert'
-    " We need to call OnInsertLeave() explicitly for some reason. The
-    " stopinsert-command should suffice in theory?
-    call s:OnInsertLeave()
+    " We need to call Reset() explicitly for some reason. 'stopinsert' should
+    " suffice in theory?
+    call s:Reset()
 
     " Open the actual file for editing
     if !empty(file)
@@ -99,33 +98,34 @@ function! completer#OpenFile()
     return ''
 endfunction
 
-function! completer#Completer(start, base)
+function! completer#Completefunc(start, base)
     if a:start == 1
         " First invocation, return the column from which we should start
         " matching.
         return 0
     endif
     if empty(a:base) || a:base == '.'
-        return []
+        return ''
     endif
     let result = s:FileSeach(a:base)
-    if !empty(result)
-        call feedkeys("\<C-p>\<Down>", 'n')
-    endif
+    call feedkeys("\<C-p>\<Down>", 'n')
     return result
 endfunction
 
 let s:path = ''
 let s:cache = []
-let s:cachlen = 0
+let s:cachelen = 0
+
 function completer#UpdateCache(force)
     let path = getcwd()
-    if empty(s:cache) || path != s:path || a:force
+    if empty(s:cache) || s:path != path || a:force
         echo "Updating cache ..."
         let s:_wildignore = &wildignore
         let ignore = '*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,*.gif,*~,*.o, *.class'
         let &wildignore=ignore
-        let s:cache = filter(split(globpath('.', "**/*"), '\n'), '!isdirectory(v:val)')
+        let cache = filter(split(globpath('.', "**/*"), '\n'),
+                         \ '!isdirectory(v:val)')
+        let s:cache = cache
         let s:cachelen = len(s:cache)
         let s:path = path
         let &wildignore=s:_wildignore
@@ -143,12 +143,13 @@ function! s:FileSeach(pattern)
     let pattern = substitute(pattern, '\([_]\+\)', '*\1*', 'g') 
     let pattern = substitute(pattern, '\([\/]\+\)', '*\1*', 'g') 
     let pattern = substitute(pattern, '[\*]\+', '.*', 'g')
-    let pattern = pattern
+    if len(split(pattern, '/')) == 1
+        let pattern = '.*'.pattern.'[^\/]*$'
+    endif
     let index = 0
     while index < s:cachelen
         let entry = s:cache[index]
-        let match = match(entry, pattern)
-        if match != -1
+        if match(entry, pattern) != -1
             call insert(results, entry[2:])
         endif
         if len(results) > 200
