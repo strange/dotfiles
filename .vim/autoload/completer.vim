@@ -1,7 +1,4 @@
-" TODO:
 " * Remember recent files?
-" * Performance..?
-" * No flicker on new keystrokes
 " * Come up with a name .. :)
 
 if exists("g:loaded_completer")
@@ -30,33 +27,25 @@ function! completer#InitUI()
     setlocal winfixheight " Keep height when other windows are opened
     setlocal textwidth=0 " No maximum text width
     set completeopt=menuone " Use popup with only one match
-    set omnifunc=
     set completefunc=completer#Completefunc
-    exec 'delete'
-    exec 'startinsert'
+    delete
+    startinsert!
     let s:lastColumn = 0
 
     augroup CompleterMovements
         autocmd!
         autocmd InsertLeave <buffer> call s:Reset()
         autocmd BufLeave <buffer> call s:Reset()
+        autocmd CursorMovedI <buffer> call s:Action()
+        autocmd CursorHoldI <buffer> call s:Action()
     augroup END
-
-    for chr in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
-              \ 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
-              \ 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
-              \ 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
-              \ 'W', 'X', 'Y', 'Z', '-', '_', '~', '^', '.', ',', ';', '!',
-              \'#', '=', '%', '$', '@', '<', '>', '/', '\', '<Space>']
-        exec 'ino <silent> <buffer> '.chr.' '.chr.'<C-E><C-R>=<SID>Action()<CR>'
-    endfor
 
     inoremap <silent> <buffer> <Tab> <Down>
     inoremap <silent> <buffer> <S-Tab> <Up>
     inoremap <silent> <buffer> <CR> <C-R>=completer#OpenFile()<CR>
     inoremap <silent> <buffer> <C-Y> <C-R>=completer#OpenFile()<CR>
     inoremap <silent> <buffer> <C-C> <C-R>=<SID>Reset()<CR>
-    inoremap <silent> <buffer> <BS> <BS><C-E><C-R>=<SID>Action()<CR>
+    inoremap <silent> <buffer> <BS> <C-E><BS>
 endfunction
 
 function! s:Reset()
@@ -87,16 +76,13 @@ function! completer#OpenFile()
     endif
 
     let file = getline('.')
-    exec 'stopinsert'
-    " We need to call Reset() explicitly for some reason. 'stopinsert' should
-    " suffice in theory?
+    stopinsert! " This should trigger InsertLeave?
     call s:Reset()
 
     " Open the actual file for editing
     if !empty(file)
         exec ":silent edit ".file
     endif
-    return ''
 endfunction
 
 function! completer#Completefunc(start, base)
@@ -106,7 +92,7 @@ function! completer#Completefunc(start, base)
         return 0
     endif
     if empty(a:base) || a:base == '.'
-        return ''
+        return []
     endif
     let result = s:FileSeach(a:base)
     call feedkeys("\<C-p>\<Down>", 'n')
@@ -122,7 +108,8 @@ function completer#UpdateCache(force)
     if empty(s:cache) || s:path != path || a:force
         echo "Updating cache ..."
         let s:_wildignore = &wildignore
-        let ignore = '*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,*.gif,*~,*.o, *.class'
+        let ignore = "*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,
+                     \ *.gif,*~,*.o, *.class,*.ai"
         let &wildignore=ignore
         let cache = filter(split(globpath('.', "**/*"), '\n'),
                          \ '!isdirectory(v:val)')
@@ -138,23 +125,14 @@ function! s:FileSeach(pattern)
     call completer#UpdateCache(0)
     let results = []
     let pattern = a:pattern
-    " Escape a few characters that can mess up regular expressions.
     let pattern = escape(pattern, " \t\n.?[{´$#'\"|!<&+\\'}]")
-    " Add a few patterns for convenience
     let pattern = substitute(pattern, '\([_]\+\)', '*\1*', 'g') 
     let pattern = substitute(pattern, '\([\/]\+\)', '*\1*', 'g') 
     let pattern = substitute(pattern, '[\*]\+', '.*', 'g')
     if len(split(pattern, '/')) == 1
         let pattern = '.*'.pattern.'[^\/]*$'
     endif
-    let index = 0
-    for entry in s:cache
-        if match(entry, pattern) != -1
-            call insert(results, entry[2:])
-        endif
-        if len(results) > 200
-            break
-        endif
-    endfor
+    let results = filter(s:cache[:], 'v:val =~ pattern')
+    call insert(results, pattern)
     return results
 endfunction
