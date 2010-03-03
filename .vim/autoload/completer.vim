@@ -1,6 +1,4 @@
-" * Remember recent files?
-" * Come up with a name .. :)
-" * Confiugure wildignore
+" Remember recent files? Could be nice.
 
 if exists("g:loaded_completer")
     finish
