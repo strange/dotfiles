@@ -1,7 +1,4 @@
-" TODO:
 " * Remember recent files?
-" * Performance..?
-" * No flicker on new keystrokes
 " * Come up with a name .. :)
 
 if exists("g:loaded_completer")
@@ -30,28 +27,28 @@ function! completer#InitUI()
     setlocal winfixheight " Keep height when other windows are opened
     setlocal textwidth=0 " No maximum text width
     set completeopt=menuone " Use popup with only one match
-    set completefunc=completer#Completer
-    exec 'delete'
-    exec 'startinsert'
+    set completefunc=completer#Completefunc
+    delete
+    startinsert!
     let s:lastColumn = 0
 
     augroup CompleterMovements
         autocmd!
-        autocmd InsertLeave <buffer> call s:OnInsertLeave()
-        autocmd BufLeave <buffer> call s:OnInsertLeave()
-        autocmd CursorMovedi <buffer> call s:OnCursorMoved()
+        autocmd InsertLeave <buffer> call s:Reset()
+        autocmd BufLeave <buffer> call s:Reset()
+        autocmd CursorMovedI <buffer> call s:Action()
+        autocmd CursorHoldI <buffer> call s:Action()
     augroup END
 
-    inoremap <silent> <buffer> <CR> <C-r>=completer#OpenFile()<CR>
-    inoremap <silent> <buffer> <C-y> <C-r>=completer#OpenFile()<CR>
-    inoremap <silent> <buffer> <C-c> <C-r>=<SID>ResetUI()<CR>
-    inoremap <silent> <buffer> <BS> <C-r>=<SID>OnBackspace()<CR>
-    inoremap <silent> <buffer> <C-h> <C-r>=<SID>OnBackspace()<CR>
     inoremap <silent> <buffer> <Tab> <Down>
-    inoremap <silent> <buffer> <S-Tab> <Up> " Does not work in console vim
+    inoremap <silent> <buffer> <S-Tab> <Up>
+    inoremap <silent> <buffer> <CR> <C-R>=completer#OpenFile()<CR>
+    inoremap <silent> <buffer> <C-Y> <C-R>=completer#OpenFile()<CR>
+    inoremap <silent> <buffer> <C-C> <C-R>=<SID>Reset()<CR>
+    inoremap <silent> <buffer> <BS> <C-E><BS>
 endfunction
 
-function s:ResetUI()
+function! s:Reset()
     let s:lastColumn = 0
     let &completeopt=s:_completeopt
     exec s:bufno.'bdelete!'
@@ -61,21 +58,13 @@ function s:ResetUI()
     endif
 endfunction
 
-function! s:OnInsertLeave()
-    call s:ResetUI()
-endfunction
-
-function! s:OnBackspace()
-    call feedkeys("\<C-X>\<C-U>", 'n')
-    let s:lastColumn = col('.') - 1
-    return "\<BS>"
-endfunction
-
-function! s:OnCursorMoved()
+let s:lastColumn = 0
+function! s:Action()
     if col('.') != s:lastColumn
         call feedkeys("\<C-X>\<C-U>", 'n')
         let s:lastColumn = col('.')
     endif
+    return ''
 endfunction
 
 function! completer#OpenFile()
@@ -87,19 +76,16 @@ function! completer#OpenFile()
     endif
 
     let file = getline('.')
-    exec 'stopinsert'
-    " We need to call OnInsertLeave() explicitly for some reason. The
-    " stopinsert-command should suffice in theory?
-    call s:OnInsertLeave()
+    stopinsert! " This should trigger InsertLeave?
+    call s:Reset()
 
     " Open the actual file for editing
     if !empty(file)
         exec ":silent edit ".file
     endif
-    return ''
 endfunction
 
-function! completer#Completer(start, base)
+function! completer#Completefunc(start, base)
     if a:start == 1
         " First invocation, return the column from which we should start
         " matching.
@@ -109,26 +95,28 @@ function! completer#Completer(start, base)
         return []
     endif
     let result = s:FileSeach(a:base)
-    if !empty(result)
-        call feedkeys("\<C-P>\<Down>", 'n')
-    endif
+    call feedkeys("\<C-p>\<Down>", 'n')
     return result
 endfunction
 
 let s:path = ''
 let s:cache = []
+let s:cachelen = 0
+
 function completer#UpdateCache(force)
     let path = getcwd()
-    if empty(s:cache) || path != s:path || a:force
+    if empty(s:cache) || s:path != path || a:force
         echo "Updating cache ..."
         let s:_wildignore = &wildignore
-        let ignore = '*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,*.gif,*~,*.o, *.class'
+        let ignore = "*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,
+                     \ *.gif,*~,*.o, *.class,*.ai"
         let &wildignore=ignore
         " Build a search cache by traversing the current working directory,
-        " omitting all directories, and splitting and reversing each path
-        " entry on a slash.
-        let s:cache = map(filter(split(globpath('.', "**/*"), '\n'),
-            \ '!isdirectory(v:val)'), 'reverse(split(v:val, "/"))')
+        " omitting all directories.
+        let cache = filter(split(globpath('.', "**/*"), '\n'),
+                         \ '!isdirectory(v:val)')
+        let s:cache = cache
+        let s:cachelen = len(s:cache)
         let s:path = path
         let &wildignore=s:_wildignore
         echo "Cache update done!"
@@ -139,43 +127,14 @@ function! s:FileSeach(pattern)
     call completer#UpdateCache(0)
     let results = []
     let pattern = a:pattern
-    if pattern[-1:] == '/'
-        " Add an asterisk to patterns ending with slash to expand
-        " the directory while searching.
-        let pattern = pattern."*"
-    endif
-    " Escape a few characters that can mess up regular expressions.
     let pattern = escape(pattern, " \t\n.?[{´$#'\"|!<&+\\'}]")
-    " Add a few patterns for convenience
     let pattern = substitute(pattern, '\([_]\+\)', '*\1*', 'g') 
+    let pattern = substitute(pattern, '\([\/]\+\)', '*\1*', 'g') 
     let pattern = substitute(pattern, '[\*]\+', '.*', 'g')
-    let bits = reverse(split(pattern, '/'))
-    let bitlen = len(bits)
-    for entry in s:cache
-        if bitlen > len(entry)
-            " Skip item as it cannot possibly match.
-            continue
-        endif
-        let index = 0
-        let matches = 0
-        while index < bitlen
-            if bits[index] == '.*' ||
-                        \ match(entry[index], '^'.bits[index]) != -1
-                let matches = matches + 1
-            endif
-            let index = index + 1
-            if index > matches
-                " Break out of the loop if we've gone through more iterations
-                " than we have found matching bits.
-                break
-            endif
-        endwhile
-        if matches == bitlen
-            call insert(results, join(reverse(entry[:]), '/')[2:])
-        endif
-        if len(results) > 200
-            break
-        endif
-    endfor
+    if len(split(pattern, '/')) == 1
+        let pattern = '.*'.pattern.'[^\/]*$'
+    endif
+    let results = filter(s:cache[:], 'v:val =~ pattern')
+    call insert(results, pattern)
     return results
 endfunction
