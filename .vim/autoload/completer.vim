@@ -7,6 +7,12 @@ if exists("g:loaded_completer")
 endif
 let g:loaded_completer = 1
 
+if !exists("g:completer_ignore")
+    let g:completer_ignore = "*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,
+                            \ *.gif,*~,*.o, *.class,*.ai,*.plist,*.swp,*.mp3
+                            \ *.db"
+endif
+
 function! completer#InitUI()
     " Reference window from which we were invoked and settings we'll be
     " changing.
@@ -94,7 +100,7 @@ function! completer#Completefunc(start, base)
         return []
     endif
     let result = s:FileSeach(a:base)
-    call feedkeys("\<C-p>\<Down>", 'n')
+    call feedkeys("\<C-P>\<Down>", 'n')
     return result
 endfunction
 
@@ -102,14 +108,12 @@ let s:path = ''
 let s:cache = []
 function completer#UpdateCache(force)
     let path = getcwd()
-    if empty(s:cache) || s:path != path || a:force
+    if empty(s:cache) || path != s:path || a:force
         echo "Updating cache ..."
         let s:_wildignore = &wildignore
-        let ignore = "*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,
-                     \ *.gif,*~,*.o, *.class,*.ai"
-        let &wildignore=ignore
-        " Build a search cache by traversing the current working directory,
-        " omitting all directories and stripping leading './'.
+        let &wildignore=g:completer_ignore
+        " Build a search-cache by traversing the current working directory,
+        " omitting all directories and stripping the leading './'.
         let s:cache = map(filter(split(globpath('.', "**/*"), '\n'),
                       \ '!isdirectory(v:val)'), 'v:val[2:]')
         let s:path = path
@@ -120,15 +124,11 @@ endfunction
 
 function! s:FileSeach(pattern)
     call completer#UpdateCache(0)
-    let results = []
-    let pattern = a:pattern
-    let pattern = escape(pattern, " \t\n.?[{´$#'\"|!<&+\\'}]")
+    let pattern = escape(a:pattern, " \t\n.?[{´$#'\"|!<&+\\'}]")
     let pattern = substitute(pattern, '\([\/]\+\)', '*\1*', 'g') 
     let pattern = substitute(pattern, '[\*]\+', '.*', 'g')
     if len(split(pattern, '/')) == 1
         let pattern = '.*'.pattern.'[^\/]*$'
     endif
-    let results = filter(s:cache[:], 'v:val =~ pattern')
-    " call insert(results, pattern)
-    return results
+    return filter(s:cache[:], 'v:val =~ pattern')
 endfunction
