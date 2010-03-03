@@ -30,6 +30,7 @@ function! completer#InitUI()
     setlocal winfixheight " Keep height when other windows are opened
     setlocal textwidth=0 " No maximum text width
     set completeopt=menuone " Use popup with only one match
+    set omnifunc=
     set completefunc=completer#Completefunc
     exec 'delete'
     exec 'startinsert'
@@ -42,12 +43,12 @@ function! completer#InitUI()
     augroup END
 
     for chr in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
-              \ 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y',
-              \ 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
-              \ 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
-              \ 'Y', 'Z', '-', '_', '~', '^', '.', ',', ';', '!', '#', '=',
-              \ '%', '$', '@', '<', '>', '/', '\', '<Space>']
-        exec 'ino <silent> <buffer> '.chr.' '.chr.'<C-R>=<SID>Action()<CR>'
+              \ 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
+              \ 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+              \ 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
+              \ 'W', 'X', 'Y', 'Z', '-', '_', '~', '^', '.', ',', ';', '!',
+              \'#', '=', '%', '$', '@', '<', '>', '/', '\', '<Space>']
+        exec 'ino <silent> <buffer> '.chr.' '.chr.'<C-E><C-R>=<SID>Action()<CR>'
     endfor
 
     inoremap <silent> <buffer> <Tab> <Down>
@@ -147,15 +148,13 @@ function! s:FileSeach(pattern)
         let pattern = '.*'.pattern.'[^\/]*$'
     endif
     let index = 0
-    while index < s:cachelen
-        let entry = s:cache[index]
+    for entry in s:cache
         if match(entry, pattern) != -1
             call insert(results, entry[2:])
         endif
         if len(results) > 200
             break
         endif
-        let index = index + 1
-    endwhile
+    endfor
     return results
 endfunction
