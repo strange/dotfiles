@@ -130,9 +130,8 @@ let g:SuperTabDefaultCompletionType = "<C-n>"
 noremap <leader>e :Completer<CR>
 noremap <silent> <leader>E :CompleterUpdateCache<CR>
 
-let g:completer_ignore = "*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,
-                        \ *.gif,*~,*.o, *.class,*.ai,*.plist,*.swp,*.mp3
-                        \ *.db"
+let g:completer_ignore = '*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,
+                         \*.gif,*~,*.o,*.class,*.ai,*.plist,*.swp,*.mp3,*.db'
 
 " UltiSnips ******************************************************************
 

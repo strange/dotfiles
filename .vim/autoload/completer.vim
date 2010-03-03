@@ -104,6 +104,17 @@ function! completer#Completefunc(start, base)
     return result
 endfunction
 
+function s:BuildCacheFind()
+    let ignore = split(g:completer_ignore, ',')
+    let input = map(ignore, '" -not -iname ".v:val')
+    call add(input, ' -not -path ./.\*')
+    return split(system('find . -type fl -maxdepth 7 '.join(input, ' ')), '\n')
+endfunction
+
+function s:BuildCacheNative()
+    return filter(split(globpath('.', "**/*"), '\n'), '!isdirectory(v:val)')
+endfunction
+
 let s:path = ''
 let s:cache = []
 function completer#UpdateCache(force)
@@ -112,10 +123,7 @@ function completer#UpdateCache(force)
         echo "Updating cache ..."
         let s:_wildignore = &wildignore
         let &wildignore=g:completer_ignore
-        " Build a search-cache by traversing the current working directory,
-        " omitting all directories and stripping the leading './'.
-        let s:cache = map(filter(split(globpath('.', "**/*"), '\n'),
-                      \ '!isdirectory(v:val)'), 'v:val[2:]')
+        let s:cache = map(s:BuildCacheFind(), 'v:val[2:]')
         let s:path = path
         let &wildignore=s:_wildignore
         echo "Cache update done!"
@@ -130,5 +138,7 @@ function! s:FileSeach(pattern)
     if len(split(pattern, '/')) == 1
         let pattern = '.*'.pattern.'[^\/]*$'
     endif
-    return filter(s:cache[:], 'v:val =~ pattern')
+    let results = filter(s:cache[:], 'v:val =~ pattern')
+    " call insert(results, pattern)
+    return results
 endfunction
