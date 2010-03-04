@@ -40,16 +40,20 @@ function! completer#InitUI()
         autocmd!
         autocmd InsertLeave <buffer> call s:Reset()
         autocmd BufLeave <buffer> call s:Reset()
-        autocmd CursorMovedI <buffer> call s:Action()
-        autocmd CursorHoldI <buffer> call s:Action()
+        " autocmd CursorMovedI <buffer> call s:Action()
+        " autocmd CursorHoldI <buffer> call s:Action()
     augroup END
-
     inoremap <silent> <buffer> <Tab> <Down>
     inoremap <silent> <buffer> <S-Tab> <Up>
     inoremap <silent> <buffer> <CR> <C-R>=completer#OpenFile()<CR>
     inoremap <silent> <buffer> <C-Y> <C-R>=completer#OpenFile()<CR>
     inoremap <silent> <buffer> <C-C> <C-R>=<SID>Reset()<CR>
-    inoremap <silent> <buffer> <BS> <C-E><BS>
+    inoremap <silent> <buffer> <BS> <BS><C-E><C-R>=<SID>Action()<CR>
+    inoremap <silent> <buffer> <Space> <Space><C-R>=<SID>Action()<CR>
+    " CursorMovedI does not seem to work consistently. This is a temp fix.
+    for chr in range(33, 123) + range(125, 126)
+        exe printf("ino <buffer> %c %c\<C-R>=\<SID>Action()\<CR>", chr, chr)
+    endfor
 endfunction
 
 function! s:Reset()
@@ -106,7 +110,7 @@ function s:BuildCacheFind()
     let ignore = split(g:completer_ignore, ',')
     let input = map(ignore, '" -not -name \x27".v:val."\x27"')
     call add(input, " -not -path './.\*'")
-    return split(system('find -L . -type f -maxdepth 7 '.join(input, ' ')), '\n')
+    return split(system('find -L . -type f '.join(input, ' ')), '\n')
 endfunction
 
 function s:BuildCacheNative()
