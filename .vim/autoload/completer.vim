@@ -51,8 +51,9 @@ function! completer#InitUI()
     inoremap <silent> <buffer> <BS> <BS><C-E><C-R>=<SID>Action()<CR>
     inoremap <silent> <buffer> <Space> <Space><C-R>=<SID>Action()<CR>
     " CursorMovedI does not seem to work consistently. This is a temp fix.
+    let ino = "inoremap <silent> <buffer> %c %c\<C-R>=\<SID>Action()\<CR>"
     for chr in range(33, 123) + range(125, 126)
-        exe printf("ino <buffer> %c %c\<C-E>\<C-R>=\<SID>Action()\<CR>", chr, chr)
+        exec printf(ino, chr, chr)
     endfor
 endfunction
 
@@ -65,12 +66,8 @@ function! s:Reset()
     endif
 endfunction
 
-let s:lastColumn = 0
 function! s:Action()
-    if col('.') != s:lastColumn
-        call feedkeys("\<C-X>\<C-U>", 'n')
-        let s:lastColumn = col('.')
-    endif
+    call feedkeys("\<C-X>\<C-U>\<C-P>\<Down>", 'n')
     return ''
 endfunction
 
@@ -140,9 +137,9 @@ function! s:FileSeach(pattern)
     let pattern = substitute(pattern, '\([\/]\+\)', '*\1*', 'g') 
     let pattern = substitute(pattern, '[\*]\+', '.*', 'g')
     if len(split(pattern, '/')) == 1
-        let pattern = '.*'.pattern.'[^\/]*$'
+        let pattern = '^.*'.pattern.'[^\/]*$'
     endif
-    let results = filter(s:cache[:], 'v:val =~? pattern')
+    return filter(s:cache[:], 'v:val =~? pattern')
     " call insert(results, pattern)
     return results
 endfunction
