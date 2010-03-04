@@ -52,7 +52,7 @@ function! completer#InitUI()
     inoremap <silent> <buffer> <Space> <Space><C-R>=<SID>Action()<CR>
     " CursorMovedI does not seem to work consistently. This is a temp fix.
     for chr in range(33, 123) + range(125, 126)
-        exe printf("ino <buffer> %c %c\<C-R>=\<SID>Action()\<CR>", chr, chr)
+        exe printf("ino <buffer> %c %c\<C-E>\<C-R>=\<SID>Action()\<CR>", chr, chr)
     endfor
 endfunction
 
@@ -102,7 +102,9 @@ function! completer#Completefunc(start, base)
         return []
     endif
     let result = s:FileSeach(a:base)
-    call feedkeys("\<C-P>\<Down>", 'n')
+    if !empty(result)
+        call feedkeys("\<C-P>\<Down>", 'n')
+    endif
     return result
 endfunction
 
