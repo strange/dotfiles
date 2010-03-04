@@ -136,7 +136,7 @@ function! s:FileSeach(pattern)
     if len(split(pattern, '/')) == 1
         let pattern = '.*'.pattern.'[^\/]*$'
     endif
-    let results = filter(s:cache[:], 'v:val =~ pattern')
+    let results = filter(s:cache[:], 'v:val =~? pattern')
     " call insert(results, pattern)
     return results
 endfunction
