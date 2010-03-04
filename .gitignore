@@ -11,6 +11,7 @@
 .vim/colors/*
 !.vim/colors/gconsole.vim
 !.vim/colors/gurra.vim
+!.vim/colors/strange.vim
 
 .vifm/Trash
 
