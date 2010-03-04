@@ -124,13 +124,21 @@ alias cleanpy="find . -name '*.py[oc]' -delete"
 
 shopt -s checkwinsize
 
-# Host-specific ##############################################################
-
-# Should probably source a .bashrc.local or something.
+# Prompt ####################################################################
 
 PS1='[\u@\h]\W% '
+
+# Local Configs #############################################################
+
+load_host_bashrc() {
+    local host_bits=`hostname`
+    local hostname=${host_bits%%.*}
+    if [ -e "$HOME/.bashrc.$hostname" ]; then
+        source "$HOME/.bashrc.$hostname"
+    fi
+}
+load_host_bashrc
 
 if [ -e "$HOME/.bashrc.local" ]; then
     source "$HOME/.bashrc.local"
 fi
-
