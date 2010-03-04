@@ -104,8 +104,8 @@ endfunction
 
 function s:BuildCacheFind()
     let ignore = split(g:completer_ignore, ',')
-    let input = map(ignore, '" -not -iname ".v:val')
-    call add(input, ' -not -path ./.\*')
+    let input = map(ignore, '" -not -name \x27".v:val."\x27"')
+    call add(input, " -not -path './.\*'")
     return split(system('find -L . -type f -maxdepth 7 '.join(input, ' ')), '\n')
 endfunction
 
