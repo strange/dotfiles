@@ -48,7 +48,7 @@ function! completer#InitUI()
     inoremap <silent> <buffer> <CR> <C-R>=completer#OpenFile()<CR>
     inoremap <silent> <buffer> <C-Y> <C-R>=completer#OpenFile()<CR>
     inoremap <silent> <buffer> <C-C> <C-R>=<SID>Reset()<CR>
-    inoremap <silent> <buffer> <BS> <BS><C-E><C-R>=<SID>Action()<CR>
+    inoremap <silent> <buffer> <BS> <BS><C-R>=<SID>Action()<CR>
     inoremap <silent> <buffer> <Space> <Space><C-R>=<SID>Action()<CR>
     " CursorMovedI does not seem to work consistently. This is a temp fix.
     let ino = "inoremap <silent> <buffer> %c %c\<C-R>=\<SID>Action()\<CR>"
@@ -122,11 +122,11 @@ function completer#UpdateCache(force)
     let path = getcwd()
     if empty(s:cache) || path != s:path || a:force
         echo "Updating cache ..."
-        let s:_wildignore = &wildignore
+        let wildignore = &wildignore
         let &wildignore=g:completer_ignore
         let s:cache = map(s:BuildCacheFind(), 'v:val[2:]')
         let s:path = path
-        let &wildignore=s:_wildignore
+        let &wildignore=wildignore
         echo "Cache update done!"
     endif
 endfunction
@@ -135,8 +135,5 @@ function! s:FileSeach(pattern)
     call completer#UpdateCache(0)
     let pattern = escape(a:pattern, " *\t\n.?[{´$#'\"|!<&+\\'}]")
     let pattern = substitute(pattern, '\/', '.*\/.*', 'g').'[^\/]*$'
-    " let pattern = escape(a:pattern, " *\t\n.?[{´$#'\"|!<&+\\'}]")
-    " let pattern = substitute(pattern, '\([\/]\+\)', '.*\1.*', 'g') 
-    " let pattern = pattern.'[^\/]*$'
     return filter(s:cache[:], 'v:val =~? pattern')[:300]
 endfunction
