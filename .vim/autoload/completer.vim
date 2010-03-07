@@ -107,7 +107,7 @@ endfunction
 
 function s:BuildCacheFind()
     let ignore = split(g:completer_ignore, ',')
-    let input = map(ignore, '" -not -name \x27".v:val."\x27"')
+    let input = map(ignore, '" -not -iname \x27".v:val."\x27"')
     call add(input, " -not -path './.\*'")
     return split(system('find -L . -type f '.join(input, ' ')), '\n')
 endfunction
@@ -133,12 +133,10 @@ endfunction
 
 function! s:FileSeach(pattern)
     call completer#UpdateCache(0)
-    let pattern = escape(a:pattern, " \t\n.?[{´$#'\"|!<&+\\'}]")
-    let pattern = substitute(pattern, '\([\/]\+\)', '*\1*', 'g') 
-    let pattern = substitute(pattern, '[\*]\+', '.*', 'g')
-    if len(split(pattern, '/')) == 1
-        let pattern = pattern.'[^\/]*$'
-    endif
+    let pattern = escape(a:pattern, " *\t\n.?[{´$#'\"|!<&+\\'}]")
+    let pattern = substitute(pattern, '\/', '.*\/.*', 'g').'[^\/]*$'
+    " let pattern = escape(a:pattern, " *\t\n.?[{´$#'\"|!<&+\\'}]")
+    " let pattern = substitute(pattern, '\([\/]\+\)', '.*\1.*', 'g') 
+    " let pattern = pattern.'[^\/]*$'
     return filter(s:cache[:], 'v:val =~? pattern')[:300]
-    " call insert(results, pattern)
 endfunction
