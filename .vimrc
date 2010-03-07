@@ -127,11 +127,11 @@ let g:SuperTabDefaultCompletionType = "<C-n>"
 
 " Completer ******************************************************************
 
-noremap <leader>e :Completer<CR>
-noremap <silent> <leader>E :CompleterUpdateCache<CR>
+noremap <leader>e :Pyxis<CR>
+noremap <silent> <leader>E :PyxisUpdateCache<CR>
 
-let g:completer_ignore = '*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,
-                         \*.gif,*~,*.o,*.class,*.ai,*.plist,*.swp,*.mp3,*.db'
+let g:pyxis_ignore = '*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,
+                     \*.gif,*~,*.o,*.class,*.ai,*.plist,*.swp,*.mp3,*.db'
 
 " UltiSnips ******************************************************************
 

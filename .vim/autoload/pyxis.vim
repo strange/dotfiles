@@ -1,26 +1,26 @@
-" Remember recent files? Could be nice.
+" A simple Vim script that makes finding and opening files fast
+" Maintainer: Gustaf Sjöberg <gs@distrop.com>
+" Last Change: 2010 Mar 07
+"
+" Drop this script in your ~/.vim/autoload directory.
 
-if exists("g:loaded_completer")
+if exists("g:loaded_pyxis")
     finish
 endif
-let g:loaded_completer = 1
+let g:loaded_pyxis = 1
 
-if !exists("g:completer_ignore")
-    let g:completer_ignore = "*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,
-                            \ *.gif,*~,*.o, *.class,*.ai,*.plist,*.swp,*.mp3
-                            \ *.db"
+if !exists("g:pyxis_ignore")
+    let g:pyxis_ignore = "*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,*.gif,
+                         \*~,*.o, *.class,*.ai,*.plist,*.swp,*.mp3,*.db"
 endif
 
-function! completer#InitUI()
-    " Reference window from which we were invoked and settings we'll be
-    " changing.
+function! pyxis#InitUI()
     let s:_winno = winnr()
     let s:_completeopt = &completeopt
     let s:_splitbelow = &splitbelow
 
-    " Create and setup a new window for file-pattern insertion.
-    set nosplitbelow
-    exec '1split [Type the name of a file or directory ...]'
+    set nosplitbelow " Always show the completion-window above current
+    exec '1split [Start typing the name of a file ...]'
     let s:bufno = bufnr('%')
     setlocal nobuflisted " Do not show in buf list
     setlocal nonumber " Do not display line numbers
@@ -32,7 +32,7 @@ function! completer#InitUI()
     setlocal winfixheight " Keep height when other windows are opened
     setlocal textwidth=0 " No maximum text width
     set completeopt=menuone " Use popup with only one match
-    set completefunc=completer#Completefunc
+    set completefunc=pyxis#CompleteFunc
     delete " Delete any text
     startinsert! " Enter insert mode
 
@@ -43,8 +43,8 @@ function! completer#InitUI()
     augroup END
     inoremap <silent> <buffer> <Tab> <Down>
     inoremap <silent> <buffer> <S-Tab> <Up>
-    inoremap <silent> <buffer> <CR> <C-R>=completer#OpenFile()<CR>
-    inoremap <silent> <buffer> <C-Y> <C-R>=completer#OpenFile()<CR>
+    inoremap <silent> <buffer> <CR> <C-Y><C-R>=pyxis#OpenFile()<CR>
+    inoremap <silent> <buffer> <C-Y> <C-Y><C-R>=pyxis#OpenFile()<CR>
     inoremap <silent> <buffer> <C-C> <C-R>=<SID>Reset()<CR>
     inoremap <silent> <buffer> <C-H> <C-R>=<SID>Action()<CR><C-H>
     inoremap <silent> <buffer> <BS> <C-R>=<SID>Action()<CR><BS>
@@ -63,6 +63,7 @@ function! s:Reset()
     if s:_splitbelow
         set splitbelow
     endif
+    return ''
 endfunction
 
 function! s:Action()
@@ -70,28 +71,18 @@ function! s:Action()
     return ''
 endfunction
 
-function! completer#OpenFile()
-    if pumvisible()
-        " The popup menu is visible. Select the current item and re-invoke
-        " this function.
-        call feedkeys("\<C-Y>\<C-R>=completer#OpenFile()\<CR>", 'n')
-        return ''
-    endif
-
+function! pyxis#OpenFile()
     let file = getline('.')
     stopinsert! " This should trigger InsertLeave?
     call s:Reset()
-
     " Open the actual file for editing
     if !empty(file)
         exec ":silent edit ".file
     endif
 endfunction
 
-function! completer#Completefunc(start, base)
+function! pyxis#CompleteFunc(start, base)
     if a:start == 1
-        " First invocation, return the column from which we should start
-        " matching.
         return 0
     endif
     if empty(a:base) || a:base == '.'
@@ -105,33 +96,34 @@ function! completer#Completefunc(start, base)
 endfunction
 
 function s:BuildCacheFind()
-    let ignore = split(g:completer_ignore, ',')
+    let ignore = split(g:pyxis_ignore, ',')
     let input = map(ignore, '" -not -iname \x27".v:val."\x27"')
     call add(input, " -not -path './.\*'")
     return split(system('find -L . -type f '.join(input, ' ')), '\n')
 endfunction
 
 function s:BuildCacheNative()
-    return filter(split(globpath('.', "**/*"), '\n'), '!isdirectory(v:val)')
+    let wildignore = &wildignore
+    let &wildignore=g:pyxis_ignore
+    let results = globpath('.', "**/*")
+    let &wildignore=wildignore
+    return filter(split(results, '\n'), '!isdirectory(v:val)')
 endfunction
 
 let s:path = ''
 let s:cache = []
-function completer#UpdateCache(force)
+function pyxis#UpdateCache(force)
     let path = getcwd()
     if empty(s:cache) || path != s:path || a:force
         echo "Updating cache ..."
-        let wildignore = &wildignore
-        let &wildignore=g:completer_ignore
-        let s:cache = map(s:BuildCacheFind(), 'v:val[2:]')
+        let s:cache = map(s:BuildCacheNative(), 'v:val[2:]')
         let s:path = path
-        let &wildignore=wildignore
         echo "Cache update done!"
     endif
 endfunction
 
 function! s:FileSeach(pattern)
-    call completer#UpdateCache(0)
+    call pyxis#UpdateCache(0)
     let pattern = escape(a:pattern, " *\t\n.?[{´$#'\"|!<&+\\'}]")
     let pattern = substitute(pattern, '\/', '.*\/.*', 'g').'[^\/]*$'
     return filter(s:cache[:], 'v:val =~? pattern')[:300]
