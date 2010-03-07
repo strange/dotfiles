@@ -40,15 +40,14 @@ function! completer#InitUI()
         autocmd!
         autocmd InsertLeave <buffer> call s:Reset()
         autocmd BufLeave <buffer> call s:Reset()
-        " autocmd CursorMovedI <buffer> call s:Action()
-        " autocmd CursorHoldI <buffer> call s:Action()
     augroup END
     inoremap <silent> <buffer> <Tab> <Down>
     inoremap <silent> <buffer> <S-Tab> <Up>
     inoremap <silent> <buffer> <CR> <C-R>=completer#OpenFile()<CR>
     inoremap <silent> <buffer> <C-Y> <C-R>=completer#OpenFile()<CR>
     inoremap <silent> <buffer> <C-C> <C-R>=<SID>Reset()<CR>
-    inoremap <silent> <buffer> <BS> <BS><C-R>=<SID>Action()<CR>
+    inoremap <silent> <buffer> <C-H> <C-R>=<SID>Action()<CR><C-H>
+    inoremap <silent> <buffer> <BS> <C-R>=<SID>Action()<CR><BS>
     inoremap <silent> <buffer> <Space> <Space><C-R>=<SID>Action()<CR>
     " CursorMovedI does not seem to work consistently. This is a temp fix.
     let ino = "inoremap <silent> <buffer> %c %c\<C-R>=\<SID>Action()\<CR>"
