@@ -72,11 +72,11 @@ function! s:Action()
 endfunction
 
 function! pyxis#OpenFile()
-    let file = getline('.')
+    let filename = getline('.')
     stopinsert! " This should trigger InsertLeave?
     call s:Reset()
-    if !empty(file)
-        exec ":silent edit ".file
+    if !empty(filename)
+        exec ":silent edit ".filename
     endif
 endfunction
 
