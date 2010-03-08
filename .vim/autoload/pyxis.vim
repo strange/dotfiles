@@ -1,4 +1,4 @@
-" A simple Vim script that makes finding and opening files fast
+" A simple Vim script that makes for quick finding and opening files
 " Maintainer: Gustaf Sjöberg <gs@distrop.com>
 " Last Change: 2010 Mar 07
 "
@@ -75,7 +75,6 @@ function! pyxis#OpenFile()
     let file = getline('.')
     stopinsert! " This should trigger InsertLeave?
     call s:Reset()
-    " Open the actual file for editing
     if !empty(file)
         exec ":silent edit ".file
     endif
@@ -95,14 +94,14 @@ function! pyxis#CompleteFunc(start, base)
     return result
 endfunction
 
-function s:BuildCacheFind()
+function! s:BuildCacheFind()
     let ignore = split(g:pyxis_ignore, ',')
     let input = map(ignore, '" -not -iname \x27".v:val."\x27"')
     call add(input, " -not -path './.\*'")
     return split(system('find -L . -type f '.join(input, ' ')), '\n')
 endfunction
 
-function s:BuildCacheNative()
+function! s:BuildCacheNative()
     let wildignore = &wildignore
     let &wildignore=g:pyxis_ignore
     let results = globpath('.', "**/*")
@@ -112,9 +111,9 @@ endfunction
 
 let s:path = ''
 let s:cache = []
-function pyxis#UpdateCache(force)
+function! pyxis#UpdateCache(force)
     let path = getcwd()
-    if empty(s:cache) || path != s:path || a:force
+    if a:force || empty(s:cache) || path != s:path
         echo "Updating cache ..."
         let s:cache = map(s:BuildCacheNative(), 'v:val[2:]')
         let s:path = path
@@ -122,9 +121,8 @@ function pyxis#UpdateCache(force)
     endif
 endfunction
 
-function! s:FileSeach(pattern)
+function! s:FileSeach(needle)
     call pyxis#UpdateCache(0)
-    let pattern = escape(a:pattern, " *\t\n.?[{´$#'\"|!<&+\\'}]")
-    let pattern = substitute(pattern, '\/', '.*\/.*', 'g').'[^\/]*$'
-    return filter(s:cache[:], 'v:val =~? pattern')[:300]
+    let n = substitute(fnameescape(a:needle), '\/', '.*\/.*', 'g').'[^\/]*$'
+    return filter(s:cache[:], 'v:val =~? n')[:300]
 endfunction
