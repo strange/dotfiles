@@ -12,13 +12,5 @@
 " noremap <leader>e :Pyxis<CR>
 " noremap <silent> <leader>E :PyxisUpdateCache<CR>
 
-function! s:Pyxis()
-    call pyxis#InitUI()
-endfunction
-
-function! s:PyxisUpdateCache()
-    call pyxis#UpdateCache(1)
-endfunction
-
-command! Pyxis :call s:Pyxis()
-command! PyxisUpdateCache :call s:PyxisUpdateCache()
+command! Pyxis :call pyxis#InitUI()
+command! PyxisUpdateCache :call pyxis#UpdateCache(1)

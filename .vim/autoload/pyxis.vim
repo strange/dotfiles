@@ -84,7 +84,7 @@ function! pyxis#CompleteFunc(start, base)
     if a:start == 1
         return 0
     endif
-    if empty(a:base) || a:base == '.'
+    if empty(a:base)
         return []
     endif
     let result = s:FileSeach(a:base)
@@ -103,9 +103,9 @@ endfunction
 
 function! s:BuildCacheNative()
     let wildignore = &wildignore
-    let &wildignore=g:pyxis_ignore
+    let &wildignore = g:pyxis_ignore
     let results = globpath('.', "**/*")
-    let &wildignore=wildignore
+    let &wildignore = wildignore
     return filter(split(results, '\n'), '!isdirectory(v:val)')
 endfunction
 
