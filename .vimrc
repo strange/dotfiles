@@ -136,6 +136,10 @@ let g:pyxis_ignore = '*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,
 
 set runtimepath+=~/.vim/ultisnips_repository
 
+" RagTag *********************************************************************
+
+imap <C-_> <C-X>/
+
 " Custom Mappings ************************************************************
 
 nnoremap ' `
