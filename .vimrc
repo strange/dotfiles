@@ -130,7 +130,7 @@ noremap <leader>e :Pyxis<CR>
 noremap <silent> <leader>E :PyxisUpdateCache<CR>
 
 let g:pyxis_ignore = '*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,
-                     \*.gif,*~,*.o,*.class,*.ai,*.plist,*.swp,*.mp3,*.db'
+                     \*.gif,*~,*.o,*.class,*.ai,*.plist,*.swp,*.mp3,*.db,*.beam'
 
 " UltiSnips ******************************************************************
 

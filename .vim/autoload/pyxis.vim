@@ -11,7 +11,7 @@ let g:loaded_pyxis = 1
 
 if !exists("g:pyxis_ignore")
     let g:pyxis_ignore = "*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,*.gif,
-                         \*~,*.o, *.class,*.ai,*.plist,*.swp,*.mp3,*.db"
+                         \*~,*.o,*.class,*.ai,*.plist,*.swp,*.mp3,*.db,*.beam"
 endif
 
 function! pyxis#InitUI()
@@ -115,7 +115,7 @@ function! pyxis#UpdateCache(force)
     let path = getcwd()
     if a:force || empty(s:cache) || path != s:path
         echo "Updating cache ..."
-        let s:cache = map(s:BuildCacheNative(), 'v:val[2:]')
+        let s:cache = map(s:BuildCacheFind(), 'v:val[2:]')
         let s:path = path
         echo "Cache update done!"
     endif
