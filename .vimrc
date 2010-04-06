@@ -187,9 +187,6 @@ noremap <silent> <leader>n :silent :noh<CR>
 " Toggle paste mode
 noremap <silent> <leader>p :set paste!<CR>
 
-" Space scrolls half a page
-noremap <Space> <C-d>
-
 " Keep hands on home row
 inoremap jj <Esc>
 
