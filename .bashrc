@@ -7,7 +7,7 @@ export LC_MONETARY="sv_SE.UTF-8"
 export LC_NUMERIC="sv_SE.UTF-8"
 export LC_TIME="sv_SE.UTF-8"
 export LC_MESSAGES="en_US.UTF-8"
-export LANG="sv_SE.UTF-8"
+export LANG="en_US.UTF-8"
 
 export EDITOR=vi
 export PAGER=less
@@ -15,17 +15,8 @@ export DISPLAY=:0.0
 
 # Paths #####################################################################
 
-for path in "/usr/local/bin" \
-            "/opt/local/bin" \
-            "$HOME/bin" \
-            "$HOME/local/bin";
-do
-    if [ -d $path ]; then
-        PATH="$path:$PATH"
-    fi
-done
-
-export PATH
+export PATH="/usr/local/bin:/opt/local/bin:$HOME/bin:$PATH"
+export MANPATH="/usr/local/man:/opt/local/man:$MANPATH"
 
 # Bash history ##############################################################
 
