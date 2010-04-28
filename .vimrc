@@ -187,6 +187,9 @@ noremap <silent> <leader>n :silent :noh<CR>
 " Toggle paste mode
 noremap <silent> <leader>p :set paste!<CR>
 
+" Explore
+noremap <silent> <leader>x :Explore<CR>
+
 " Keep hands on home row
 inoremap jj <Esc>
 
