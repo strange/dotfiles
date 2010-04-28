@@ -98,12 +98,6 @@ let g:NERDShutUp = 1
 let g:NERDSpaceDelims = 1
 let g:NERDCommentWholeLinesInVMode = 1
  
-" NERD Tree ******************************************************************
-
-let g:NERDTreeShowHidden = 1
-
-" noremap <leader>nn :NERDTreeToggle<CR>
-
 " Taglist ********************************************************************
 
 let g:Tlist_Inc_Winwidth = 0
