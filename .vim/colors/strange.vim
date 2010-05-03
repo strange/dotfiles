@@ -30,6 +30,9 @@ if &t_Co != 256 && !has("gui_running")
     " Menus
     hi PmenuSel ctermbg=darkyellow ctermfg=black
     hi Pmenu ctermbg=black ctermfg=darkgray
+    hi TabLineSel ctermbg=darkcyan ctermfg=black term=none cterm=none
+    hi TabLine ctermbg=black ctermfg=lightgray term=none cterm=reverse
+    hi TabLineFill cterm=reverse
 "hi PmenuSbar ctermbg=243 guibg=#888888
 "hi PmenuThumb ctermbg=250 guibg=#EEEEEE
 "hi WildMenu ctermfg=0 guifg=#000000 ctermbg=226 guibg=#FFD700 cterm=none gui=none
