@@ -48,6 +48,8 @@ set nofoldenable
 set report=2
 set virtualedit=block
 
+set showtabline=0
+
 " Statusline *****************************************************************
 
 set showcmd
