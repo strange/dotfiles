@@ -161,19 +161,21 @@ noremap <C-h> ^
 noremap <C-l> g_
 
 " Navigate Tabs
-noremap <leader>tn :tabnew<CR>
-noremap <leader>tc :tabclose<CR>
-noremap <leader>tj :tabnext<CR>
-noremap <leader>tk :tabprev<CR>
-noremap <leader>t1 :tab 1<CR>
-noremap <leader>t2 :tab 2<CR>
-noremap <leader>t3 :tab 3<CR>
-noremap <leader>t4 :tab 4<CR>
-noremap <leader>t5 :tab 5<CR>
-noremap <leader>t6 :tab 6<CR>
-noremap <leader>t7 :tab 7<CR>
-noremap <leader>t8 :tab 8<CR>
-noremap <leader>t9 :tab 9<CR>
+noremap tn :tabnew<CR>
+noremap tc :tabclose<CR>
+noremap tj :tabnext<CR>
+noremap tk :tabprev<CR>
+noremap th :tabnext<CR>
+noremap tl :tabprev<CR>
+noremap t1 :tabn 1<CR>
+noremap t2 :tabn 2<CR>
+noremap t3 :tabn 3<CR>
+noremap t4 :tabn 4<CR>
+noremap t5 :tabn 5<CR>
+noremap t6 :tabn 6<CR>
+noremap t7 :tabn 7<CR>
+noremap t8 :tabn 8<CR>
+noremap t9 :tabn 9<CR>
 
 " Reset search highlighting
 noremap <silent> <leader>n :silent :noh<CR>
@@ -213,3 +215,4 @@ au Filetype css set foldmethod=syntax foldmarker={,}
 if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
+let g:sparkupExecuteMapping = '<c-x>'
