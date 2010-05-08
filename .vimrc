@@ -100,7 +100,6 @@ let g:NERDMapleader = "<leader>llllll"
 let g:NERDShutUp = 1
 let g:NERDSpaceDelims = 1
 let g:NERDCommentWholeLinesInVMode = 1
-let g:NERDComLineSexyMap = "c"
 
 nnoremap <silent> <leader>c :call NERDComment(0, "toggle")<cr>
 vnoremap <silent> <leader>c <ESC>:call NERDComment(1, "toggle")<cr>
@@ -210,6 +209,10 @@ function! ExpandBraces()
         return "\<CR>"
     endif
 endfunction
+
+" Indenting
+vnoremap < <gv
+vnoremap > >gv
 
 " Filetypes ******************************************************************
 
