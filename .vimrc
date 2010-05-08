@@ -219,6 +219,7 @@ vnoremap > >gv
 au BufWritePre *.py normal m`:%s/\s\+$//e ``
 au Filetype rest set formatoptions=tcqn
 au Filetype css set foldmethod=syntax foldmarker={,}
+au Filetype help map <cr> <c-]>
 
 " Local Configuration ********************************************************
 
