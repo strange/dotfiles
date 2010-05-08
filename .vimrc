@@ -1,6 +1,6 @@
 set nocompatible 
 let mapleader = ","
-set iskeyword+=#,-
+set iskeyword=@,48-57,_,192-255,-
 
 " Filetype *******************************************************************
 
@@ -96,9 +96,14 @@ let g:Tex_ViewRule_pdf = 'Preview'
 
 " NERD Comments **************************************************************
  
+let g:NERDMapleader = "<leader>llllll"
 let g:NERDShutUp = 1
 let g:NERDSpaceDelims = 1
 let g:NERDCommentWholeLinesInVMode = 1
+let g:NERDComLineSexyMap = "c"
+
+nnoremap <silent> <leader>c :call NERDComment(0, "toggle")<cr>
+vnoremap <silent> <leader>c <ESC>:call NERDComment(1, "toggle")<cr>
  
 " Taglist ********************************************************************
 
