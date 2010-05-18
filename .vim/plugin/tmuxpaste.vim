@@ -1,7 +1,7 @@
 " A simple Vim script that makes sending data from a vim instance to a tmux
 " pane (within the same window) easy.
 " Maintainer: Gustaf Sjöberg <gs@distrop.com>
-" Last Change: 2010 Mar 07
+" Last Change: 2010 May 18
 "
 " Drop this script in your ~/.vim/plugin directory.
 " Use it with <C-c><C-c> (ooo, slime)
@@ -31,4 +31,4 @@ function! TmuxResetPaneId()
 endfunction
 
 vnoremap <silent> <C-c><C-c> "xy:call TmuxPaste(@x)<CR>
-nmap <silent> <C-c><C-c> gg"xyG'':call TmuxPaste(@x)<CR>
+nnoremap <silent> <C-c><C-c> gg"xyG'':call TmuxPaste(@x)<CR>
