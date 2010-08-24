@@ -1,4 +1,7 @@
 function! Skeletor()
+    if &filetype == ''
+        return ''
+    endif
     let paths = split(&runtimepath, ',')
     let files = []
     let entries = []
