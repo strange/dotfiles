@@ -1,27 +1,22 @@
 function! Skeletor()
     if &filetype == ''
+        echo "No filetype set"
         return ''
     endif
-    let paths = split(&runtimepath, ',')
-    let files = []
+    let files = split(globpath(&runtimepath, 'skels/'.&filetype.'/*'))
     let entries = []
     let counter = 1
-    for path in paths
-        let x = path."/skels/".&filetype
-        if isdirectory(x)
-            let subjects = split(glob(x."/*"), '\n')
-            for subject in subjects
-                call insert(entries, counter.") ".fnamemodify(subject, ':t'))
-                call insert(files, subject)
-                let counter = counter + 1
-            endfor
-        endif
+    for file in files
+        call add(entries, counter.") ".fnamemodify(file, ':t'))
+        let counter += 1
     endfor
-    call reverse(entries)
-    call reverse(files)
-    let choice = inputlist(entries)
-    if choice > 0 && choice <= len(files)
-        exe 'r '.files[choice - 1]
+    if len(files)
+        let choice = inputlist(entries)
+        if choice > 0 && choice <= len(files)
+            exe 'r '.files[choice - 1]
+        endif
+    else
+        echo "No skeleton files available"
     endif
 endfunction
 
