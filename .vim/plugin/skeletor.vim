@@ -13,7 +13,7 @@ function! Skeletor()
     if len(files)
         let choice = inputlist(entries)
         if choice > 0 && choice <= len(files)
-            exe 'r '.files[choice - 1]
+            silent execute 'r '.files[choice - 1]
         endif
     else
         echo "No skeleton files available"
