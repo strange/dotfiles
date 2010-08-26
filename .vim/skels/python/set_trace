@@ -1,0 +1,10 @@
+# n, next (repeat with CR)
+# c, continue
+# q, quit
+# l, display adjacent lines of source code
+# s, step into subroutine
+# r, continue to end of subroutine
+# p <variable_name>, print variable
+# pp <variable_name>, pretty print variable
+import pdb
+pdb.set_trace() 
