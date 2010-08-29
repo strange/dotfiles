@@ -221,6 +221,9 @@ au Filetype rest set formatoptions=tcqn
 au Filetype css set foldmethod=syntax foldmarker={,}
 au Filetype help map <cr> <c-]>
 au BufWritePost .vimrc source $MYVIMRC
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |
+    \ exe "normal! g`\"" | 
+    \ endif
 
 " Local Configuration ********************************************************
 
