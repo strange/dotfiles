@@ -118,7 +118,9 @@ noremap <leader>b :TlistToggle<CR>
 
 " AutoClose ******************************************************************
 
-let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']'}
+" let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']'}
+" let g:AutoClosePairs = {'{': '}'}
+let g:AutoClosePairs = {}
 
 " SuperTab *******************************************************************
 
@@ -151,7 +153,17 @@ command! Q q
 command! WQ wq
 command! Wq wq
 
+" johan uses two spaces to indent everything
+command! JFD set ts=2 sw=2
+
+" because sometimes i forget
 cnoremap w!! w !sudo tee % > /dev/null
+
+" open shell quickly
+noremap <cr> :shell<cr>
+
+" easy to reach, hardly ever use space
+noremap <space> :
 
 " Navigate between windows
 noremap <C-j> <C-w>w
