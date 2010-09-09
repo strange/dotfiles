@@ -5,10 +5,10 @@
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
         <title>{% block title %}{% endblock %}</title>
-        <link rel="stylesheet" href="{{ MEDIA_URL }}static/css/index.css" type="text/css" media="screen" charset="utf-8"/>
+        <link rel="stylesheet" href="{{ MEDIA_URL }}static/css/master.css" type="text/css" media="screen" charset="utf-8"/>
         <link rel="shortcut icon" href="{{ MEDIA_URL }}static/images/misc/favicon.ico"/>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" charset="utf-8"></script>
-        <script type="text/javascript" src="{{ MEDIA_URL }}static/script/.js" charset="utf-8"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" charset="utf-8"></script>
+        <script type="text/javascript" src="{{ MEDIA_URL }}static/script/behaviour.js" charset="utf-8"></script>
         {% block script %}{% endblock %}
     </head>
 
