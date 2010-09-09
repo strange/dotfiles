@@ -1,0 +1,72 @@
+/* Buttons --------------------------------------------------------------- */
+
+/*
+ * Each button configuration consists of a left and a right sprite. The
+ * dimensions of the sprites should be:
+ *
+ * - modes * height x 300 (left)
+ * - modes * height x 5px (right)
+ *
+ * Suggested modes (order-sensitive): no-state, hover, pressed and active.
+ *
+ * The sprites should be named according to the following scheme:
+ *
+ * <style>-<position>.png (e.g. default-left.png)
+ *
+ */
+
+a.button {
+    display: inline-block;
+    font-size: 12px;
+    line-height: normal;
+    height: 24px;
+    padding: 0 0 0 10px;
+    text-decoration: none;
+    background-repeat: no-repeat;
+    background-position: left top;
+}
+
+a.button span {
+    display: block;
+    line-height: 14px;
+    padding: 5px 10px 5px 0; 
+    background-repeat: no-repeat;
+    background-position: right top;
+}
+
+a.button:hover {
+    background-position: left -24px;
+}
+
+a.button:hover span {
+    background-position: right -24px;
+}
+
+a.button.click {
+    background-position: left -48px;
+}
+
+a.button.click span {
+    background-position: right -48px;
+}
+
+a.button.active {
+    background-position: left -72px;
+}
+
+a.button.active span {
+    background-position: right -72px;
+}
+
+/* Default Button Styles */
+
+a.button.default {
+    background-image: url(../images/buttons/default-left.png);
+}
+
+a.button.default span {
+    background-image: url(../images/buttons/default-right.png);
+    font-weight: bold;
+    color: #444;
+    text-shadow: #FFF 1px 1px 0px;
+}

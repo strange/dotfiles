@@ -1,0 +1,9 @@
+// buttons
+(function() {
+    $('.button').mousedown(function(event) {
+        $(this).addClass('click');
+    }).mouseup(removeClass).mouseout(removeClass);
+    function removeClass(event) {
+        $(this).removeClass('click');
+    }
+})();
