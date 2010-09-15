@@ -10,6 +10,9 @@ colo strange
 " copy stuff
 map <M-c> <C-v><M-c>
 
+map a gT
+map s gt
+
 " qmarks (go<qm> or gn<qm>)
 silent qmark h http://news.ycombinator.com
 silent qmark m http://mail.google.com
