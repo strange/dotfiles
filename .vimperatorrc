@@ -1,0 +1,11 @@
+set runtimepath=~/.vimperator
+set visualbell
+set hintchars="asdfghjklö"
+
+map j 6<c-e>
+map k 6<c-y>
+
+colo strange
+
+" copy stuff
+map <M-c> <C-v><M-c>
