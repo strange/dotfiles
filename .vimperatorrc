@@ -9,3 +9,23 @@ colo strange
 
 " copy stuff
 map <M-c> <C-v><M-c>
+
+" qmarks (go<qm> or gn<qm>)
+silent qmark h http://news.ycombinator.com
+silent qmark m http://mail.google.com
+
+" bmarks
+" http://github.com/mashiro/dot-files/
+javascript <<EOM
+function bmark(title, url, keyword) {
+    if (!bookmarks.isBookmarked(url)) {
+        bookmarks.add(false, title, url, keyword, ['keyword'], false);
+    }
+}
+bmark('Google', 'http://www.google.com/search?q=%s', 'g');
+bmark('Pirate Bay', 'http://thepiratebay.org/search/%s', 't');
+bmark('Wikipedia (en)', 'http://en.wikipedia.org/wiki/Special:Search?search=%s', 'w');
+bmark('Wikipedia (sv)', 'http://sv.wikipedia.org/wiki/Special:Search?search=%s', 'ws');
+bmark('imdb', 'http://www.imdb.com/find?s=all&q=%s', 'i');
+bmark('tyda.se', 'http://tyda.se/search?form=1&w=%s', 'ty');
+EOM
