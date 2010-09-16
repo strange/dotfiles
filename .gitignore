@@ -13,6 +13,8 @@
 !.vim/colors/gurra.vim
 !.vim/colors/strange.vim
 
+.vimperator/info
+
 .vifm/Trash
 
 .ipython/*

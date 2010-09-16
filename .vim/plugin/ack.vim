@@ -1,23 +1,23 @@
 " NOTE: You must, of course, install the ack script
-"       in your path.
+" in your path.
 " On Debian / Ubuntu:
-"   sudo apt-get install ack-grep
+" sudo apt-get install ack-grep
 " On your vimrc:
-"   let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+" let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 "
 " With MacPorts:
-"   sudo port install p5-app-ack
+" sudo port install p5-app-ack
 
 " Location of the ack utility
 if !exists("g:ackprg")
-	let g:ackprg="ack -H --nocolor --nogroup --column"
+let g:ackprg="ack -H --nocolor --nogroup --column"
 endif
 
 function! s:Ack(cmd, args)
     redraw
     echo "Searching ..."
 
-    " Format, used to manage column jump
+" Format, used to manage column jump
     if a:cmd =~# '-g$'
         let g:ackformat="%f"
     else
@@ -40,14 +40,17 @@ function! s:Ack(cmd, args)
     else
         botright copen
     endif
+
+    exec "nnoremap <silent> <buffer> q :ccl<CR>"
+
     redraw!
 endfunction
 
 function! s:AckFromSearch(cmd, args)
-    let search =  getreg('/')
-    " translate vim regular expression to perl regular expression.
+    let search = getreg('/')
+" translate vim regular expression to perl regular expression.
     let search = substitute(search,'\(\\<\|\\>\)','\\b','g')
-    call s:Ack(a:cmd, '"' .  search .'" '. a:args)
+    call s:Ack(a:cmd, '"' . search .'" '. a:args)
 endfunction
 
 command! -bang -nargs=* -complete=file Ack call s:Ack('grep<bang>',<q-args>)

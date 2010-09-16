@@ -186,6 +186,7 @@ matchit.vim	matchit.txt	/*matchit.vim*
 o_[%	matchit.txt	/*o_[%*
 o_]%	matchit.txt	/*o_]%*
 o_g%	matchit.txt	/*o_g%*
+plugin-guide.txt	plugin-guide.txt	/*plugin-guide.txt*
 ragtag	ragtag.txt	/*ragtag*
 ragtag-CTRL-V_%	ragtag.txt	/*ragtag-CTRL-V_%*
 ragtag-CTRL-V_&	ragtag.txt	/*ragtag-CTRL-V_&*
