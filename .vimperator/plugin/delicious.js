@@ -11,6 +11,10 @@ commands.addUserCommand(['dmark'], "Bookmark page on Delicious",
         var xhr = new XMLHttpRequest();
         xhr.open('POST', url, false);
         xhr.send(null);
-        liberator.echo(xhr.responseTextj);
+        if (xhr.status != 200) {
+            liberator.echo("Error creating bookmark");
+        } else {
+            liberator.echo("Bookmark added");
+        }
     }
 );
