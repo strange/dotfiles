@@ -160,10 +160,7 @@ command! JFD set ts=2 sw=2
 cnoremap w!! w !sudo tee % > /dev/null
 
 " open shell quickly
-noremap <cr> :shell<cr>
-
-" easy to reach, hardly ever use space
-noremap <space> :
+noremap <space> :shell<cr>
 
 " Navigate between windows
 noremap <C-j> <C-w>w
