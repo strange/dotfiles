@@ -16,6 +16,9 @@ map s gt
 " qmarks (go<qm> or gn<qm>)
 silent qmark h http://news.ycombinator.com
 silent qmark m http://mail.google.com
+silent qmark d http://www.delicious.com/gurraman
+silent qmark g http://www.github.com/strange
+silent qmark t http://www.twitter.com/gurraman
 
 " bmarks
 " http://github.com/mashiro/dot-files/
