@@ -1,6 +1,5 @@
 set nocompatible 
 let mapleader = ","
-set iskeyword=@,48-57,_,192-255,-
 
 " Filetype *******************************************************************
 
@@ -15,12 +14,15 @@ set shiftwidth=4
 set expandtab
 
 set backspace=indent,eol,start
-" set smartindent
 set autoindent
-set smarttab
+" set smartindent
+" set smarttab
 
 set tw=78
-set formatoptions=rnq
+set formatoptions=rnql
+set nojoinspaces
+
+set iskeyword+=@,_
 
 " History, backup and undo ***************************************************
 
@@ -32,6 +34,7 @@ set backup backupdir=$HOME/.vim/backup
 
 " Edtitor and Interface ******************************************************
 
+set nomodeline
 set matchtime=2
 set scrolloff=5
 set vb
@@ -41,7 +44,7 @@ set title
 set visualbell
 
 set wildmenu
-set wildmode=list:longest,full
+set wildmode=list:longest
 set wildignore=*.pyc
 
 set nofoldenable
@@ -50,8 +53,12 @@ set virtualedit=block
 
 set showtabline=0
 
+set ttyfast
+set ttymouse=
+
 " Statusline *****************************************************************
 
+set showmode
 set showcmd
 set shortmess=atI
 set laststatus=2
@@ -73,6 +80,10 @@ set infercase
 set smartcase
 set hlsearch
 set incsearch
+set gdefault
+
+nnoremap / /\v
+vnoremap / /\v
 
 " Language *******************************************************************
 
@@ -120,7 +131,7 @@ noremap <leader>b :TlistToggle<CR>
 
 " let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']'}
 " let g:AutoClosePairs = {'{': '}'}
-let g:AutoClosePairs = {}
+" let g:AutoClosePairs = {}
 
 " SuperTab *******************************************************************
 
@@ -133,10 +144,6 @@ noremap <silent> <leader>E :PyxisUpdateCache<CR>
 
 let g:pyxis_ignore = '*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,
                      \*.gif,*~,*.o,*.class,*.ai,*.plist,*.swp,*.mp3,*.db,*.beam'
-
-" UltiSnips ******************************************************************
-
-set runtimepath+=~/.vim/ultisnips_repository
 
 " RagTag *********************************************************************
 
@@ -229,7 +236,6 @@ au BufWritePre *.py normal m`:%s/\s\+$//e ``
 au Filetype rest set formatoptions=tcqn
 au Filetype css set foldmethod=syntax foldmarker={,}
 au Filetype help map <cr> <c-]>
-au BufWritePost .vimrc source $MYVIMRC
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |
     \ exe "normal! g`\"" | 
     \ endif
