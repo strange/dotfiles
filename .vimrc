@@ -188,23 +188,6 @@ noremap <C-w><C-w> <C-w>p
 noremap <C-h> ^
 noremap <C-l> g_
 
-" Navigate Tabs
-noremap tn :tabnew<CR>
-noremap tc :tabclose<CR>
-noremap tj :tabnext<CR>
-noremap tk :tabprev<CR>
-noremap th :tabnext<CR>
-noremap tl :tabprev<CR>
-noremap t1 :tabn 1<CR>
-noremap t2 :tabn 2<CR>
-noremap t3 :tabn 3<CR>
-noremap t4 :tabn 4<CR>
-noremap t5 :tabn 5<CR>
-noremap t6 :tabn 6<CR>
-noremap t7 :tabn 7<CR>
-noremap t8 :tabn 8<CR>
-noremap t9 :tabn 9<CR>
-
 " Reset search highlighting
 noremap <silent> <leader>n :silent :noh<CR>
 
