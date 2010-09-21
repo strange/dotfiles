@@ -1,12 +1,11 @@
 set nocompatible 
 let mapleader = ","
 
+" Filetype *******************************************************************
+
 filetype off " as suggested by Tim Pope
 call pathogen#runtime_append_all_bundles() 
 filetype plugin indent on
-
-" Filetype *******************************************************************
-
 
 " Indentation and text formatting ********************************************
 
@@ -128,12 +127,6 @@ let g:Tlist_GainFocus_On_ToggleOpen = 1
 let g:Tlist_Show_Menu = 0
 
 noremap <leader>b :TlistToggle<CR>
-
-" AutoClose ******************************************************************
-
-" let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']'}
-" let g:AutoClosePairs = {'{': '}'}
-let g:AutoClosePairs = {}
 
 " SuperTab *******************************************************************
 
