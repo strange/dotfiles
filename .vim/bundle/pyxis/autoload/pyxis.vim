@@ -58,7 +58,7 @@ endfunction
 
 function! s:Reset()
     let &completeopt=s:_completeopt
-    exec s:bufno.'bdelete!'
+    exec 'bdelete! '.s:bufno
     exec s:_winno.'wincmd w'
     if s:_splitbelow
         set splitbelow
