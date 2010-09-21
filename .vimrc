@@ -1,10 +1,12 @@
 set nocompatible 
 let mapleader = ","
 
+filetype off " as suggested by Tim Pope
+call pathogen#runtime_append_all_bundles() 
+filetype plugin indent on
+
 " Filetype *******************************************************************
 
-filetype on
-filetype plugin indent on
 
 " Indentation and text formatting ********************************************
 
@@ -100,10 +102,6 @@ let python_highlight_all = 1
 syntax on
 color strange
 
-" Pathogen *******************************************************************
-
-call pathogen#runtime_append_all_bundles() 
-
 " LaTeX **********************************************************************
 
 let g:tex_flavor='latex'
@@ -135,7 +133,7 @@ noremap <leader>b :TlistToggle<CR>
 
 " let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']'}
 " let g:AutoClosePairs = {'{': '}'}
-" let g:AutoClosePairs = {}
+let g:AutoClosePairs = {}
 
 " SuperTab *******************************************************************
 
@@ -152,6 +150,10 @@ let g:pyxis_ignore = '*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,
 " RagTag *********************************************************************
 
 imap <C-_> <C-X>/
+
+" BufSwitch ******************************************************************
+
+map <leader>l :BufSwitch<CR>
 
 " Custom Mappings ************************************************************
 
@@ -249,4 +251,3 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |
 if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
-let g:sparkupExecuteMapping = '<c-x>'
