@@ -23,7 +23,7 @@ set tw=78
 set formatoptions=rnql
 set nojoinspaces
 
-set iskeyword+=@,_
+set iskeyword+=@,_,-
 
 " History, backup and undo ***************************************************
 
