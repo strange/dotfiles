@@ -100,6 +100,10 @@ let python_highlight_all = 1
 syntax on
 color strange
 
+" Pathogen *******************************************************************
+
+call pathogen#runtime_append_all_bundles() 
+
 " LaTeX **********************************************************************
 
 let g:tex_flavor='latex'
