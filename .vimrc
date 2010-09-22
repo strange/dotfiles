@@ -106,16 +106,6 @@ color strange
 let g:tex_flavor='latex'
 let g:Tex_ViewRule_pdf = 'Preview'
 
-" NERD Comments **************************************************************
- 
-let g:NERDMapleader = "<leader>llllll"
-let g:NERDShutUp = 1
-let g:NERDSpaceDelims = 1
-let g:NERDCommentWholeLinesInVMode = 1
-
-nnoremap <silent> <leader>c :call NERDComment(0, "toggle")<cr>
-vnoremap <silent> <leader>c <ESC>:call NERDComment(1, "toggle")<cr>
- 
 " Taglist ********************************************************************
 
 let g:Tlist_Inc_Winwidth = 0
@@ -215,6 +205,7 @@ vnoremap > >gv
 " AutoCommands ***************************************************************
 
 au BufWritePre *.py normal m`:%s/\s\+$//e ``
+au Filetype python set commentstring=#\ %s
 au Filetype rest set formatoptions=tcqn
 au Filetype css set foldmethod=syntax foldmarker={,}
 au Filetype help map <cr> <c-]>
