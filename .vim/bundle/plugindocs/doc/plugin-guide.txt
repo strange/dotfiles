@@ -1,0 +1,27 @@
+*plugin-guide*    A guide to my installed plugins
+
+Last updated: Wed 22 Sep 2010 02:26:39 CEST
+
+=============================================================================
+tComment                                                        *pg-tComment*
+
+gc{motion}   Toggle comments
+gcc          Toggle comment for current line
+
+=============================================================================
+Surround.vim                                                    *pg-surround*
+
+ds"           Delete surrounding double quotes
+ds)           Delete surrounding parens
+dst           Delete surrounding tags
+
+cs"'          Change surrounding double quotes to single quotes
+cst<span>     Change surrounding tag to a <span> tag
+
+ysiw"         Wraps word under cursor in double quotes
+yss"          Wraps current line in double quotes
+
+vs<span>      Wraps selected region in a <span> tag
+
+=============================================================================
+ vim:tw=78:ts=8:ft=help:norl:
