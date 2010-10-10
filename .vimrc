@@ -99,11 +99,6 @@ let python_highlight_all = 1
 syntax on
 color strange
 
-" LaTeX **********************************************************************
-
-let g:tex_flavor='latex'
-let g:Tex_ViewRule_pdf = 'Preview'
-
 " SuperTab *******************************************************************
 
 let g:SuperTabDefaultCompletionType = "<C-n>"
