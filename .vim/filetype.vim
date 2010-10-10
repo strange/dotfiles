@@ -13,6 +13,7 @@ augroup filetypedetect
     au! BufRead,BufNewFile *.txt setf rest
     au! BufRead,BufNewFile *.vim setf vim
     au! BufRead,BufNewFile *.xul setf xml
+    au! BufNewFile,BufRead *.rb,*.rbw,*.gem,*.gemspecsetf ruby
 
     au! BufRead,BufNewFile .muttrc* setf muttrc
 
@@ -23,7 +24,9 @@ augroup filetypedetect
     au! BufNewFile,BufRead .mailcap,mailcapsetf mailcap
     au! BufNewFile,BufRead snd.\d\+,.letter,.letter.\d\+,.followup,.article,.article.\d\+,pico.\d\+,mutt{ng,}-*-\w\+,mutt[[:alnum:]_-]\{6\},ae\d\+.txt,/tmp/SLRN[0-9A-Z.]\+,*.eml setf mail
 
-    au! BufNewFile,BufRead crontab,crontab.*,/etc/cron.d/*ENDcall setf crontab
+    au! BufNewFile,BufRead crontab,crontab.*,/etc/cron.d/* setf crontab
+
+    au! BufNewFile,BufRead /etc/nginx/*.conf,/etc/nginx/sites-enabled/*,/etc/nginx/sites-available/* setf conf
 
     au! BufRead,BufNewFile *vimrc* setf vim
 
