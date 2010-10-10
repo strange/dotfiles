@@ -369,7 +369,11 @@ function! s:SuperTab(command)
 
     if b:complReset
       let b:complReset = 0
-      return "\<c-e>" . complType
+      " not an accurate condition for everyone, but better than sending <c-e>
+      " at the wrong time.
+      if pumvisible()
+        return "\<c-e>" . complType
+      endif
     endif
 
     return complType
@@ -590,7 +594,7 @@ endfunction " }}}
     " using a <c-r> mapping instead of <expr>, seems to prevent evaluating
     " other functions mapped to <cr> etc. (like endwise.vim)
     inoremap <cr> <c-r>=<SID>SelectCompletion()<cr>
-    function s:SelectCompletion()
+    function! s:SelectCompletion()
       return pumvisible() ? "\<space>\<bs>" : "\<cr>"
     endfunction
   endif
