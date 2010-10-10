@@ -14,6 +14,7 @@ augroup filetypedetect
     au! BufRead,BufNewFile *.vim setf vim
     au! BufRead,BufNewFile *.xul setf xml
     au! BufNewFile,BufRead *.rb,*.rbw,*.gem,*.gemspecsetf ruby
+    au! BufNewFile,BufRead *.sh setf sh
 
     au! BufRead,BufNewFile .muttrc* setf muttrc
 
