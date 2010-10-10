@@ -84,9 +84,6 @@ set hlsearch
 set incsearch
 set gdefault
 
-nnoremap / /\v
-vnoremap / /\v
-
 " Language *******************************************************************
 
 set encoding=utf-8
