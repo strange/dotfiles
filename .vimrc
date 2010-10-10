@@ -135,6 +135,10 @@ let g:pyxis_ignore = '*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,
 
 imap <C-_> <C-X>/
 
+" Yankring *******************************************************************
+
+let g:yankring_history_dir = '$HOME/.vim'
+
 " BufSwitch ******************************************************************
 
 map <leader>l :BufSwitch<CR>
