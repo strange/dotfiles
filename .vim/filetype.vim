@@ -25,5 +25,7 @@ augroup filetypedetect
 
     au! BufNewFile,BufRead crontab,crontab.*,/etc/cron.d/*ENDcall setf crontab
 
+    au! BufRead,BufNewFile *vimrc* setf vim
+
     au! BufNewFile,BufRead *.Z,*.gz,*.bz2,*.zip,*.tgz set filetype=
 augroup END
