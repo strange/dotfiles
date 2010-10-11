@@ -169,19 +169,19 @@ noremap <silent> <leader>x :Explore<CR>
 inoremap jj <Esc>
 
 " Expand braces
-inoremap <silent> <CR> <C-R>=ExpandBraces()<CR>
-function! ExpandBraces()
-    let column = col('.')
-    let line = getline('.')
-    let current = line[column - 2]
-    let next = line[column - 1]
-    let valids = { '{': '}', '[': ']', '(': ')' }
-    if column > 1 && has_key(valids, current) && next == valids[current]
-        return "\<CR>\<CR>\<Up>\<Tab>"
-    else
-        return "\<CR>"
-    endif
-endfunction
+" inoremap <silent> <CR> <C-R>=ExpandBraces()<CR>
+" function! ExpandBraces()
+"     let column = col('.')
+"     let line = getline('.')
+"     let current = line[column - 2]
+"     let next = line[column - 1]
+"     let valids = { '{': '}', '[': ']', '(': ')' }
+"     if column > 1 && has_key(valids, current) && next == valids[current]
+"         return "\<CR>\<CR>\<Up>\<Tab>"
+"     else
+"         return "\<CR>"
+"     endif
+" endfunction
 
 " Indenting
 vnoremap < <gv
