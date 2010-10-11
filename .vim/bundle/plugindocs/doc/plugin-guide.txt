@@ -1,6 +1,6 @@
 *plugin-guide*    A guide to my installed plugins
 
-Last updated: Wed 22 Sep 2010 02:26:39 CEST
+Last updated: Mon 11 Oct 2010 13:44:24 CEST
 
 =============================================================================
 tComment                                                        *pg-tComment*
@@ -22,6 +22,11 @@ ysiw"         Wraps word under cursor in double quotes
 yss"          Wraps current line in double quotes
 
 vs<span>      Wraps selected region in a <span> tag
+
+=============================================================================
+Not plugins, but hey                                            *pg-surround*
+
+gv            Re-select previously selected block
 
 =============================================================================
  vim:tw=78:ts=8:ft=help:norl:
