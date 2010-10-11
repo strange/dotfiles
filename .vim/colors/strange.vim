@@ -26,6 +26,7 @@ if &t_Co != 256 && !has("gui_running")
     hi StatusLine ctermfg=black ctermbg=white term=none cterm=none 
     hi StatusLineNC ctermfg=darkgray  ctermbg=white term=bold cterm=bold 
     hi VertSplit ctermfg=white ctermbg=white
+    hi ColorColumn ctermbg=red
  
     " Menus
     hi PmenuSel ctermbg=darkyellow ctermfg=black
