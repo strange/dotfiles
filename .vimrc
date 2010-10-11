@@ -172,36 +172,27 @@ noremap <silent> <leader>x :Explore<CR>
 " Keep hands on home row
 inoremap jj <Esc>
 
-" Expand braces
-" inoremap <silent> <CR> <C-R>=ExpandBraces()<CR>
-" function! ExpandBraces()
-"     let column = col('.')
-"     let line = getline('.')
-"     let current = line[column - 2]
-"     let next = line[column - 1]
-"     let valids = { '{': '}', '[': ']', '(': ')' }
-"     if column > 1 && has_key(valids, current) && next == valids[current]
-"         return "\<CR>\<CR>\<Up>\<Tab>"
-"     else
-"         return "\<CR>"
-"     endif
-" endfunction
-
 " Indenting
 vnoremap < <gv
 vnoremap > >gv
 
 " AutoCommands ***************************************************************
 
+" strip trailing spaces in python
 au BufWritePre *.py normal m`:%s/\s\+$//e ``
+
+" remember last cursor position
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |
+    \ exe "normal! g`\"" | 
+    \ endif
+
+" a few per filetype settings
 au Filetype python set commentstring=#\ %s
 au Filetype actionscript set commentstring=//\ %s
 au Filetype rest set formatoptions=tclqn
 au Filetype css set foldmethod=syntax foldmarker={,}
+au Filetype html set formatoptions=q
 au Filetype help map <cr> <c-]>
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |
-    \ exe "normal! g`\"" | 
-    \ endif
 
 " Local Configuration ********************************************************
 
