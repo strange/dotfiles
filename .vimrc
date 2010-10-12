@@ -38,7 +38,7 @@ set backup backupdir=$HOME/.vim/backup
 
 set nomodeline
 set matchtime=2
-set scrolloff=5
+set scrolloff=8
 set vb
 set nowrap
 set bg=dark
@@ -58,7 +58,7 @@ set showtabline=0
 set ttyfast
 set ttymouse=
 
-if v:version == 703
+if v:version >= 703
     set colorcolumn=80
 endif
 
@@ -76,8 +76,11 @@ set fillchars=stl:-,vert:\|,fold:-,diff:-
 
 " Gutter *********************************************************************
 
-"set number
 set numberwidth=1
+if v:version >= 703
+    set number
+    set relativenumber
+endif
 
 " Searching *****************************************************************
 
@@ -193,6 +196,7 @@ au Filetype rest set formatoptions=tclqn
 au Filetype css set foldmethod=syntax foldmarker={,}
 au Filetype html set formatoptions=q
 au Filetype help map <cr> <c-]>
+au Filetype help set colorcolumn=0
 
 " Local Configuration ********************************************************
 
