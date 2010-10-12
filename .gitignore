@@ -9,6 +9,7 @@
 .vim/sessions
 .vim/yankring_history_v2.txt
 .vim/backup
+.vim/undo
 .vim/colors/*
 !.vim/colors/gconsole.vim
 !.vim/colors/gurra.vim

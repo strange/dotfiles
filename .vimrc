@@ -34,6 +34,12 @@ set directory=/tmp//
 set writebackup
 set backup backupdir=$HOME/.vim/backup
 
+if v:version >= 703
+    set undodir=~/.vim/undo
+    set undofile
+    set undoreload=10000
+endif
+
 " Edtitor and Interface ******************************************************
 
 set nomodeline
@@ -79,7 +85,7 @@ set fillchars=stl:-,vert:\|,fold:-,diff:-
 
 set numberwidth=1
 if v:version >= 703
-    set number
+    " set number
     set relativenumber
 endif
 
