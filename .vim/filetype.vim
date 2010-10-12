@@ -13,10 +13,12 @@ augroup filetypedetect
     au! BufRead,BufNewFile *.txt setf rest
     au! BufRead,BufNewFile *.vim setf vim
     au! BufRead,BufNewFile *.xul setf xml
-    au! BufNewFile,BufRead *.rb,*.rbw,*.gem,*.gemspecsetf ruby
+    au! BufNewFile,BufRead *.rb,*.gem ruby
     au! BufNewFile,BufRead *.sh setf sh
 
     au! BufRead,BufNewFile .muttrc* setf muttrc
+
+    au BufNewFile,BufRead .bashrc*,bashrc,bash.bashrc,.bash_profile*,.bash_logout*,*.bash setf sh
 
     au! BufNewFile,BufRead *.git/COMMIT_EDITMSG setf gitcommit
     au! BufNewFile,BufRead *.git/config,.gitconfig setf gitconfig
