@@ -83,10 +83,10 @@ set fillchars=stl:-,vert:\|,fold:-,diff:-
 
 " Gutter *********************************************************************
 
+" set number
 set numberwidth=1
 if v:version >= 703
-    " set number
-    set relativenumber
+    " set relativenumber
 endif
 
 " Searching *****************************************************************
