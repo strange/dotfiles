@@ -9,7 +9,7 @@ export LC_TIME="sv_SE.UTF-8"
 export LC_MESSAGES="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
-export EDITOR=vi
+export EDITOR=vim
 export PAGER=less
 export DISPLAY=:0.0
 
@@ -36,6 +36,7 @@ export PROMPT_COMMAND='history -a'
 for file in "/opt/local/etc/bash_completion" \
             "/opt/local/etc/bash_completion.d/git" \
             "/usr/local/etc/bash_completion" \
+            "/usr/local/etc/bash_completion.d" \
             "/etc/bash_completion";
 do
     if [ -f $file ]; then
