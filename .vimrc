@@ -68,7 +68,8 @@ set showmode
 set showcmd
 set shortmess=atI
 set laststatus=2
-set statusline=%(\ %f%m%r\ %)%=%(\ y=%l,x=%v:%=%p%%\ %)
+
+set statusline=%(\ %f%m%r%{&paste?'[PASTE]':''}\ %)%=%(\ y=%l,x=%v:%=%p%%\ %)
 
 set splitbelow
 set splitright
