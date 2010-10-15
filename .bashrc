@@ -71,6 +71,10 @@ loadenv() {
 }
 complete -o default -o nospace -W '$(ls $PIP_VIRTUALENV_BASE)' loadenv
 
+# Fabric ####################################################################
+
+complete -o default -o nospace -W '$(fab --shortlist)' fab
+
 # Aliases ###################################################################
 
 alias myip="ifconfig | grep '[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | \
