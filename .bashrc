@@ -51,43 +51,29 @@ _expand() { return 0; }
 
 export PYTHONPATH="" # Disable to work nicely with pip.
 export PIP_VIRTUALENV_BASE=$HOME/.virtualenvs
-export PIP_REQUIRE_VIRTUALENV=true
+export PIP_REQUIRE_VIRTUALENV=false
 export PIP_RESPECT_VIRTUALENV=true
 
-# Load a virtualenv
+# load virtualenvwrapper if it has been installed
+loadvirtualenvwrapper() {
+    local vwpath=`which virtualenvwrapper.sh`
+    if [ -f $vwpath ]; then
+        source $vwpath
+        export WORKON_HOME=$PIP_VIRTUALENV_BASE
+    fi
+}
+loadvirtualenvwrapper
+
+# shortcut to load virtual environment with same name as cwd
 loadenv() {
-    local VENV_NAME=`[ -n "$1" ] && echo "$1" || echo ${PWD##*/}`
-    local VENV_PATH="$PIP_VIRTUALENV_BASE/$VENV_NAME/bin/activate"
-    if [ ! -e "$VENV_PATH" ]; then
-        echo "Environment '$VENV_NAME' does not exist." 
-        return 1
-    fi
-    source $VENV_PATH
+    local venv_name=`[ -n "$1" ] && echo "$1" || echo ${PWD##*/}`
+    workon $venv_name
 }
+complete -o default -o nospace -W '$(ls $PIP_VIRTUALENV_BASE)' loadenv
 
-# Change directory to site-packages directory of a virtualenv.
-cdenvsp() {
-    local VENV_NAME=`[ -n "$1" ] && echo "$1" || echo ${PWD##*/}`
-    # TODO: Give choice between multiple versions of Python?
-    cd `echo "$PIP_VIRTUALENV_BASE/$VENV_NAME/lib/python*/site-packages"`
-}
+# Fabric ####################################################################
 
-# Create a new virtual environment in $PIP_VIRTUALENV_BASE
-mkvenv() {
-    if [ -z $1 ] ; then
-        echo "Usage: mkenv <name>"
-        return 1
-    fi
-    local full_path="$PIP_VIRTUALENV_BASE/$1"
-    if [ -d $full_path ]; then
-        echo "A virtual environment by that name already exists."
-        return 1
-    fi
-    virtualenv --no-site-packages $full_path
-    return 0
-}
-
-complete -o default -o nospace -W '$(ls $PIP_VIRTUALENV_BASE)' loadenv cdenvsp
+complete -o default -o nospace -W '$(fab --shortlist)' fab
 
 # Aliases ###################################################################
 
