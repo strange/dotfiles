@@ -20,6 +20,8 @@ cst<span>               Change surrounding tag to a <span> tag
 
 ysiw"                   Wraps word under cursor in double quotes
 yss"                    Wraps current line in double quotes
+yss"                    Wraps current line in double quotes
+ySS<p>                  Wraps current line in <p> and re-formats.
 
 vs<span>                Wraps selected region in a <span> tag
 

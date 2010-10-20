@@ -100,6 +100,7 @@ alias port="sudo port"
 
 # Some Django convenience aliases
 alias djrun='django-admin.py runserver --settings=${PWD##*/}.settings'
+alias djunicorn='django-admin.py run_gunicorn --settings=${PWD##*/}.settings'
 alias djsync='django-admin.py syncdb --settings=${PWD##*/}.settings'
 alias djshell='django-admin.py shell --settings=${PWD##*/}.settings'
 alias djdb='django-admin.py dbshell --settings=${PWD##*/}.settings'
