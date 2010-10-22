@@ -17,6 +17,7 @@ augroup filetypedetect
     au BufNewFile,BufRead *.xul setf xml
     au BufNewFile,BufRead *.rb,*.gem ruby
     au BufNewFile,BufRead *.sh setf sh
+    au BufNewFile,BufRead *.md,*.markdown setf markdown
 
     au BufNewFile,BufRead .muttrc* setf muttrc
 
