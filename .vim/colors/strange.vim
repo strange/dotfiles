@@ -74,6 +74,7 @@ else
     hi StatusLine ctermbg=235 guibg=#222222 ctermfg=255 guifg=#FFFFFF cterm=bold gui=none
     hi StatusLineNC ctermbg=235 guibg=#222222 ctermfg=239 guifg=#555555 cterm=none gui=none
     hi VertSplit ctermfg=235 guifg=#222222 ctermbg=235 guibg=#222222 cterm=none gui=none
+    hi ColorColumn ctermbg=233 guibg=#151515
 
     " Menus
     hi Pmenu ctermfg=250 guifg=#DDDDDD ctermbg=236 guibg=#444444
