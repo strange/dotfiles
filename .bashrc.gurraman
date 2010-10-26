@@ -1,7 +1,0 @@
-PS1='[\u@\h]\W$(__git_ps1 ":%s")\[\e[1;31m\]%\[\e[0m\] '
-
-alias weechat="weechat-curses"
-alias lock="open -a ScreenSaverEngine"
-alias port="sudo port"
-alias startpg="pg_ctl -D /usr/local/var/postgres -l logfile start"
-source "$HOME/code/checkouts/z/z.sh"

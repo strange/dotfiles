@@ -1,22 +1,13 @@
 # Exports ###################################################################
 
-export LC_ALL=""
-export LC_COLLATE="sv_SE.UTF-8"
-export LC_CTYPE="sv_SE.UTF-8"
-export LC_MONETARY="sv_SE.UTF-8"
-export LC_NUMERIC="sv_SE.UTF-8"
-export LC_TIME="sv_SE.UTF-8"
-export LC_MESSAGES="en_US.UTF-8"
-export LANG="en_US.UTF-8"
-
 export EDITOR=vim
 export PAGER=less
 export DISPLAY=:0.0
 
 # Paths #####################################################################
 
-export PATH="/usr/local/bin:/opt/local/bin:$HOME/bin:$PATH"
-export MANPATH="/usr/local/man:/opt/local/man:$MANPATH"
+export PATH="/usr/local/bin:$HOME/bin:$PATH"
+export MANPATH="/usr/local/man:$MANPATH"
 
 # Bash history ##############################################################
 
@@ -33,9 +24,7 @@ export PROMPT_COMMAND='history -a'
 
 # Bash completion ###########################################################
 
-for file in "/opt/local/etc/bash_completion" \
-            "/opt/local/etc/bash_completion.d/git" \
-            "/usr/local/etc/bash_completion" \
+for file in "/usr/local/etc/bash_completion" \
             "/usr/local/etc/bash_completion.d" \
             "/etc/bash_completion";
 do
@@ -57,7 +46,7 @@ export PIP_RESPECT_VIRTUALENV=true
 # load virtualenvwrapper if it has been installed
 loadvirtualenvwrapper() {
     local vwpath=`which virtualenvwrapper.sh`
-    if [ -f $vwpath ]; then
+    if [ $vwpath != "" ] && [ -f $vwpath ]; then
         source $vwpath
         export WORKON_HOME=$PIP_VIRTUALENV_BASE
     fi
@@ -80,9 +69,6 @@ complete -o default -o nospace -W '$(fab --shortlist)' fab
 alias myip="ifconfig | grep '[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | \
             grep -v '127.0.0.1' | awk '{print \$2}'"
 alias ls="ls -G"
-alias vi=vim
-alias tmux="tmux -u"
-alias port="sudo port"
 
 # Some Django convenience aliases
 alias djrun='django-admin.py runserver --settings=${PWD##*/}.settings'
@@ -111,16 +97,7 @@ else
     PS1='[\u@\h]\W% '
 fi
 
-# Local Configs #############################################################
-
-load_host_bashrc() {
-    local host_bits=`hostname`
-    local hostname=${host_bits%%.*}
-    if [ -e "$HOME/.bashrc.$hostname" ]; then
-        source "$HOME/.bashrc.$hostname"
-    fi
-}
-load_host_bashrc
+# Local Config ##############################################################
 
 if [ -e "$HOME/.bashrc.local" ]; then
     source "$HOME/.bashrc.local"

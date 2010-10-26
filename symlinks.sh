@@ -13,7 +13,7 @@ then
     exit 1
 fi
 
-EXCLUDE=".gitignore .git README.txt $SCRIPT"
+EXCLUDE=".gitignore .git README.txt .bashrc.local.skel $SCRIPT"
 
 for FILE in `ls -A`
 do

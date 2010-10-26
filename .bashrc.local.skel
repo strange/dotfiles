@@ -1,0 +1,25 @@
+# a few common things i put in the .bashrc.local on various systems.
+
+# git-infuced prompt
+PS1='[\u@\h]\W$(__git_ps1 ":%s")\[\e[1;31m\]%\[\e[0m\] '
+
+# lock screen on os x
+alias lock="open -a ScreenSaverEngine"
+
+# add local python bin dir to path
+export PATH="$PATH:/usr/local/Cellar/python/2.7/bin"
+
+# locale
+export LC_ALL=""
+export LC_COLLATE="sv_SE.UTF-8"
+export LC_CTYPE="sv_SE.UTF-8"
+export LC_MONETARY="sv_SE.UTF-8"
+export LC_NUMERIC="sv_SE.UTF-8"
+export LC_TIME="sv_SE.UTF-8"
+export LC_MESSAGES="en_US.UTF-8"
+export LANG="en_US.UTF-8"
+
+# aliases
+alias vi=vim
+alias tmux="tmux -u"
+alias port="sudo port"
