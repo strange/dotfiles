@@ -23,3 +23,14 @@ export LANG="en_US.UTF-8"
 alias vi=vim
 alias tmux="tmux -u"
 alias port="sudo port"
+
+# load virtualenvwrapper if it has been installed
+loadvirtualenvwrapper() {
+    local vwpath=`which virtualenvwrapper.sh`
+    if [ $vwpath != "" ] && [ -f $vwpath ]; then
+        source $vwpath
+        export WORKON_HOME=$PIP_VIRTUALENV_BASE
+    fi
+}
+loadvirtualenvwrapper
+

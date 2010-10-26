@@ -43,16 +43,6 @@ export PIP_VIRTUALENV_BASE=$HOME/.virtualenvs
 export PIP_REQUIRE_VIRTUALENV=false
 export PIP_RESPECT_VIRTUALENV=true
 
-# load virtualenvwrapper if it has been installed
-loadvirtualenvwrapper() {
-    local vwpath=`which virtualenvwrapper.sh`
-    if [ $vwpath != "" ] && [ -f $vwpath ]; then
-        source $vwpath
-        export WORKON_HOME=$PIP_VIRTUALENV_BASE
-    fi
-}
-loadvirtualenvwrapper
-
 # shortcut to load virtual environment with same name as cwd
 loadenv() {
     local venv_name=`[ -n "$1" ] && echo "$1" || echo ${PWD##*/}`
