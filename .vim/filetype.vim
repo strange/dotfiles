@@ -36,6 +36,7 @@ augroup filetypedetect
     au BufNewFile,BufRead crontab,crontab.*,/etc/cron.d/* setf crontab
 
     au BufNewFile,BufRead /etc/nginx/*.conf,/etc/nginx/sites-enabled/*,/etc/nginx/sites-available/* setf conf
+    au BufNewFile,BufRead /etc/hosts.conf setf conf
 
     au BufNewFile,BufRead *vimrc* setf vim
 augroup END
