@@ -12,9 +12,9 @@ export MANPATH="/usr/local/man:$MANPATH"
 # Bash history ##############################################################
 
 export HISTCONTROL=erasedups
+export HISTIGNORE="ls:exit"
 export HISTSIZE=10000
 unset HISTFILESIZE
-export HISTIGNORE="ls:exit"
 
 shopt -s histappend
 shopt -s cmdhist
