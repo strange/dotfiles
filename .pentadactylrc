@@ -9,6 +9,9 @@ colo strange
 " copy stuff
 map <M-c> <C-v><M-c>
 
+" disable default completion
+:set autocomplete=
+
 map a gT
 map s gt
 
