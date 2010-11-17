@@ -9,6 +9,7 @@ augroup filetypedetect
     au BufNewFile,BufRead *.css setf css
     au BufNewFile,BufRead *.erl setf erlang
     au BufNewFile,BufRead *.html setf html
+    au BufNewFile,BufRead *.et setf html
     au BufNewFile,BufRead *.js setf javascript
     au BufNewFile,BufRead *.py setf python
     au BufNewFile,BufRead *.rst setf rest
