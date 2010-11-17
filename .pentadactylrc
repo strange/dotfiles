@@ -10,7 +10,9 @@ colo strange
 map <M-c> <C-v><M-c>
 
 " disable default completion
-:set autocomplete=
+set autocomplete=
+
+set hintkeys="asdfghjklö"
 
 map a gT
 map s gt
