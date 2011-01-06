@@ -7,7 +7,7 @@ augroup filetypedetect
 
     au BufNewFile,BufRead *.as setf actionscript
     au BufNewFile,BufRead *.css setf css
-    au BufNewFile,BufRead *.erl setf erlang
+    au BufNewFile,BufRead *.erl,*.hrl setf erlang
     au BufNewFile,BufRead *.html setf html
     au BufNewFile,BufRead *.et setf html
     au BufNewFile,BufRead *.js setf javascript
