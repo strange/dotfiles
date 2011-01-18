@@ -6,7 +6,7 @@ export DISPLAY=:0.0
 
 # Paths #####################################################################
 
-export PATH="/usr/local/bin:$HOME/bin:$PATH"
+export PATH="/usr/local/sbin:/usr/local/bin:$HOME/bin:$PATH"
 export MANPATH="/usr/local/man:$MANPATH"
 
 # Bash history ##############################################################
