@@ -176,9 +176,6 @@ noremap <silent> <leader>p :set paste!<CR>
 " Explore
 noremap <silent> <leader>x :Explore<CR>
 
-" Keep hands on home row
-inoremap jj <Esc>
-
 " Indenting
 vnoremap < <gv
 vnoremap > >gv
