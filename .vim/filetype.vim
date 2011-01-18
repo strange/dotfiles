@@ -11,13 +11,13 @@ augroup filetypedetect
     au BufNewFile,BufRead *.html setf html
     au BufNewFile,BufRead *.js setf javascript
     au BufNewFile,BufRead *.py setf python
-    au BufNewFile,BufRead *.rst setf rest
-    au BufNewFile,BufRead *.txt setf rest
+    au BufNewFile,BufRead *.rst,*.txt setf rest
     au BufNewFile,BufRead *.vim setf vim
     au BufNewFile,BufRead *.xul setf xml
     au BufNewFile,BufRead *.rb,*.gem ruby
     au BufNewFile,BufRead *.sh setf sh
     au BufNewFile,BufRead *.md,*.markdown setf markdown
+    au BufNewFile,BufRead *.php setf php
 
     au BufNewFile,BufRead .muttrc* setf muttrc
 
