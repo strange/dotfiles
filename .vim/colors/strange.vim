@@ -68,7 +68,7 @@ else
 
     " Search
     hi IncSearch ctermfg=0 guifg=#000000 ctermbg=226 guibg=#FFD700 cterm=none gui=none
-    hi Search ctermfg=0 guifg=#000000 ctermbg=191 guibg=#FFD700 cterm=none gui=none
+    hi Search ctermfg=0 guifg=#000000 ctermbg=151 guibg=#FFD700 cterm=none gui=none
     
     " Dividers
     hi StatusLine ctermbg=235 guibg=#222222 ctermfg=255 guifg=#FFFFFF cterm=bold gui=none

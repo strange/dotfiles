@@ -19,6 +19,9 @@ augroup filetypedetect
     au BufNewFile,BufRead *.sh setf sh
     au BufNewFile,BufRead *.md,*.markdown setf markdown
     au BufNewFile,BufRead *.php setf php
+    au BufNewFile,BufRead *.h setf c
+    au BufNewFile,BufRead *.c setf c
+    au BufNewFile,BufRead *.cc,*.cpp,*.cxx,*.C,*.hh,*.hxx,*.hpp setf cpp
 
     au BufNewFile,BufRead .muttrc* setf muttrc
 
