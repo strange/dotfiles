@@ -1,21 +1,21 @@
 set runtimepath=~/.pentadactyl
 set visualbell
 
-map j 6<c-e>
-map k 6<c-y>
+nnoremap j 6<C-e>
+nnoremap k 6<C-y>
 
 colo strange
 
 " copy stuff
-map <M-c> <C-v><M-c>
+noremap <M-c> <C-v><M-c>
 
 " disable default completion
 set autocomplete=
 
 set hintkeys="asdfghjklö"
 
-map a gT
-map s gt
+nnoremap a gT
+nnoremap s gt
 
 " qmarks (go<qm> or gn<qm>)
 silent qmark h http://news.ycombinator.com
