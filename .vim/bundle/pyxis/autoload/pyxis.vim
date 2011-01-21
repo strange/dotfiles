@@ -18,6 +18,7 @@ function! pyxis#InitUI()
     let s:_winno = winnr()
     let s:_completeopt = &completeopt
     let s:_splitbelow = &splitbelow
+    let s:_paste = &paste
 
     set nosplitbelow " Always show the completion-window above current
     exec '1split [Start typing the name of a file ...]'
@@ -31,6 +32,7 @@ function! pyxis#InitUI()
     setlocal nowrap " Do not wrap long lines
     setlocal winfixheight " Keep height when other windows are opened
     setlocal textwidth=0 " No maximum text width
+    setlocal nopaste " Paste mode interferes
     set completeopt=menuone " Use popup with only one match
     set completefunc=pyxis#CompleteFunc
     delete " Delete any text
@@ -60,6 +62,9 @@ function! s:Reset()
     let &completeopt=s:_completeopt
     exec 'bdelete! '.s:bufno
     exec s:_winno.'wincmd w'
+    if s:_paste
+        set paste
+    endif
     if s:_splitbelow
         set splitbelow
     endif
