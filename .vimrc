@@ -207,6 +207,7 @@ au Filetype css set foldmethod=syntax foldmarker={,}
 au Filetype html set formatoptions=q
 au Filetype help map <cr> <c-]>
 au Filetype help set colorcolumn=0
+autocmd FileType html set indentexpr& autoindent
 
 " Local Configuration ********************************************************
 
