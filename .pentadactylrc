@@ -12,7 +12,7 @@ noremap <M-c> <C-v><M-c>
 " disable default completion
 set autocomplete=
 
-set hintkeys="asdfghjklö"
+set hintkeys="asdfghjkl;"
 
 nnoremap a gT
 nnoremap s gt
@@ -28,14 +28,15 @@ silent qmark t http://www.twitter.com/gurraman
 " http://github.com/mashiro/dot-files/
 javascript <<EOM
 function bmark(title, url, keyword) {
-    if (!bookmarks.isBookmarked(url)) {
+    if (!bookmarkcache.isBookmarked(url)) {
         bookmarks.add(false, title, url, keyword, ['keyword'], false);
     }
 }
 bmark('Google', 'http://www.google.com/search?q=%s', 'g');
-bmark('Pirate Bay', 'http://thepiratebay.org/search/%s', 't');
+bmark('Pirate Bay', 'http://thepiratebay.org/search/%s/0/7/0', 't');
 bmark('Wikipedia (en)', 'http://en.wikipedia.org/wiki/Special:Search?search=%s', 'w');
 bmark('Wikipedia (sv)', 'http://sv.wikipedia.org/wiki/Special:Search?search=%s', 'ws');
 bmark('imdb', 'http://www.imdb.com/find?s=all&q=%s', 'i');
 bmark('tyda.se', 'http://tyda.se/search?form=1&w=%s', 'ty');
+bmark('youtube.come', 'http://www.youtube.com/results?search_query=%s', 'yt');
 EOM
