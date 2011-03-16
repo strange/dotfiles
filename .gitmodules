@@ -22,3 +22,6 @@
 	path = .vim/bundle/yankring
 	url = https://github.com/vim-scripts/YankRing.vim.git
     ignore = untracked
+[submodule ".vim/bundle/pyxis"]
+	path = .vim/bundle/pyxis
+	url = git@github.com:strange/pyxis-vim.git
