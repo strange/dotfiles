@@ -1,0 +1,6 @@
+[submodule ".vim/bundle/supertab"]
+	path = .vim/bundle/supertab
+	url = https://github.com/ervandew/supertab.git
+[submodule ".vim/bundle/tcomment"]
+	path = .vim/bundle/tcomment
+	url = https://github.com/tomtom/tcomment_vim.git
