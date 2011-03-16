@@ -13,6 +13,10 @@ then
     exit 1
 fi
 
+# first checkout submodules
+
+git submodule update --init
+
 EXCLUDE=".gitignore .git README.txt .bashrc.local.skel $SCRIPT"
 
 for FILE in `ls -A`
