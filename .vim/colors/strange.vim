@@ -91,6 +91,7 @@ else
     hi Statement ctermfg=240 guifg=#5d6065 cterm=none gui=none
     hi Type ctermfg=246 guifg=#999999 gui=none
     hi Number ctermfg=174 guifg=#97806e
+    hi Delimiter ctermfg=240 guifg=#5d6065
     hi Special ctermfg=214 guifg=#FFA500
     hi Type ctermfg=246 guifg=#999999 cterm=none gui=none
 

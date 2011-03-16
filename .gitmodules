@@ -25,3 +25,6 @@
 [submodule ".vim/bundle/pyxis"]
 	path = .vim/bundle/pyxis
 	url = git@github.com:strange/pyxis-vim.git
+[submodule ".vim/bundle/vimerl"]
+	path = .vim/bundle/vimerl
+	url = https://github.com/jimenezrick/vimerl.git
