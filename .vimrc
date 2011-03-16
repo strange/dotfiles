@@ -1,6 +1,6 @@
 set nocompatible 
 let mapleader=","
-set runtimepath=$HOME/.vim
+"set runtimepath=$HOME/.vim
 
 " Filetype *******************************************************************
 
