@@ -6,6 +6,7 @@ let mapleader=","
 
 filetype off " as suggested by Tim Pope
 call pathogen#runtime_append_all_bundles() 
+call pathogen#helptags() 
 filetype plugin indent on
 
 " Indentation and text formatting ********************************************
@@ -209,7 +210,6 @@ au Filetype help map <cr> <c-]>
 au Filetype help set colorcolumn=0
 au FileType html set indentexpr& autoindent
 au BufEnter * :syntax sync fromstart
-
 
 " Local Configuration ********************************************************
 
