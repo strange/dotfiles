@@ -25,6 +25,12 @@
 [submodule ".vim/bundle/pyxis"]
 	path = .vim/bundle/pyxis
 	url = git@github.com:strange/pyxis-vim.git
+    ignore = untracked
 [submodule ".vim/bundle/vimerl"]
 	path = .vim/bundle/vimerl
 	url = https://github.com/jimenezrick/vimerl.git
+    ignore = untracked
+[submodule ".vim/bundle/gundo"]
+	path = .vim/bundle/gundo
+	url = http://github.com/sjl/gundo.vim.git
+    ignore = untracked

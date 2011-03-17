@@ -135,6 +135,10 @@ let g:yankring_history_dir = '$HOME/.vim'
 
 map <leader>l :BufSwitch<CR>
 
+" Gundo **********************************************************************
+
+map <leader>g :GundoToggle<CR>
+
 " Custom Mappings ************************************************************
 
 nnoremap ' `
