@@ -23,6 +23,7 @@ silent qmark m http://mail.google.com
 silent qmark d http://www.delicious.com/gurraman
 silent qmark g http://www.github.com/strange
 silent qmark t http://www.twitter.com/gurraman
+silent qmark z https://zetabee.com/text/
 
 " bmarks
 " http://github.com/mashiro/dot-files/
