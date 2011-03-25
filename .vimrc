@@ -177,18 +177,21 @@ noremap <C-w>j <C-w>w
 noremap <C-w>k <C-W>W
 noremap <C-w><C-w> <C-w>p
 
-" Line navigations
+" Explore marks
+noremap <leader>m :marks<cr>
+
+" Line navigation
 noremap <C-h> ^
 noremap <C-l> g_
 
 " Reset search highlighting
-noremap <silent> <leader>n :silent :noh<CR>
+noremap <silent> <leader>n :silent :noh<cr>
 
 " Toggle paste mode
-noremap <silent> <leader>p :set paste!<CR>
+noremap <silent> <leader>p :set paste!<cr>
 
 " Explore
-noremap <silent> <leader>x :Explore<CR>
+noremap <silent> <leader>x :Explore<cr>
 
 " Indenting
 vnoremap < <gv
