@@ -1,4 +1,4 @@
-commands.addUserCommand(['dmark'], "Bookmark page on Delicious",
+group.commands.add(['dmark'], "Bookmark page on Delicious",
     function(args) {
         var url = [
             'https://api.del.icio.us/v1/posts/add?',
