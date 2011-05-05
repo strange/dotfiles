@@ -192,8 +192,7 @@ noremap <C-h> ^
 noremap <C-l> g_
 
 " Reset search highlighting
-map <silent> <esc> :silent :noh<cr>
-" imap <silent> <esc> <C-c>:silent :noh<cr>
+noremap <esc> :noh<cr><esc>
 
 " Toggle paste mode
 noremap <silent> <leader>p :set paste!<cr>
