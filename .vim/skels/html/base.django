@@ -6,8 +6,8 @@
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="{{ MEDIA_URL }}static/style/master.css" type="text/css" media="screen">
         <!-- <link rel="shortcut icon" href="{{ MEDIA_URL }}static/images/misc/favicon.ico"> -->
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-        <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script> -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+        <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script> -->
         <script type="text/javascript" src="{{ MEDIA_URL }}static/script/behaviour.js"></script>
         {% block script %}{% endblock %}
     </head>
