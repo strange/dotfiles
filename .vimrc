@@ -139,6 +139,13 @@ map <leader>l :BufSwitch<CR>
 
 map <leader>g :GundoToggle<CR>
 
+" NERDTree *******************************************************************
+
+noremap <silent> <leader>x :NERDTreeToggle<cr>
+
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeDirArrows = 1
+
 " Custom Mappings ************************************************************
 
 nnoremap ' `
@@ -185,13 +192,11 @@ noremap <C-h> ^
 noremap <C-l> g_
 
 " Reset search highlighting
-noremap <silent> <leader>n :silent :noh<cr>
+map <silent> <esc> :silent :noh<cr>
+" imap <silent> <esc> <C-c>:silent :noh<cr>
 
 " Toggle paste mode
 noremap <silent> <leader>p :set paste!<cr>
-
-" Explore
-noremap <silent> <leader>x :Explore<cr>
 
 " Indenting
 vnoremap < <gv

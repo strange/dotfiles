@@ -36,6 +36,6 @@ function! TmuxResetPaneId()
     unlet b:tmux_back_to_vim
 endfunction
 
-vnoremap <silent> <C-c><C-c> "xy:call TmuxPaste(@x)<CR>
-nnoremap <silent> <C-c><C-c> gg"xyG'':call TmuxPaste(@x)<CR>
+" vnoremap <silent> <C-c><C-c> "xy:call TmuxPaste(@x)<CR>
+" nnoremap <silent> <C-c><C-c> gg"xyG'':call TmuxPaste(@x)<CR>
 command TmuxPasteReset :call TmuxResetPaneId()
