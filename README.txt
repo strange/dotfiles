@@ -10,3 +10,8 @@ Create a .muttrc with the following contents::
     set smtp_pass="<password>"
 
     source ~/.mutt/muttrc
+
+Adding submodules to pathogen:
+
+    git submodule add <path> .vim/bundle/<name>
+    git submodule init && git submodule update
