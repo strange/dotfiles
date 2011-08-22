@@ -4,40 +4,42 @@
 # configurations available in this package. The script must be run from
 # the directory in which the files we're creating symlinks for reside.
 
-SCRIPT=$(basename $0)
+function createsymlinks() {
+    local script=$(basename $0)
 
-if [ ! -e "$PWD/$SCRIPT" ]
-then
-    echo "Script must be run from the directory in which the files we're " \
-         "creating links to reside."
-    exit 1
-fi
-
-# first checkout submodules
-
-git submodule update --init
-
-EXCLUDE=".gitignore .git README.txt .bashrc.local.skel $SCRIPT"
-
-for FILE in `ls -A`
-do
-    if [[ "${EXCLUDE}" != *${FILE}* ]]
+    if [ ! -e "$PWD/$script" ]
     then
-        SOURCE="$PWD/$FILE"
-        TARGET="$HOME/$FILE"
-        if [ $# -eq 1 ] && [ $1 = 'remove' ]
-        then
-            if [ -L $TARGET ]
-            then
-                rm $TARGET
-            fi
-        else
-            if [ -e $TARGET ]
-            then
-                echo "A file named $TARGET already exists!"
+        echo "Script must be run from the directory in which the files we're " \
+             "creating links to reside."
+        exit 1
+    fi
+
+    # first checkout submodules
+
+    git submodule update --init
+
+    local exclude=".gitignore .git README.txt .bashrc.local.skel $SCRIPT"
+
+    for filename in `ls -A`
+    do
+        if [[ "${exclude}" != *${filename}* ]]; then
+            local from="$PWD/$filename"
+            local to="$HOME/$filename"
+
+            if [ $# -eq 1 ] && [ $1 = 'remove' ]; then
+                if [ -L $to ]; then
+                    rm $to
+                fi
             else
-                ln -s $SOURCE $TARGET
+                if [ -e $to ]; then
+                    if  [[ $(readlink $to) != $from ]]; then
+                        echo "A file named $to already exists!"
+                    fi
+                else
+                    ln -s $from $to
+                fi
             fi
         fi
-    fi
-done
+    done
+}
+createsymlinks
