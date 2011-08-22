@@ -220,7 +220,7 @@ au Filetype html set formatoptions=q
 au Filetype help map <cr> <c-]>
 au Filetype help set colorcolumn=0
 au FileType html set indentexpr& autoindent
-au BufEnter * :syntax sync fromstart
+au BufEnter * :syntax sync minlines=200
 
 " Local Configuration ********************************************************
 
