@@ -38,6 +38,7 @@ bmark('Pirate Bay', 'http://thepiratebay.org/search/%s/0/7/0', 't');
 bmark('Wikipedia (en)', 'http://en.wikipedia.org/wiki/Special:Search?search=%s', 'w');
 bmark('Wikipedia (sv)', 'http://sv.wikipedia.org/wiki/Special:Search?search=%s', 'ws');
 bmark('imdb', 'http://www.imdb.com/find?s=all&q=%s', 'i');
+bmark('imdb', 'http://www.google.com/search?btnI=1&q=imdb %s', 'i2');
 bmark('tyda.se', 'http://tyda.se/search?form=1&w=%s', 'ty');
 bmark('youtube.come', 'http://www.youtube.com/results?search_query=%s', 'yt');
 EOM
