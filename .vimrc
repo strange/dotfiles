@@ -53,8 +53,8 @@ set title
 set visualbell
 
 set wildmenu
-set wildmode=list:longest
-set wildignore=*.pyc
+set wildmode=full
+set wildignore=*.pyc,*.pyo,*.beam
 
 set nofoldenable
 set report=2
@@ -221,6 +221,7 @@ au Filetype help map <cr> <c-]>
 au Filetype help set colorcolumn=0
 au FileType html set indentexpr& autoindent
 au BufEnter * :syntax sync minlines=200
+au Filetype erlang :ErlangDisableShowErrors
 
 " Local Configuration ********************************************************
 
