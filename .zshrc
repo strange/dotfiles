@@ -25,14 +25,15 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=$HOME/.history
 
-setopt share_history
 setopt append_history
 setopt inc_append_history
 setopt hist_ignore_all_dups
 setopt hist_verify
 
-bindkey "^[[A" history-search-backward
-bindkey "^[[B" history-search-forward
+# bindkey "^[[A" history-search-backward
+# bindkey "^[[B" history-search-forward
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
 bindkey '^R' history-incremental-search-backward
 
 # env
