@@ -1,0 +1,33 @@
+set visualbell
+set noautocomplete
+set complete=l
+set scrollbars=false
+set hintchars="asdfghjkl;"
+set showstatuslinks=0
+
+nnoremap a gT
+nnoremap s gt
+nnoremap j 6<C-e>
+nnoremap k 6<C-y>
+noremap <M-c> <C-v><M-c>
+
+colo strange
+
+" qmarks (go<qm> or gn<qm>)
+silent qmark h http://news.ycombinator.com
+silent qmark m http://mail.google.com
+silent qmark d http://www.delicious.com/gurraman
+silent qmark g http://www.github.com/strange
+silent qmark t http://www.twitter.com/gurraman
+silent qmark z https://zetabee.com/text/
+
+silent bmark -title='Google' -keyword='g' 'http://www.google.com/search?q=%s'
+silent bmark -title='Pirate Bay' -keyword='t' 'http://thepiratebay.org/search/%s/0/7/0'
+silent bmark -title='Wikipedia (en)' -keyword='w' 'http://en.wikipedia.org/wiki/Special:Search?search=%s'
+silent bmark -title='Wikipedia (sv)' -keyword='ws' 'http://sv.wikipedia.org/wiki/Special:Search?search=%s'
+silent bmark -title='imdb' -keyword='i' 'http://www.imdb.com/find?s=all&q=%s'
+silent bmark -title='imdb' -keyword='i2' 'http://www.google.com/search?btnI=1&q=imdb %s'
+silent bmark -title='tyda.se' -keyword='ty' 'http://tyda.se/search?form=1&w=%s'
+silent bmark -title='youtube.com' -keyword='yt' 'http://www.youtube.com/results?search_query=%s'
+silent bmark -title='news.yc' -keyword='yc' 'http://www.google.com/search?q=site:news.ycombinator.com %s'
+silent bmark -title='stack overflow' -keyword='so' 'http://www.google.com/search?q=site:stackoverflow.com %s'
