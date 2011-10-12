@@ -2,7 +2,7 @@
 
 autoload -U colors && colors
 autoload -Uz vcs_info
-autoload -U compinit && compinit
+autoload -U compinit && compinit -i
 
 # settings
 
@@ -16,6 +16,7 @@ setopt correct
 
 zstyle ':completion:*' completer _complete
 zstyle ':completion:*:*:kill:*' menu yes select
+zstyle ':completion:*' accept-exact '*(N)'
 
 bindkey '^[[Z' reverse-menu-complete
 
@@ -30,11 +31,10 @@ setopt inc_append_history
 setopt hist_ignore_all_dups
 setopt hist_verify
 
-# bindkey "^[[A" history-search-backward
-# bindkey "^[[B" history-search-forward
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 bindkey '^R' history-incremental-search-backward
+bindkey '^?'  backward-delete-char
 
 # env
 
