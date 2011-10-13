@@ -15,3 +15,7 @@ Adding submodules to pathogen:
 
     git submodule add <path> .vim/bundle/<name>
     git submodule init && git submodule update
+
+Update all submodules:
+
+    git submodule foreach git checkout master && git submodule foreach git pull origin master
