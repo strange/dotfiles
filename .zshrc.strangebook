@@ -7,8 +7,10 @@ alias lock="open -a ScreenSaverEngine"
 alias startpg="pg_ctl -D /usr/local/var/postgres -l logfile start"
 alias flushcache="sudo dscacheutil -flushcache"
 
+export PATH=$PATH:/usr/local/share/aclocal:/usr/texbin
+
 export WORKON_HOME=$PIP_VIRTUALENV_BASE
 mkvirtualenv() {
     source /usr/local/Cellar/python/2.7/bin/virtualenvwrapper.sh && \
-        mkvirtualenv
+        mkvirtualenv $1
 }
