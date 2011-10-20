@@ -51,6 +51,7 @@ set nowrap
 set bg=dark
 set title
 set visualbell
+set cursorline
 
 set wildmenu
 set wildmode=full
@@ -118,10 +119,6 @@ let g:SuperTabDefaultCompletionType = "<C-n>"
 
 noremap <leader>e :Pyxis<CR>
 noremap <leader>E :PyxisUpdateCache<CR>
-
-let g:pyxis_ignore = '*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,
-                     \*.gif,*~,*.o,*.class,*.ai,*.plist,*.swp,*.mp3,*.db,
-                     \*.beam'
 
 " RagTag *********************************************************************
 
