@@ -1,8 +1,10 @@
 [[ -z "$PS1" ]] && return
 
-autoload -U colors && colors
+autoload -U colors
 autoload -Uz vcs_info
-autoload -U compinit && compinit -i
+autoload -U compinit -C -D
+
+colors
 
 # settings
 
@@ -18,6 +20,8 @@ zstyle ':completion:*' completer _complete
 zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*' accept-exact '*(N)'
 
+compinit
+
 bindkey '^[[Z' reverse-menu-complete
 
 # history 
@@ -31,15 +35,23 @@ setopt inc_append_history
 setopt hist_ignore_all_dups
 setopt hist_verify
 
-bindkey "^[[A" history-beginning-search-backward
-bindkey "^[[B" history-beginning-search-forward
+autoload -U history-search-end 
+
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+
+bindkey "^[[A" history-beginning-search-backward-end
+bindkey "^[[B" history-beginning-search-forward-end
 bindkey '^R' history-incremental-search-backward
 bindkey '^?'  backward-delete-char
 
 # env
 
 export EDITOR="vim"
-export PATH="$PATH:$HOME/bin"
+export PATH="$HOME/bin:/usr/local/bin:$PATH"
+export LC_ALL="en_US.UTF-8"
+export LANG="en_US.UTF-8"
+export LC_CTYPE=C
 
 # virtualenv and pip
 
