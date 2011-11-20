@@ -1,14 +1,15 @@
-# Images
-Image/JPEG; $HOME/.mutt/view_attachment.sh %s jpg
-Image/PNG; $HOME/.mutt/view_attachment.sh %s png
-Image/GIF; $HOME/.mutt/view_attachment.sh %s gif
+image/jpg; open -a Preview %s; jametemplate=%s.jpg
+image/jpeg; open -a Preview %s; needsterminal; nametemplate=%s.jpeg
+image/gif; open -a Preview %s; needsterminal; nametemplate=%s.gif
+image/png; open -a Preview %s; needsterminal; nametemplate=%s.png
+video/*; open -a VLC %s
+application/pdf; open -a Preview %s; needsterminal; nametemplate=%s.pdf
 
-# PDF
-application/pdf; $HOME/.mutt/view_attachment.sh %s pdf
-application/zip; $HOME/.mutt/view_attachment.sh %s zip
+application/zip; mkdir -p ~/Downloads/mutt && cp %s ~/Downloads/mutt/$(basename %s)
 
-# HTML
+application/rtf; open %s
+application/msword; open %s
+
+application/octet-stream; open %s
+
 text/html; lynx -force-html %s
-
-# Documents
-application/rtf; $HOME/.mutt/view_attachment.sh %s rtf
