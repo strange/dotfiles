@@ -2,28 +2,32 @@
 # imap_user, imap_pass, smtp_url, smtp_pass
 # smtp_url="smtp://<user>@smtp.gmail.com:587/"
 
+set config_charset=utf-8
+
 set imap_keepalive=240
 set imap_check_subscribed
 
-set from = "gs@distrop.com"
 set realname = "Gustaf Sjöberg"
-
-unset fcc_attach
-
-#set query_command="lbdbq '%s'"
-set query_command = "~/code/checkouts/goobook-read-only/contactos.py '%s'"
-set alias_file=~/.mutt/alias
-bind editor <Tab> complete-query
-bind editor ^T complete
+set reverse_name
+set from = "gs@pipsq.com"
+alternates "gs@distrop.com|gs@hydna.com|gsjoberg@gmail.com|gs@pipsq.com"
 
 set folder = "imaps://imap.gmail.com:993"
 set spoolfile = "+INBOX"
 set postponed="+[Gmail]/Drafts"
 
-set index_format="%4C %Z %{%b %d} %-20.20L %s"
-set index_format="%4C %{%b %d} %-20.20L [%Z] %s"
+unset fcc_attach
 
-set signature="~/.mutt/signature"
+#set query_command="lbdbq '%s'"
+# set query_command = "~/code/checkouts/goobook-read-only/contactos.py '%s'"
+set alias_file=~/.mutt/alias
+bind editor <Tab> complete-query
+bind editor ^T complete
+
+set index_format="%3M %{%b %d} %-20.20L [%Z] %s"
+
+set sig_dashes
+#set signature="echo 'Gustaf Sjöberg'|"
 
 set markers=no
 set pager="builtin"
@@ -33,10 +37,12 @@ set menu_scroll=yes
 set pager_context=1
 set pager_stop=yes
 set sig_dashes=no
-set charset="utf8"
+set edit_headers=yes
 
-# Do not store local copies of sent mail as Google stores all mail sent through
-# it's SMTP in "[Gmail]/Sent"
+folder-hook . "exec collapse-all"
+
+# Do not store local copies of sent mail as Google stores all mail sent
+# through it's SMTP in "[Gmail]/Sent"
 unset record
 unset fcc_attach
 
