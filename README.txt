@@ -11,11 +11,6 @@ Create a .muttrc with the following contents::
 
     source ~/.mutt/muttrc
 
-Adding submodules to pathogen:
+Clone vundle:
 
-    git submodule add <path> .vim/bundle/<name>
-    git submodule init && git submodule update
-
-Update all submodules:
-
-    git submodule foreach git checkout master && git submodule foreach git pull origin master
+    git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle

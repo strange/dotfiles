@@ -1,13 +1,6 @@
 set nocompatible 
 let mapleader=","
-"set runtimepath=$HOME/.vim
-
-" Filetype *******************************************************************
-
-filetype off " as suggested by Tim Pope
-call pathogen#runtime_append_all_bundles() 
-call pathogen#helptags() 
-filetype plugin indent on
+filetype off
 
 " Indentation and text formatting ********************************************
 
@@ -106,37 +99,53 @@ set encoding=utf-8
 let $LANG="en_US.UTF-8"
 set langmenu=en_us.utf-8
 
+" Vundle *********************************************************************
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" Misc bundles
+Bundle 'gmarik/vundle'
+Bundle 'ack.vim'
+Bundle 'tsaleh/vim-matchit'
+Bundle 'tomtom/tcomment_vim'
+Bundle 'tpope/vim-surround'
+
 " Syntax *********************************************************************
+
+Bundle 'strange/strange.vim.git'
 
 syntax on
 color strange
 
 " SuperTab *******************************************************************
 
+Bundle 'SuperTab'
+
 let g:SuperTabDefaultCompletionType = "<C-n>"
 
 " Completer ******************************************************************
+
+Bundle 'strange/pyxis-vim'
 
 noremap <leader>e :Pyxis<CR>
 noremap <leader>E :PyxisUpdateCache<CR>
 
 " RagTag *********************************************************************
 
+Bundle 'tpope/vim-ragtag'
+
 imap <C-_> <C-X>/
 
 " Yankring *******************************************************************
 
+Bundle 'YankRing.vim'
+
 let g:yankring_history_dir = '$HOME/.vim'
 
-" BufSwitch ******************************************************************
-
-map <leader>l :BufSwitch<CR>
-
-" Gundo **********************************************************************
-
-map <leader>g :GundoToggle<CR>
-
 " NERDTree *******************************************************************
+
+Bundle 'scrooloose/nerdtree'
 
 noremap <silent> <leader>x :NERDTreeToggle<cr>
 
@@ -188,6 +197,10 @@ noremap <silent> <leader>p :set paste!<cr>
 " Indenting
 vnoremap < <gv
 vnoremap > >gv
+
+" Detect file types **********************************************************
+
+filetype plugin indent on
 
 " AutoCommands ***************************************************************
 

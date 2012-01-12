@@ -11,9 +11,7 @@
 .vim/backup
 .vim/undo
 .vim/colors/*
-!.vim/colors/gconsole.vim
-!.vim/colors/gurra.vim
-!.vim/colors/strange.vim
+.vim/bundle/*
 
 .vimperator/info
 .pentadactyl/info
