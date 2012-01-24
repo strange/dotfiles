@@ -107,9 +107,25 @@ call vundle#rc()
 " Misc bundles
 Bundle 'gmarik/vundle'
 Bundle 'ack.vim'
-Bundle 'tsaleh/vim-matchit'
+Bundle 'ervandew/snipmate.vim'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'tpope/vim-surround'
+Bundle 'tsaleh/vim-matchit'
+
+" JavaScript *****************************************************************
+
+Bundle 'JavaScript-Indent'
+
+" Python *********************************************************************
+
+Bundle 'indentpython.vim'
+Bundle 'python.vim--Vasiliev'
+
+let python_highlight_exceptions = 1
+let python_highlight_builtin_funcs = 1
+let python_highlight_builtin_objs = 1
+let python_highlight_doctests = 1
+let python_highlight_string_formatting = 1
 
 " Syntax *********************************************************************
 
@@ -120,7 +136,7 @@ color strange
 
 " SuperTab *******************************************************************
 
-Bundle 'SuperTab'
+Bundle 'ervandew/supertab'
 
 let g:SuperTabDefaultCompletionType = "<C-n>"
 
@@ -147,7 +163,7 @@ let g:yankring_history_dir = '$HOME/.vim'
 
 Bundle 'scrooloose/nerdtree'
 
-noremap <silent> <leader>x :NERDTreeToggle<cr>
+noremap <silent> <leader>x :NERDTreeToggle<CR>
 
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeDirArrows = 1
@@ -222,7 +238,6 @@ au Filetype help map <cr> <c-]>
 au Filetype help set colorcolumn=0
 au FileType html set indentexpr& autoindent
 au BufEnter * :syntax sync minlines=200
-au Filetype erlang :ErlangDisableShowErrors
 
 " Local Configuration ********************************************************
 
