@@ -112,6 +112,8 @@ Bundle 'tomtom/tcomment_vim'
 Bundle 'tpope/vim-surround'
 Bundle 'tsaleh/vim-matchit'
 
+Bundle 'indenthtml.vim'
+
 " JavaScript *****************************************************************
 
 Bundle 'JavaScript-Indent'
