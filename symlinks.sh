@@ -14,11 +14,7 @@ function createsymlinks() {
         exit 1
     fi
 
-    # first checkout submodules
-
-    git submodule update --init
-
-    local exclude=".gitignore .git README.txt .bashrc.local.skel $SCRIPT"
+    local exclude=".gitignore .git README.txt .bashrc.local.skel $script"
 
     for filename in `ls -A`
     do
