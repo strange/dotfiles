@@ -2,6 +2,7 @@ set visualbell
 set complete=l
 set hintkeys="asdfghjkl;"
 set mapleader=","
+set autocomplete=
 
 nnoremap a gT
 nnoremap s gt
