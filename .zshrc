@@ -95,8 +95,9 @@ alias djsql="python ./**/manage.py sql"
 # zstyle ':vcs_info:git*' formats ":%u%b%m"
 # zstyle ':vcs_info:*' enable git
 
-precmd() { vcs_info }
-PROMPT='%c${vcs_info_msg_0_}%{$fg[red]%}%#%{$reset_color%} '
+# precmd() { vcs_info }
+# PROMPT='%c${vcs_info_msg_0_}%{$fg[red]%}%#%{$reset_color%} '
+PROMPT='%c%{$fg[red]%}%#%{$reset_color%} '
 
 # source local config
 
