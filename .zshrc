@@ -1,7 +1,7 @@
 [[ -z "$PS1" ]] && return
 
 autoload -U colors
-autoload -Uz vcs_info
+# autoload -Uz vcs_info
 autoload -U compinit -C -D
 
 colors
@@ -85,8 +85,9 @@ alias djvalidate='django-admin.py validate --settings=${PWD##*/}.settings'
 alias djmakemessages='django-admin.py makemessages --settings=${PWD##*/}.settings'
 alias djcompilemessages='django-admin.py compilemessages'
 
-zstyle ':vcs_info:git*' formats ":%u%b%m"
-zstyle ':vcs_info:*' enable git
+
+# zstyle ':vcs_info:git*' formats ":%u%b%m"
+# zstyle ':vcs_info:*' enable git
 
 precmd() { vcs_info }
 PROMPT='%c${vcs_info_msg_0_}%{$fg[red]%}%#%{$reset_color%} '
