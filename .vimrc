@@ -111,6 +111,7 @@ Bundle 'ervandew/snipmate.vim'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'tpope/vim-surround'
 Bundle 'tsaleh/vim-matchit'
+Bundle 'strange/skeletor-vim'
 
 Bundle 'indenthtml.vim'
 
