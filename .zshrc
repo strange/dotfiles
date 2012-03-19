@@ -74,6 +74,7 @@ alias rm="rm -i"
 alias mv="mv -i"
 alias ls="ls -G"
 alias cleanpy="find . -name '*.py[oc]' -delete"
+
 alias djrun='django-admin.py runserver --settings=${PWD##*/}.settings'
 alias djunicorn='django-admin.py run_gunicorn --settings=${PWD##*/}.settings'
 alias djsync='django-admin.py syncdb --settings=${PWD##*/}.settings'
@@ -85,6 +86,11 @@ alias djvalidate='django-admin.py validate --settings=${PWD##*/}.settings'
 alias djmakemessages='django-admin.py makemessages --settings=${PWD##*/}.settings'
 alias djcompilemessages='django-admin.py compilemessages'
 
+alias djrun="python ./**/manage.py runserver"
+alias djsync="python ./**/manage.py syncdb"
+alias djdb="python ./**/manage.py dbshell"
+alias djshell="python ./**/manage.py shell"
+alias djsql="python ./**/manage.py sql"
 
 # zstyle ':vcs_info:git*' formats ":%u%b%m"
 # zstyle ':vcs_info:*' enable git
