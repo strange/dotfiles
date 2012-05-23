@@ -107,12 +107,11 @@ call vundle#rc()
 " Misc bundles
 Bundle 'gmarik/vundle'
 Bundle 'ack.vim'
-Bundle 'ervandew/snipmate.vim'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-haml'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'strange/skeletor-vim'
-
 Bundle 'indenthtml.vim'
 
 " JavaScript *****************************************************************
@@ -236,10 +235,9 @@ au Filetype python set commentstring=#\ %s
 au Filetype actionscript set commentstring=//\ %s
 au Filetype rest set formatoptions=tclqn
 au Filetype css set foldmethod=syntax foldmarker={,}
-au Filetype html set formatoptions=q
 au Filetype help map <cr> <c-]>
 au Filetype help set colorcolumn=0
-au FileType html set indentexpr& autoindent
+au FileType html set tw=0 indentexpr& autoindent
 au BufEnter * :syntax sync minlines=200
 
 " Local Configuration ********************************************************
