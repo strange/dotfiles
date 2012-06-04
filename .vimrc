@@ -110,13 +110,11 @@ Bundle 'ack.vim'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-haml'
+Bundle 'tpope/vim-eunuch'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'strange/skeletor-vim'
-Bundle 'indenthtml.vim'
-
-" JavaScript *****************************************************************
-
-Bundle 'JavaScript-Indent'
+Bundle 'pangloss/vim-javascript'
+Bundle 'jimenezrick/vimerl'
 
 " Python *********************************************************************
 
