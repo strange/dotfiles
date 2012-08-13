@@ -7,12 +7,12 @@
 
 -define(SERVER, ?MODULE).
 
-%% API Function Definitions
+%% External API
 
 start_link() ->
     gen_server:start_link({local, ?MODULE}, ?MODULE, [], []).
 
-%% gen_server Function Definitions
+%% Callbacks
 
 init([]) ->
     State = [],
@@ -33,4 +33,4 @@ terminate(_Reason, _State) ->
 code_change(_OldVersion, State, _Extra) ->
     {ok, State}.
 
-%% Internal Function Definitions
+%% Internal API
