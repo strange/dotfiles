@@ -1,15 +1,28 @@
-image/jpg; open -a Preview %s; jametemplate=%s.jpg
-image/jpeg; open -a Preview %s; needsterminal; nametemplate=%s.jpeg
-image/gif; open -a Preview %s; needsterminal; nametemplate=%s.gif
-image/png; open -a Preview %s; needsterminal; nametemplate=%s.png
-video/*; open -a VLC %s
-application/pdf; open -a Preview %s; needsterminal; nametemplate=%s.pdf
+image/jpg; ~/.mutt/bin/open %s jpg
+image/jpeg; ~/.mutt/bin/open %s jpg
+image/pjpeg; ~/.mutt/bin/open %s jpg
+image/png; ~/.mutt/bin/open %s png
+image/gif; ~/.mutt/bin/open %s gif
+image/psd; ~/.mutt/bin/open %s psd
 
-application/zip; mkdir -p ~/Downloads/mutt && cp %s ~/Downloads/mutt/$(basename %s)
+application/photoshop; ~/.mutt/bin/open %s psd
+application/zip; ~/.mutt/bin/open %s zip
+application/pdf; ~/.mutt/bin/open %s pdf
 
-application/rtf; open %s
-application/msword; open %s
+application/msword; ~/.mutt/bin/open %s doc
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; ~/.mutt/bin/open %s docx
+application/vnd.ms-excel; ~/mutt/bin/open %s xls
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; ~/mutt/bin/open %s xlsx
+application/vnd.ms-powerpoint; ~/mutt/bin/open %s ppt
 
-application/octet-stream; open %s
+text/html; w3m -I %{charset} -T text/html; copiousoutput;
 
-text/html; lynx -force-html %s
+application/octet-stream; ~/.mutt/bin/open %s "-"
+
+# text/html; lynx -force-html %s
+
+# video/*; open -a VLC %s
+# application/rtf; open %s
+# application/msword; open %s
+# application/octet-stream; open %s
+# text/html; lynx -force-html %s
