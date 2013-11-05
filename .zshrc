@@ -15,6 +15,7 @@ setopt no_beep
 setopt vi
 setopt no_prompt_sp
 setopt correct
+setopt nolistambiguous
 
 zstyle ':completion:*' completer _complete
 zstyle ':completion:*:*:kill:*' menu yes select
@@ -61,11 +62,17 @@ export PIP_REQUIRE_VIRTUALENV=false
 export PIP_RESPECT_VIRTUALENV=true
 
 loadenv() {
-    local venv_name=`[ -n "$1" ] && echo "$1" || echo ${PWD##*/}`
-    source "$PIP_VIRTUALENV_BASE/$venv_name/bin/activate"
+    if [ -f env/bin/activate ] ; then 
+        source env/bin/activate
+    else
+        local venv_name=`[ -n "$1" ] && echo "$1" || echo ${PWD##*/}`
+        source "$PIP_VIRTUALENV_BASE/$venv_name/bin/activate"
+    fi
 }
 
 # aliases
+
+alias ssh='TERM=xterm ssh'
 
 alias sz="source $HOME/.zshrc"
 alias myip="ifconfig | grep -E '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | \
@@ -86,11 +93,38 @@ alias djvalidate='django-admin.py validate --settings=${PWD##*/}.settings'
 alias djmakemessages='django-admin.py makemessages --settings=${PWD##*/}.settings'
 alias djcompilemessages='django-admin.py compilemessages'
 
-alias djrun="python ./**/manage.py runserver"
-alias djsync="python ./**/manage.py syncdb"
-alias djdb="python ./**/manage.py dbshell"
-alias djshell="python ./**/manage.py shell"
-alias djsql="python ./**/manage.py sql"
+# alias djrun="python ./*/manage.py runserver"
+# alias djsync="python ./*/manage.py syncdb"
+# alias djdb="python ./*/manage.py dbshell"
+# alias djshell="python ./*/manage.py shell"
+# alias djsql="python ./*/manage.py sql"
+
+# functions
+
+tmux-django() {
+    local dir=$HOME/src/django/$1
+    if [ -d $dir ]; then
+        cd $dir
+        tmux send-keys "cd $dir && vim" C-m
+        tmux split-window -h
+        tmux send-keys "cd $dir && loadenv && djrun" C-m
+        tmux split-window -v
+        tmux send-keys "cd $dir" C-m
+        tmux select-pane -L
+        tmux rename-window $1
+    else
+        echo "No go man!"
+    fi
+}
+
+_tmux_django_complete() {
+    local completions="$(ls $HOME/src/django)"
+    reply=("${(ps:\n:)completions}")
+}
+
+compctl -K _tmux_django_complete tmux-django
+
+# prompt
 
 # zstyle ':vcs_info:git*' formats ":%u%b%m"
 # zstyle ':vcs_info:*' enable git
