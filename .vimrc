@@ -39,12 +39,13 @@ endif
 set nomodeline
 set matchtime=2
 set scrolloff=8
+" set scrolljump=-50
 set vb
 set nowrap
 set bg=dark
 set title
 set visualbell
-set cursorline
+" set cursorline
 
 set wildmenu
 set wildmode=full
@@ -105,21 +106,30 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " Misc bundles
+Bundle 'vim-scripts/YankRing.vim'
 Bundle 'gmarik/vundle'
 Bundle 'ack.vim'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-haml'
-Bundle 'tpope/vim-eunuch'
-Bundle 'tsaleh/vim-matchit'
-Bundle 'strange/skeletor-vim'
+Bundle 'rking/ag.vim'
+Bundle 'ervandew/supertab'
+Bundle 'indentpython.vim'
 Bundle 'pangloss/vim-javascript'
+Bundle 'python.vim--Vasiliev'
+Bundle 'hynek/vim-python-pep8-indent'
+Bundle 'scrooloose/nerdtree'
+Bundle 'strange/pyxis-vim'
+Bundle 'strange/skeletor-vim'
+Bundle 'strange/strange.vim.git'
+Bundle 'tomtom/tcomment_vim'
+Bundle 'tpope/vim-eunuch'
+Bundle 'tpope/vim-haml'
+Bundle 'tpope/vim-ragtag'
+Bundle 'tpope/vim-surround'
+Bundle 'tsaleh/vim-matchit'
+Bundle 'wlangstroth/vim-racket'
 Bundle 'jimenezrick/vimerl'
 
-" Python *********************************************************************
 
-Bundle 'indentpython.vim'
-Bundle 'python.vim--Vasiliev'
+" Python *********************************************************************
 
 let python_highlight_exceptions = 1
 let python_highlight_builtin_funcs = 1
@@ -129,39 +139,34 @@ let python_highlight_string_formatting = 1
 
 " Syntax *********************************************************************
 
-Bundle 'strange/strange.vim.git'
-
 syntax on
 color strange
 
 " SuperTab *******************************************************************
 
-Bundle 'ervandew/supertab'
-
 let g:SuperTabDefaultCompletionType = "<C-n>"
 
-" Completer ******************************************************************
+" YankRing *******************************************************************
 
-Bundle 'strange/pyxis-vim'
+let g:yankring_history_dir = '~/.vim'
+
+" Completer ******************************************************************
 
 noremap <leader>e :Pyxis<CR>
 noremap <leader>E :PyxisUpdateCache<CR>
 
-" RagTag *********************************************************************
+let g:pyxis_ignore = "*.jpeg,*.jpg,*.pyo,*.pyc,.DS_Store,*.png,*.bmp,
+                     \*.gif,*~,*.o,*.class,*.ai,*.plist,*.swp,*.mp3,*.db,
+                     \*.beam,*.pdf,*.swf,*.flv,*.mpeg,*.mp4,*.zip,*.tar,
+                     \*.tgz,*.tar.gz,*.wmv,*git*,*.o,*.hi,*.nib,
+                     \*.tiff,./env/*,./static/script/tiny_mce/*,./deps/*,
+                     \./log/*"
 
-Bundle 'tpope/vim-ragtag'
+" RagTag *********************************************************************
 
 imap <C-_> <C-X>/
 
-" Yankring *******************************************************************
-
-Bundle 'YankRing.vim'
-
-let g:yankring_history_dir = '$HOME/.vim'
-
-" NERDTree *******************************************************************
-
-Bundle 'scrooloose/nerdtree'
+" " NERDTree *******************************************************************
 
 noremap <silent> <leader>x :NERDTreeToggle<CR>
 
@@ -178,9 +183,7 @@ command! W w
 command! Q q
 command! WQ wq
 command! Wq wq
-
-" johan uses two spaces to indent everything
-command! JFD set ts=2 sw=2
+nnoremap Q <nop>
 
 " because sometimes i forget
 cnoremap w!! w !sudo tee % > /dev/null
@@ -205,10 +208,11 @@ noremap <C-h> ^
 noremap <C-l> g_
 
 " Reset search highlighting
-nnoremap <silent> <C-l> :nohl<cr><C-l>
+nnoremap <silent> <esc> :nohl<cr><esc>
 
 " Toggle paste mode
-noremap <silent> <leader>p :set paste!<cr>
+" noremap <silent> <leader>p :set paste!<cr>
+noremap <silent> <leader>p :r!pbpaste<cr>
 
 " Indenting
 vnoremap < <gv
