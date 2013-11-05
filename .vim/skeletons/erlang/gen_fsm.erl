@@ -4,10 +4,14 @@
 
 -export([start_link/0]).
 
--export([init/1, handle_event/3, handle_sync_event/4, handle_info/3,
-        terminate/3, code_change/4]).
+-export([state_name/2]).
 
--define(SERVER, ?MODULE).
+-export([init/1]).
+-export([handle_event/3]).
+-export([handle_sync_event/4]).
+-export([handle_info/3]).
+-export([terminate/3]).
+-export([code_change/4]).
 
 %% External API
 
