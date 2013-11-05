@@ -4,11 +4,11 @@
     <head>
         <meta charset="utf-8">
         <title>{% block title %}{% endblock %}</title>
-        <link rel="stylesheet" href="{{ MEDIA_URL }}static/style/master.css" type="text/css" media="screen">
-        <!-- <link rel="shortcut icon" href="{{ MEDIA_URL }}static/images/misc/favicon.ico"> -->
+        <link rel="stylesheet" href="{{ STATIC_URL }}style/master.css" type="text/css" media="screen">
+        <!-- <link rel="shortcut icon" href="{{ STATIC_URL }}images/misc/favicon.ico"> -->
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-        <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.20/jquery-ui.min.js"></script> -->
-        <script type="text/javascript" src="{{ MEDIA_URL }}static/script/behaviour.js"></script>
+        <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script> -->
+        <script type="text/javascript" src="{{ STATIC_URL }}script/behaviour.js"></script>
         {% block script %}{% endblock %}
     </head>
 
