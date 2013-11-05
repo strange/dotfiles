@@ -2,3 +2,5 @@ hi -a Hint font-family: sans-serif; font-size: 12px; font-weight: bold;
 hi -a Hint border: 0;
 hi -a Hint padding: 4px;
 hi -a Hint background-color: yellow !important; color: black !important;
+hi -a Search background-color: red !important; color: white;
+hi -a Find background-color: red !important; color: white;

@@ -1,16 +1,20 @@
+set passkeys+=127.0.0.1\:8080:asdwq1
+
 set visualbell
 set complete=l
 set hintkeys="asdfghjkl;"
-set mapleader=","
 set autocomplete=
 
-nnoremap a gT
-nnoremap s gt
-nnoremap j 6<C-e>
-nnoremap k 6<C-y>
-noremap <M-c> <C-v><M-c>
+nmap a gT
+nmap s gt
+nmap j 6<C-e>
+nmap k 6<C-y>
+nmap d :tabclose<cr>
+nmap <M-c> <C-v><M-c>
 
 colo strange
+
+command! delicious :open javascript:(function(){f='http://www.delicious.com/save?url='+encodeURIComponent(window.location.href)+'&title='+encodeURIComponent(document.title)+'&v=5&';a=function(){if(!window.open(f+'noui=1&jump=doclose','deliciousuiv5','location=yes,links=no,scrollbars=no,toolbar=no,width=550,height=550'))location.href=f+'jump=yes'};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})()
 
 " qmarks (go<qm> or gn<qm>)
 silent qmark h http://news.ycombinator.com
@@ -18,6 +22,7 @@ silent qmark m http://mail.google.com
 silent qmark d http://www.delicious.com/gurraman
 silent qmark g http://www.github.com/strange
 silent qmark t http://www.twitter.com/gurraman
+silent qmark r http://www.reddit.com/r/erlang
 
 silent bmark -title='Google' -keyword='g' 'http://www.google.com/search?q=%s'
 silent bmark -title='Pirate Bay' -keyword='t' 'http://thepiratebay.org/search/%s/0/7/0'
@@ -30,3 +35,4 @@ silent bmark -title='youtube.com' -keyword='yt' 'http://www.youtube.com/results?
 silent bmark -title='news.yc' -keyword='yc' 'http://www.google.com/search?q=site:news.ycombinator.com %s'
 silent bmark -title='stack overflow' -keyword='so' 'http://www.google.com/search?q=site:stackoverflow.com %s'
 silent bmark -title='duck duck go' -keyword='ddg' 'http://www.duckduckgo.com/?q=%s'
+silent bmark -title='Systembolaget' -keyword='s' 'http://www.systembolaget.se/Sok-dryck/?searchquery=%s&sortfield=Default&sortdirection=Ascending&hitsoffset=0&page=1&searchview=All&groupfiltersheader=Default&filters=searchquery%2c&ny=1'
