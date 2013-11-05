@@ -1,80 +1,117 @@
 # Source this file from ~/.muttrc and add the following:
-# imap_user, imap_pass, smtp_url, smtp_pass
 # smtp_url="smtp://<user>@smtp.gmail.com:587/"
 
-set config_charset=utf-8
+set config_charset = utf-8
 
-set imap_keepalive=240
-set imap_check_subscribed
+# about me
 
 set realname = "Gustaf Sjöberg"
-set reverse_name
-set from = "gs@pipsq.com"
-alternates "gs@distrop.com|gs@hydna.com|gsjoberg@gmail.com|gs@pipsq.com"
+set from = "gsjoberg@gmail.com"
+alternates "gs@distrop.com|gs@hydna.com|gsjoberg@gmail.com|gs@pipsq.com|gustaf@houseofradon.com"
 
-set folder = "imaps://imap.gmail.com:993"
-set spoolfile = "+INBOX"
-set postponed="+[Gmail]/Drafts"
+# setup mbox
 
-unset fcc_attach
+set folder = ~/.mail
+set mbox_type = Maildir
+set spoolfile = "+gsjoberg/INBOX"
+set mbox = "+gsjoberg/archive"
+set postponed = "+gsjoberg/drafts"
+mailboxes = +gsjoberg/INBOX +gsjoberg/archive +gsjoberg/sent \
+            +gsjoberg/drafts +temporary/search
 
-#set query_command="lbdbq '%s'"
-# set query_command = "~/code/checkouts/goobook-read-only/contactos.py '%s'"
-set alias_file=~/.mutt/alias
+# gmail specific
+
+unset record # do not store outgoing messages
+unset move # sync back from gmail
+
+# general
+
+set sleep_time = 0 # do not pause to show messages
+set menu_scroll = yes # scroll line by line instead of redrawing
+set status_format = " [%r] %f %?V?[limit: %V]? %> %m messages%?u? (%u unread)? - %P "
+set timeout = 3
+set mail_check = 0 # how often to check for new mail
+set quit = yes # do not prompt when exiting
+unset resolve # do not move to next message
+set envelope_from = yes # force envelope to match "From:"
+
+# contacts
+
+set query_command="goobook query '%s'"
+macro index,pager a "<pipe-message>goobook add<return>" "add sender to google contacts"
 bind editor <Tab> complete-query
 bind editor ^T complete
 
-set index_format="%3M %{%b %d} %-20.20L [%Z] %s"
+# html email
 
-set sig_dashes
-#set signature="echo 'Gustaf Sjöberg'|"
+auto_view text/html
+alternative_order text/plain text/enriched text/html
 
-set markers=no
-set pager="builtin"
-set fast_reply=yes
-set include=yes
-set menu_scroll=yes
-set pager_context=1
-set pager_stop=yes
-set sig_dashes=no
-set edit_headers=yes
+# index
 
-folder-hook . "exec collapse-all"
+unset mark_old # treat all unread messages as new
+set to_chars = " TtCFL"
+set index_format = " %{%b %d} %?X?∞& ?%?M?+& ?%Z  %-20.20L  %s"
+set sort = threads
+set sort_aux = last-date-received
+unset collapse_unread # don't collapse threads containing unread mail
 
-# Do not store local copies of sent mail as Google stores all mail sent
-# through it's SMTP in "[Gmail]/Sent"
-unset record
-unset fcc_attach
+macro index O "<shell-escape>offlineimap<enter>" "run offlineimap to sync all mail"
+macro index o "<shell-escape>offlineimap -qf INBOX<enter>" "run offlineimap to sync inbox"
+macro index S "<enter-command>unset wait_key<enter><shell-escape>~/.mutt/bin/mutt-notmuch.py -G ~/.mail/temporary/search<enter><change-folder-readonly>+temporary/search<enter>" "search mail (using notmuch)"
 
-#set pager_index_lines=6
+bind index j next-entry
+bind index k previous-entry
+bind index gg first-entry
+bind index G last-entry
+bind index <space> collapse-thread
+bind index Cu half-up
+bind index Cd half-up
 
-set timeout=15
-set mail_check=90
+# folder-hook =gsjoberg/INBOX "exec collapse-all first-entry last-entry"
 
-set header_cache=~/.mutt/cache/headers
-set message_cachedir=~/.mutt/cache/bodies
+# composing
 
-set certificate_file=~/.mutt/certificates
+set edit_headers = yes
+set fast_reply = yes # do not ask for stuff when replying/forwarding
+set include = yes # include copy of message when replying
+set forward_quote = yes # include copy of message when forwarding
+set reply_to = yes
+set reverse_name = yes # reply as recipient
 
-set sort=threads
-set sort_aux = 'last-date-received'
-set move = no
+bind compose p postpone-message
 
 ignore *
 unignore Date From To Cc
 hdr_order Date From To Cc
 
-# Custom bindings
-bind editor <space> noop
-macro index,pager gi "<change-folder>=INBOX<enter>" "Go to inbox"
-macro index,pager ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
-macro index,pager gs "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to Sent Mail"
-macro index,pager gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
+# pager
 
-bind index,pager ,g group-reply
+set pager_index_lines = 10
+set pager_stop = yes # do not move to next message when at EOM
+set markers = no # do not display + signs for wrapped lines
 
-bind pager <up> previous-line
-bind pager <down> next-line
+bind pager j next-line
+bind pager k previous-line
+bind pager gg top
+bind pager G bottom
 
-source ~/.mutt/colors/new
+# index/pager
+
+macro index,pager gi "<change-folder>=gsjoberg/INBOX<enter>" "Go to inbox"
+macro index,pager ga "<change-folder>=gsjoberg/archive<enter>" "Go to archive"
+macro index,pager gs "<change-folder>=gsjoberg/sent<enter>" "Go to sent mail"
+macro index,pager gd "<change-folder>=gsjoberg/drafts<enter>" "Go to drafts"
+
+bind index,pager R group-reply
+bind index,pager N search-opposite
+bind index,pager \# noop # do not break threads
+
+# directories
+
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+set certificate_file=~/.mutt/certificates
+
+source ~/.mutt/colors/newer
 source ~/.mutt/muttrc.pgp
