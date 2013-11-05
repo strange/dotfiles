@@ -58,7 +58,6 @@ set virtualedit=block
 set showtabline=0
 
 set ttyfast
-set ttymouse=
 
 if v:version >= 703
     set colorcolumn=80
