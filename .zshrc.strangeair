@@ -4,7 +4,9 @@ alias rw="tmux rename-window"
 alias port="sudo port"
 alias erl="rlwrap -a dummy erl"
 alias lock="open -a ScreenSaverEngine"
-alias startpg="pg_ctl -D /usr/local/var/postgres -l logfile start"
+alias startpg="postgres -D /usr/local/var/postgres"
+alias stoppg="/usr/local/Cellar/postgresql/9.1.4/bin/bin/pg_ctl -D /usr/local/var/postgres stop -s -m fast"
+alias psql="/usr/local/Cellar/postgresql/9.1.4/bin/psql"
 alias startmysql="mysql.server start"
 alias flushcache="sudo dscacheutil -flushcache"
 alias vimnotes="vim -c \"cd ~/Documents/notes\" -c \"e noop\" -c \"e .\""
@@ -12,11 +14,11 @@ alias pbcopy="reattach-to-user-namespace pbcopy"
 alias pbpaste="reattach-to-user-namespace pbpaste"
 alias tunnel="ssh -D 8080 -N gs@distrop.com"
 alias proxy="networksetup -setsocksfirewallproxystate Wi-Fi" 
+alias racket="racket -il readline"
+alias curl="curl --user-agent \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:17.0) Gecko/20100101 Firefox/17.0\""
 
-export PATH=/usr/local/share/python:$PATH:/usr/local/share/aclocal:/usr/texbin:/usr/local/sbin:/usr/local/lib/ruby/gems/1.9.1/gems/sass-3.1.7/bin
+export PATH=/usr/local/share/python:$PATH:/usr/local/share/aclocal:/usr/texbin:/usr/local/sbin:/usr/local/lib/ruby/gems/1.9.1/gems/sass-3.1.7/bin:$HOME/.cabal/bin/:$HOME/Downloads/flex_sdk_4.6/bin
+export PGDATA='/usr/local/var/postgres/'
+export PKG_CONFIG_PATH='/usr/X11/lib/pkgconfig:/usr/local/lib/pkgconfig'
 
 export WORKON_HOME=$PIP_VIRTUALENV_BASE
-mkvirtualenv() {
-    source /usr/local/share/python/virtualenvwrapper.sh && \
-        mkvirtualenv $1
-}
