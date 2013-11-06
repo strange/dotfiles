@@ -191,8 +191,6 @@ cnoremap w!! w !sudo tee % > /dev/null
 " noremap <space> :shell<cr>
 
 " Navigate between windows
-noremap <C-j> <C-w>w
-noremap <C-k> <C-W>W
 noremap <C-w><C-j> <C-w>w
 noremap <C-w><C-k> <C-W>W
 noremap <C-w>j <C-w>w
@@ -207,7 +205,7 @@ noremap <C-h> ^
 noremap <C-l> g_
 
 " Reset search highlighting
-nnoremap <silent> <esc> :nohl<cr><esc>
+nnoremap <silent><c-l> :nohl<cr><esc>
 
 " Toggle paste mode
 " noremap <silent> <leader>p :set paste!<cr>
