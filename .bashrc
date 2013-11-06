@@ -42,15 +42,18 @@ _expand() { return 0; }
 
 export PYTHONPATH="" # Disable to work nicely with pip.
 export PIP_VIRTUALENV_BASE=$HOME/.virtualenvs
-export PIP_REQUIRE_VIRTUALENV=false
+export PIP_REQUIRE_VIRTUALENV=true
 export PIP_RESPECT_VIRTUALENV=true
 
 # shortcut to load virtual environment with same name as cwd
 loadenv() {
-    local venv_name=`[ -n "$1" ] && echo "$1" || echo ${PWD##*/}`
-    workon $venv_name
+    if [ -f env/bin/activate ] ; then 
+        source env/bin/activate
+    else
+        local venv_name=`[ -n "$1" ] && echo "$1" || echo ${PWD##*/}`
+        source "$PIP_VIRTUALENV_BASE/$venv_name/bin/activate"
+    fi
 }
-complete -o default -o nospace -W '$(ls $PIP_VIRTUALENV_BASE)' loadenv
 
 # Fabric ####################################################################
 
@@ -58,9 +61,11 @@ complete -o default -o nospace -W '$(fab --shortlist)' fab
 
 # Aliases ###################################################################
 
-alias myip="ifconfig | grep '[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | \
-            grep -v '127.0.0.1' | awk '{print \$2}'"
+alias myip="ip addr | grep -E '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | \
+            grep -v '127.0.0.1' | awk '{print \$2}' && curl my-ip.heroku.com"
 alias ls="ls --color"
+alias vi="vim"
+alias jnc="jnc --nox"
 
 # Some Django convenience aliases
 alias djrun='django-admin.py runserver --settings=${PWD##*/}.settings'
