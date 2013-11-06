@@ -1,0 +1,7 @@
+#include ".colors/strange"
+
+URxvt*background: black
+URxvt*foreground: white
+URxvt*scrollBar: false
+
+URxvt.font: xft:DejaVu Sans Mono:pixelsize=11
