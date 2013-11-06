@@ -1,3 +1,5 @@
+[[ $- != *i* ]] && return
+
 # Exports ###################################################################
 
 export EDITOR=vim
@@ -58,7 +60,7 @@ complete -o default -o nospace -W '$(fab --shortlist)' fab
 
 alias myip="ifconfig | grep '[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | \
             grep -v '127.0.0.1' | awk '{print \$2}'"
-alias ls="ls -G"
+alias ls="ls --color"
 
 # Some Django convenience aliases
 alias djrun='django-admin.py runserver --settings=${PWD##*/}.settings'
@@ -84,7 +86,7 @@ shopt -s checkwinsize
 if [ $(command -v __git_ps1) ]; then
     PS1='[\u@\h]\W$(__git_ps1 ":%s")% '
 else
-    PS1='[\u@\h]\W% '
+    PS1='[\u@\h]\W\[\033[0;31m\]%\[\033[0m\] '
 fi
 
 # Local Config ##############################################################
