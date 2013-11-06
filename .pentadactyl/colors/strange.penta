@@ -4,3 +4,4 @@ hi -a Hint padding: 4px;
 hi -a Hint background-color: yellow !important; color: black !important;
 hi -a Search background-color: red !important; color: white;
 hi -a Find background-color: red !important; color: white;
+hi -a FontFixed font: monospace 11px !important;
