@@ -1,18 +1,26 @@
 import XMonad
-import XMonad.Util.EZConfig(additionalKeys)
-import XMonad.Util.Paste(pasteSelection)
+import XMonad.Util.EZConfig(additionalKeys, additionalMouseBindings)
+import XMonad.Hooks.DynamicLog
+import qualified XMonad.StackSet as W
 
-main = do
-    xmonad $ defaultConfig
-      { terminal = myTerminal
-      , modMask = myModMask
-      , normalBorderColor = myNormalBorderColor
-      , focusedBorderColor = myFocusedBorderColor
-      } `additionalKeys` [
-        ((myModMask, xK_v), pasteSelection)
-      ]
+main = xmonad $ config'
 
-myModMask = mod4Mask
-myNormalBorderColor = "#4C5442"
-myFocusedBorderColor = "#85C175"
-myTerminal = "urxvt"
+config' = defaultConfig { terminal = terminal'
+                        , modMask = modMask'
+                        , normalBorderColor = "#222"
+                        , focusedBorderColor = "#85C175"
+                        } `additionalKeys` keyBindings'
+                          `additionalMouseBindings` mouseBindings'
+
+modMask' = mod4Mask
+terminal' = "urxvt"
+
+keyBindings' =
+    [ ((modMask', xK_v), spawn "/home/gs/bin/paste")
+    ]
+
+mouseBindings' =
+    [ ((modMask' .|. shiftMask, button1), floatAndResize)
+    ]
+
+floatAndResize w = focus w >> mouseResizeWindow w >> windows W.shiftMaster
