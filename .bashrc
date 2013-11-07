@@ -91,7 +91,7 @@ shopt -s checkwinsize
 if [ $(command -v __git_ps1) ]; then
     PS1='[\u@\h]\W$(__git_ps1 ":%s")% '
 else
-    PS1='[\u@\h]\W\[\033[0;31m\]%\[\033[0m\] '
+    PS1='[\u@\h]\W\[\033[0;31m\]\$\[\033[0m\] '
 fi
 
 # Local Config ##############################################################
