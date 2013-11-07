@@ -16,7 +16,9 @@ modMask' = mod4Mask
 terminal' = "urxvt"
 
 keyBindings' =
-    [ ((modMask', xK_v), spawn "/home/gs/bin/paste")
+    [ ((modMask', xK_v), paste)
+    , ((modMask', xK_Left), sendMessage Shrink)
+    , ((modMask', xK_Right), sendMessage Expand)
     ]
 
 mouseBindings' =
@@ -24,3 +26,4 @@ mouseBindings' =
     ]
 
 floatAndResize w = focus w >> mouseResizeWindow w >> windows W.shiftMaster
+paste = spawn "xvkbd -xsendevent -text '\\[Shift_L]\\[Insert]'"
