@@ -6,9 +6,8 @@
         <title></title>
         <link rel="stylesheet" href="./style/master.css" type="text/css" media="screen">
         <link rel="shortcut icon" href="./images/misc/favicon.ico">
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-        <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.20/jquery-ui.min.js"></script> -->
-        <script type="text/javascript" src="./script/behaviour.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="./script/app.js"></script>
     </head>
 
     <body>

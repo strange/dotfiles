@@ -4,6 +4,8 @@ filetype off
 
 " Indentation and text formatting ********************************************
 
+set clipboard=unnamed
+
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -38,13 +40,13 @@ endif
 
 set nomodeline
 set matchtime=2
-set scrolloff=8
-" set scrolljump=-50
+set scrolloff=12
+" set scrolljump=50
 set vb
 set nowrap
 set bg=dark
 set title
-set visualbell
+set novisualbell
 " set cursorline
 
 set wildmenu
@@ -125,8 +127,10 @@ Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-surround'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'wlangstroth/vim-racket'
-Bundle 'jimenezrick/vimerl'
-
+Bundle 'othree/html5-syntax.vim'
+Bundle 'chase/vim-ansible-yaml'
+Bundle 'mitsuhiko/vim-jinja'
+" Bundle 'jimenezrick/vimerl'
 
 " Python *********************************************************************
 
@@ -138,6 +142,7 @@ let python_highlight_string_formatting = 1
 
 " Syntax *********************************************************************
 
+syntax sync minlines=256
 syntax on
 color strange
 
@@ -148,7 +153,7 @@ let g:SuperTabDefaultCompletionType = "<C-n>"
 " YankRing *******************************************************************
 
 let g:yankring_history_dir = '~/.vim'
-
+ 
 " Completer ******************************************************************
 
 noremap <leader>e :Pyxis<CR>
@@ -208,8 +213,7 @@ noremap <C-l> g_
 nnoremap <silent><c-l> :nohl<cr><esc>
 
 " Toggle paste mode
-" noremap <silent> <leader>p :set paste!<cr>
-noremap <silent> <leader>p :r!pbpaste<cr>
+noremap <silent> <leader>p :set paste!<cr>
 
 " Indenting
 vnoremap < <gv
@@ -237,7 +241,7 @@ au Filetype css set foldmethod=syntax foldmarker={,}
 au Filetype help map <cr> <c-]>
 au Filetype help set colorcolumn=0
 au FileType html set tw=0 indentexpr& autoindent
-au BufEnter * :syntax sync minlines=200
+" au BufEnter * :syntax sync minlines=200
 
 " Local Configuration ********************************************************
 

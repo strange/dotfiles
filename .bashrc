@@ -8,7 +8,7 @@ export DISPLAY=:0.0
 
 # Paths #####################################################################
 
-export PATH="$PATH:/usr/local/sbin:/usr/local/bin:$HOME/bin:$HOME/.cabal/bin"
+export PATH="$HOME/bin:$HOME/.cabal/bin:/usr/local/sbin:/usr/local/bin:$PATH:/root/.gem/ruby/2.2.0/bin"
 export MANPATH="/usr/local/man:$MANPATH"
 
 # Bash history ##############################################################
@@ -66,21 +66,25 @@ alias myip="ip addr | grep -E '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | \
 alias ls="ls --color"
 alias vi="vim"
 alias jnc="jnc --nox"
+alias curl="curl --user-agent \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:17.0) Gecko/20100101 Firefox/17.0\""
 
 # Some Django convenience aliases
-alias djrun='django-admin.py runserver --settings=${PWD##*/}.settings'
-alias djunicorn='django-admin.py run_gunicorn --settings=${PWD##*/}.settings'
-alias djsync='django-admin.py syncdb --settings=${PWD##*/}.settings'
-alias djshell='django-admin.py shell --settings=${PWD##*/}.settings'
-alias djdb='django-admin.py dbshell --settings=${PWD##*/}.settings'
-alias djsql='django-admin.py sql --settings=${PWD##*/}.settings'
-alias djtest='django-admin.py test --settings=${PWD##*/}.settings'
-alias djvalidate='django-admin.py validate --settings=${PWD##*/}.settings'
-alias djmakemessages='django-admin.py makemessages --settings=${PWD##*/}.settings'
-alias djcompilemessages='django-admin.py compilemessages'
+alias djmanage='python $(find . -maxdepth 2 -name manage.py -print -quit)'
+alias djrun='djmanage runserver'
+alias djunicorn='djmanage run_gunicorn'
+alias djsync='djmanage syncdb'
+alias djshell='djmanage shell'
+alias djdb='djmanage dbshell'
+alias djsql='djmanage sql'
+alias djtest='djmanage test'
+alias djvalidate='djmanage validate'
+alias djmakemessages='djmanage makemessages'
+alias djcompilemessages='djmanage compilemessages'
 
 # Remove all .pyc and .pyo files in tree
 alias cleanpy="find . -name '*.py[oc]' -delete"
+
+alias erl="rlwrap -a erl"
 
 # Misc ######################################################################
 
@@ -99,3 +103,9 @@ fi
 if [ -e "$HOME/.bashrc.local" ]; then
     source "$HOME/.bashrc.local"
 fi
+
+export PERL_LOCAL_LIB_ROOT="/home/gs/perl5:$PERL_LOCAL_LIB_ROOT";
+export PERL_MB_OPT="--install_base "/home/gs/perl5"";
+export PERL_MM_OPT="INSTALL_BASE=/home/gs/perl5";
+export PERL5LIB="/home/gs/perl5/lib/perl5:$PERL5LIB";
+export PATH="/home/gs/perl5/bin:/home/gs/.gem/ruby/2.1.0/bin:$PATH";

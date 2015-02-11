@@ -1,7 +1,115 @@
-#include ".colors/strange"
+! #include ".colors/strange"
 
-URxvt*background: black
-URxvt*foreground: white
-URxvt*scrollBar: false
+urxvt*buffered: true
+urxvt*scrollBar: false
+urxvt*font: xft:DejaVu Sans Mono:pixelsize=11:antialias=false
+urxvt*fontBold: xft:DejaVu Sans Mono:pixelsize=11:antialias=false
+urxvt*letterSpace: -1
+urxvt*scrollTtyKeypress: true
+urxvt*scrollTtyOutput:  false
+! urxvt*fading: 25
+urxvt*inheritPixmap:false
+urxvt*termName: xterm-256color
+urxvt*perl-ext:
+urxvt*perl-ext-common:
+urxvt*tripleclickwords:true
 
-URxvt.font: xft:DejaVu Sans Mono:pixelsize=11
+xterm*termName: xterm-256color
+xterm*fastScroll: true
+xterm*faceName: DejaVu Sans Mono:style=Book:antialias=false:pixelsize=11
+xterm*faceNameDoubleSize: WenQuanYi Zen Hei Mono
+xterm*highlightSelection: true
+xterm*scrollBar: false
+xterm*scrollTtyOutput: false
+xterm*ScrollKey: true
+xterm*ScrollTTYKeypress: true
+xterm*allowSendEvents: true
+xterm*metaSendsEscape: true
+XTerm*eightBitInput: false
+
+*VT100.Translations: #override \
+     Super <Key>v: insert-selection(PRIMARY) \n
+
+urxvt*background: #060606
+urxvt*foreground: #F8F8F8
+
+urxvt*cursorColor: #FF3000
+
+urxvt*colorIT: #F8F8F8
+urxvt*colorUL: #F8F8F8
+urxvt*colorBD: #F8F8F8
+
+! black dark/light
+urxvt*color0: #060606
+urxvt*color8: #262626
+
+! red dark/light
+urxvt*color1: #D94C4C
+urxvt*color9: #D94C4C
+
+! green dark/light
+urxvt*color2: #7C966D
+urxvt*color10: #94B281
+
+! yellow dark/light
+urxvt*color3: #A8A156
+urxvt*color11: #D1C86B
+
+! blue dark/light
+urxvt*color4: #467C96
+urxvt*color12: #599EBF
+
+! magenta dark/light
+urxvt*color5: #8469A0
+urxvt*color13: #A885CC
+
+! cyan dark/light
+urxvt*color6: #478D96
+urxvt*color14: #5CB8C4
+
+! white dark/light
+urxvt*color7: #DDDDDD
+urxvt*color15: #FFFFFF
+
+! xterm
+
+xterm*background: #060606
+xterm*foreground: #F8F8F8
+
+xterm*cursorColor: #FF3000
+
+xterm*colorIT: #F8F8F8
+xterm*colorUL: #F8F8F8
+xterm*colorBD: #F8F8F8
+
+! black dark/light
+xterm*color0: #060606
+xterm*color8: #262626
+
+! red dark/light
+xterm*color1: #D94C4C
+xterm*color9: #D94C4C
+
+! green dark/light
+xterm*color2: #7C966D
+xterm*color10: #94B281
+
+! yellow dark/light
+xterm*color3: #A8A156
+xterm*color11: #D1C86B
+
+! blue dark/light
+xterm*color4: #467C96
+xterm*color12: #599EBF
+
+! magenta dark/light
+xterm*color5: #8469A0
+xterm*color13: #A885CC
+
+! cyan dark/light
+xterm*color6: #478D96
+xterm*color14: #5CB8C4
+
+! white dark/light
+xterm*color7: #DDDDDD
+xterm*color15: #FFFFFF

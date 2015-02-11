@@ -1,4 +1,4 @@
-set passkeys+=127.0.0.1\:8080:asdwq1
+set passkeys+=127.0.0.1\:8000/game/:asdwq10123456789<CR>
 
 set visualbell
 set complete=l
